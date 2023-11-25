@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+    <title>WeDrive</title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="../../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+    <style>
+        .form-label {
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+
+
+        .card-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .card-body::-webkit-scrollbar-track {
+            background-color: #E9ECEF;
+        }
+
+        .card-body::-webkit-scrollbar-thumb {
+            background-color: #6C757D;
+            border-radius: 10px;
+        }
+
+        .list-group-item {
+            border: none;
+            background-color: #F8F9FA;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .list-group-item:hover {
+            background-color: #E9ECEF;
+        }
+
+        .text-danger:hover {
+            color: #DC3545;
+        }
+
+        .text-dark:hover {
+            color: #212529;
+        }
+    </style>
+</head>
+
+<body class="g-sidenav-show bg-gray-100">
+    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
+        <div class="navdash">
+            <div class="navdash">
+                <div class="profile-container">
+                    <img <?php echo 'src="../../../View/assets/images/person_1.jpg"' ?> alt="profile_image" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
+                    <span id="profile-hover" onclick="changeImage()">+</span>
+                </div>
+            </div>
+            <p><?php echo 'hind' ?></p>
+        </div>
+        <hr class="horizontal dark mt-0" />
+        <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+            <ul class="navbar-nav dashnav">
+                <li class="nav-item">
+                    <a class="nav-link" href="statistiquesRec.php">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="tables.php">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Tables</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="billing.php">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Billing</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="consulterRecGest.php">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">ConsulterReclamation</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="consulterRecGest.php">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">consultertypeReclamation</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="Createreclamation.php">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">AjouterReclamation</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="Createtypereclamation.php">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">AjoutertypeReclamation</span>
+                    </a>
+                </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="rtl.php">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">RTL</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
+                        Account pages
+                    </h6>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.php">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sign-in.html">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Sign In</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sign-up.html">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-collection text-info text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Sign Up</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="sign-up.html">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-collection text-info text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </aside>
+    <main class="main-content position-relative border-radius-lg">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <li class="breadcrumb-item text-sm">
+                            <a class="opacity-5 text-white" href="javascript:;">Pages</a>
+                        </li>
+                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">
+                            Billing
+                        </li>
+                    </ol>
+                    <h6 class="font-weight-bolder text-white mb-0">Billing</h6>
+                </nav>
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+                    <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                        <div class="input-group">
+                            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" placeholder="Type here..." />
+                        </div>
+                    </div>
+                    <ul class="navbar-nav justify-content-end">
+                        <li class="nav-item d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
+                                <i class="fa fa-user me-sm-1"></i>
+                                <span class="d-sm-inline d-none">Sign In</span>
+                            </a>
+                        </li>
+                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line bg-white"></i>
+                                    <i class="sidenav-toggler-line bg-white"></i>
+                                    <i class="sidenav-toggler-line bg-white"></i>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item px-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-white p-0">
+                                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-bell cursor-pointer"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="my-auto">
+                                                <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">
+                                                    <span class="font-weight-bold">New message</span>
+                                                    from Laur
+                                                </h6>
+                                                <p class="text-xs text-secondary mb-0">
+                                                    <i class="fa fa-clock me-1"></i>
+                                                    13 minutes ago
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="my-auto">
+                                                <img src="../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">
+                                                    <span class="font-weight-bold">New album</span> by
+                                                    Travis Scott
+                                                </h6>
+                                                <p class="text-xs text-secondary mb-0">
+                                                    <i class="fa fa-clock me-1"></i>
+                                                    1 day
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item border-radius-md" href="javascript:;">
+                                        <div class="d-flex py-1">
+                                            <div class="avatar avatar-sm bg-gradient-secondary me-3 my-auto">
+                                                <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <title>credit-card</title>
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                                            <g transform="translate(1716.000000, 291.000000)">
+                                                                <g transform="translate(453.000000, 454.000000)">
+                                                                    <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
+                                                                    <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">
+                                                    Payment successfully completed
+                                                </h6>
+                                                <p class="text-xs text-secondary mb-0">
+                                                    <i class="fa fa-clock me-1"></i>
+                                                    2 days
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- End Navbar -->
+
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-md-12 mt-4">
+                    <div>
+                        <div class=" container">
+
+
+                            <div class="row justify-content-center">
+                                <div class="col-md-8">
+                                    <div class="card">
+                                        <div class="card-header">Ajouter un type</div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <?php
+                                                $nomErr = $categcErr = $modErr = "";
+                                                $nom = $categorie = $modele_de_reponse = "";
+
+                                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                    $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_STRING);
+                                                    $categorie = filter_input(INPUT_POST, "categorie", FILTER_SANITIZE_STRING);
+                                                    $modele_de_reponse = filter_input(INPUT_POST, "modele_de_reponse", FILTER_SANITIZE_STRING);
+
+                                                    if (empty($nom)) {
+                                                        $nomErr = "Nom de type de réclamation est requis";
+                                                    }
+
+                                                    if (empty($categorie)) {
+                                                        $categorie = "categorie de type de réclamation est requise";
+                                                    }
+
+                                                    if (empty($modele_de_reponse)) {
+                                                        $modele_de_reponse = "modele de reponse de type réclamation est requise";
+                                                    }
+                                                }
+                                                ?>
+
+                                                <form method="POST" action="../../../Controller/addtypereclamation.php" enctype="multipart/form-data" class="needs-validation" novalidate>
+                                                    <div class="form-group">
+                                                        <label for="nom" class="form-label">Nom <span class="required">*</span></label>
+                                                        <input type="text" class="form-control" name="nom" id="nom">
+                                                        <div id="nomError"></div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="categorie" class="form-label">Catégorie <span class="required">*</span></label>
+                                                        <input type="text" class="form-control" name="categorie" id="categorie">
+
+                                                        <div id="categorieError"></div>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label for="modele_de_reponse" class="form-label">modele de reponse<span class="required">*</span></label>
+                                                        <input type="text" class="form-control" name="modele_de_reponse" id="modele_de_reponse">
+
+                                                        <div id="modele_de_reponseError"></div>
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary">Ajouter le type</button>
+                                                    </div>
+                                                </form>
+
+
+
+
+
+
+                                                <footer class="footer pt-3">
+                                                    <div class="container-fluid">
+                                                        <div class="row align-items-center justify-content-lg-between">
+                                                            <div class="col-lg-6 mb-lg-0 mb-4">
+                                                                <div class="copyright text-center text-sm text-muted text-lg-start">
+                                                                    ©
+                                                                    <script>
+                                                                        document.write(new Date().getFullYear());
+                                                                    </script>
+                                                                    , made with <i class="fa fa-heart"></i> by
+                                                                    <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+                                                                    for a better web.
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                                                                    <li class="nav-item">
+                                                                        <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                                                                    </li>
+                                                                    <li class="nav-item">
+                                                                        <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                                                                    </li>
+                                                                    <li class="nav-item">
+                                                                        <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                                                                    </li>
+                                                                    <li class="nav-item">
+                                                                        <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </footer>
+                                            </div>
+    </main>
+    <div class="fixed-plugin">
+        <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
+            <i class="fa fa-cog py-2"> </i>
+        </a>
+        <div class="card shadow-lg">
+            <div class="card-header pb-0 pt-3">
+                <div class="float-start">
+                    <h5 class="mt-3 mb-0">Argon Configurator</h5>
+                    <p>See our dashboard options.</p>
+                </div>
+                <div class="float-end mt-4">
+                    <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+                <!-- End Toggle Button -->
+            </div>
+            <hr class="horizontal dark my-1" />
+            <div class="card-body pt-sm-3 pt-0 overflow-auto">
+                <!-- Sidebar Backgrounds -->
+                <div>
+                    <h6 class="mb-0">Sidebar Colors</h6>
+                </div>
+                <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors my-2 text-start">
+                        <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
+                        <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
+                    </div>
+                </a>
+                <!-- Sidenav Type -->
+                <div class="mt-3">
+                    <h6 class="mb-0">Sidenav Type</h6>
+                    <p class="text-sm">Choose between 2 different sidenav types.</p>
+                </div>
+                <div class="d-flex">
+                    <button class="btn bg-gradient-primary w-100 px-3 mb-2 active me-2" data-class="bg-white" onclick="sidebarType(this)">
+                        White
+                    </button>
+                    <button class="btn bg-gradient-primary w-100 px-3 mb-2" data-class="bg-default" onclick="sidebarType(this)">
+                        Dark
+                    </button>
+                </div>
+                <p class="text-sm d-xl-none d-block mt-2">
+                    You can change the sidenav type just on desktop view.
+                </p>
+                <!-- Navbar Fixed -->
+                <div class="d-flex my-3">
+                    <h6 class="mb-0">Navbar Fixed</h6>
+                    <div class="form-check form-switch ps-0 ms-auto my-auto">
+                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)" />
+                    </div>
+                </div>
+                <hr class="horizontal dark my-sm-4" />
+                <div class="mt-2 mb-5 d-flex">
+                    <h6 class="mb-0">Light / Dark</h6>
+                    <div class="form-check form-switch ps-0 ms-auto my-auto">
+                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--   Core JS Files   -->
+    <script src="../../assets/js/core/popper.min.js"></script>
+    <script src="../../assets/js/core/bootstrap.min.js"></script>
+    <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+        var win = navigator.platform.indexOf("Win") > -1;
+        if (win && document.querySelector("#sidenav-scrollbar")) {
+            var options = {
+                damping: "0.5",
+            };
+            Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+    <script src="../../scriptjs/modifyInput.js"></script>
+    <script>
+        const form = document.querySelector('.needs-validation');
+        const nom = document.getElementById("nom");
+        const nomError = document.getElementById("nomError");
+        const categorie = document.getElementById("categorie");
+        const categorieError = document.getElementById("categorieError");
+        const modele_de_reponse = document.getElementById("modele_de_reponse");
+        const modele_de_reponseError = document.getElementById("modele_de_reponseError");
+        let testnom = false;
+        let testcategorie = false;
+        let testmodele_de_reponse = false;
+        nom.addEventListener("keyup", () => {
+            if (nom.value.trim().length >= 3 && nom.value.trim().length <= 50 && nom.value.length !== "") {
+                nom.style.borderColor = "green"
+                nomError.innerText = " nom valide";
+                nomError.style.borderColor = "green"
+                testnom = true;
+            } else {
+                if (nom.value === "")
+                    nomError.innerText = "nom vide"
+                else if (nom.value.length < 3)
+                    nomError.innerText = "nom trop courte"
+                else if (nom.value.length > 50)
+                    nomError.innerText = "nom trop longue"
+                nom.style.borderColor = "red";
+                nomError.style.borderColor = "red"
+                testnom = false;
+            }
+        })
+
+        categorie.addEventListener("keyup", () => {
+            if (categorie.value.trim().length >= 3 && categorie.value.trim().length <= 50 && categorie.value.length !== "") {
+                categorie.style.borderColor = "green"
+                categorieError.innerText = " categorie valide";
+                categorieError.style.borderColor = "green"
+                testcategorie = true;
+            } else {
+                if (categorie.value === "")
+                    categorieError.innerText = "categorie vide"
+                else if (categorie.value.length < 3)
+                    categorieError.innerText = "categorie trop courte"
+                else if (categorie.value.length > 50)
+                    categorieError.innerText = "categorie trop longue"
+                categorie.style.borderColor = "red";
+                categorieError.style.borderColor = "red"
+                testcategorie = false;
+            }
+        })
+
+        modele_de_reponse.addEventListener("keyup", () => {
+            if (modele_de_reponse.value.trim().length >= 3 && modele_de_reponse.value.trim().length <= 50 && modele_de_reponse.value.length !== "") {
+                modele_de_reponse.style.borderColor = "green"
+                modele_de_reponseError.innerText = " modele_de_reponse valide";
+                modele_de_reponseError.style.borderColor = "green"
+                testmodele_de_reponse = true;
+            } else {
+                if (modele_de_reponse.value === "")
+                    modele_de_reponseError.innerText = "modele_de_reponse vide"
+                else if (modele_de_reponse.value.length < 3)
+                    modele_de_reponseError.innerText = "modele_de_reponse trop courte"
+                else if (modele_de_reponse.value.length > 50)
+                    modele_de_reponseError.innerText = "modele_de_reponse trop longue"
+                modele_de_reponse.style.borderColor = "red";
+                modele_de_reponseError.style.borderColor = "red"
+                testmodele_de_reponse = false;
+            }
+        })
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'error',
+                title: 'Erreur!',
+                text: 'Une erreur est survenue lors de l\'ajout de votre réclamation.',
+                confirmButtonText: 'OK'
+            });
+            if (testnom && testcategorie && testmodele_de_reponse) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Réclamation ajoutée!',
+                    text: 'Votre réclamation a été ajoutée avec succès.',
+                    confirmButtonText: 'OK'
+                }).then(function() {
+                    form.submit();
+                });
+            }
+        })
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</body>
+
+</html>
