@@ -10,6 +10,7 @@ try {
     session_start();
     $users = new users();
     $user = $users->addUser($data);
+    $_SESSION['id_user'] = $user->getId();
     $_SESSION['authentification'] = true;
     switch ($user->getRole()) {
         case "admin":

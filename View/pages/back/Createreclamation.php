@@ -1,3 +1,6 @@
+<?php
+require_once "../../../Controller/Users/authentification.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -336,7 +339,7 @@
                     <div class="card-header">Ajouter une réclamation</div>
                     <div class="card-body">
                       <div class="form-group"></div>
-                      <form method="POST" action="../../../Controller/addreclamation.php" enctype="multipart/form-data" class="needs-validation">
+                      <form method="POST" action="../../../Controller/Reclamations/addreclamation.php" enctype="multipart/form-data" class="needs-validation">
                         <div class="form-group">
                           <label for="nom" class="form-label">
                             Nom<span class="required">*</span>
@@ -580,12 +583,6 @@
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      Swal.fire({
-        icon: 'error',
-        title: 'Erreur!',
-        text: 'Une erreur est survenue lors de l\'ajout de votre réclamation.',
-        confirmButtonText: 'OK'
-      });
       if (testNom && testDescription && testDate) {
         Swal.fire({
           icon: 'success',
@@ -596,24 +593,32 @@
           form.submit();
           //location.href = "consulterRecGest.php";
         });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur!',
+          text: 'Une erreur est survenue lors de l\'ajout de votre réclamation.',
+          confirmButtonText: 'OK'
+        });
       }
     })
   </script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script>
     const selectNom = document.querySelector('.selectNom')
-    const request = new XMLHttpRequest();
-    request.open('GET', '../../../Controller/getType.php');
-    request.onload = () => {
-      selectNom.innerHTML = request.responseText;
-    }
-    request.send();
+    fetch('../../../Controller/Reclamations/getType.php')
+      .then(res => res.text())
+      .then(data => {
+        selectNom.innerHTML = data;
+        console.log(data);
+      })
     setInterval(() => {
-      request.open('GET', '../../../Controller/getType.php');
-      request.onload = () => {
-        selectNom.innerHTML = request.responseText;
-      }
-      request.send();
+      fetch('../../../Controller/Reclamations/getType.php')
+        .then(res => res.text())
+        .then(data => {
+          selectNom.innerHTML = data;
+          console.log(data);
+        })
     }, 3600000);
   </script>
 </body>

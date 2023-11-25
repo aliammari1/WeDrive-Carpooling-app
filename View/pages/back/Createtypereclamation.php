@@ -1,3 +1,5 @@
+<?php
+require_once "../../../Controller/Users/authentification.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -327,6 +329,9 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-8">
                                     <div class="card">
+                                        <div class="mt-4 ms-4">
+                                            <a class="text-primary" href="./consultertypeRec.php"><i class="fa fa-arrow-left me-2"></i> Retour au gestion de types de Reclamations</a>
+                                        </div>
                                         <div class="card-header">Ajouter un type</div>
                                         <div class="card-body">
                                             <div class="form-group">
@@ -344,16 +349,16 @@
                                                     }
 
                                                     if (empty($categorie)) {
-                                                        $categorie = "categorie de type de réclamation est requise";
+                                                        $categorieErr = "categorie de type de réclamation est requise";
                                                     }
 
                                                     if (empty($modele_de_reponse)) {
-                                                        $modele_de_reponse = "modele de reponse de type réclamation est requise";
+                                                        $modErr = "modele de reponse de type réclamation est requise";
                                                     }
                                                 }
                                                 ?>
 
-                                                <form method="POST" action="../../../Controller/addtypereclamation.php" enctype="multipart/form-data" class="needs-validation" novalidate>
+                                                <form method="POST" action="../../../Controller/Reclamations/addtypereclamation.php" enctype="multipart/form-data" class="needs-validation" novalidate>
                                                     <div class="form-group">
                                                         <label for="nom" class="form-label">Nom <span class="required">*</span></label>
                                                         <input type="text" class="form-control" name="nom" id="nom">

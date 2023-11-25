@@ -1,6 +1,12 @@
 <?php
-require_once "../../../../Controller/Reclamations/reclamationC.php";
-require_once "../../../../Controller/Reclamations/paginationC.php";
+require_once "../../../Controller/Users/authentification.php";
+require_once "../../../Model/Users/user.php";
+require_once "../../../Model/Users/passager.php";
+require_once "../../../Model/Users/admin.php";
+require_once "../../../Model/Users/passager.php";
+$user = unserialize($_SESSION['user']);
+require_once "../../../Controller/Reclamations/reclamationC.php";
+require_once "../../../Controller/Reclamations/paginationC.php";
 ?>
 
 <!DOCTYPE html>
@@ -35,116 +41,7 @@ require_once "../../../../Controller/Reclamations/paginationC.php";
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
 <body class="g-sidenav-show bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
-  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
-    <!-- <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/back/statistiquesRec.php " target="_blank">
-        <img src="../../assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">Argon Dashboard 2</span>
-      </a>
-    </div> -->
-    <div class="navdash">
-      <div class="navdash">
-        <div class="profile-container">
-          <img <?php echo 'src="../../../View/assets/images/person_1.jpg"' ?> alt="profile_image" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
-          <span id="profile-hover" onclick="changeImage()">+</span>
-        </div>
-      </div>
-      <p><?php echo 'hind' ?></p>
-    </div>
-    <hr class="horizontal dark mt-0" />
-    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
-      <ul class="navbar-nav dashnav">
-        <li class="nav-item">
-          <a class="nav-link" href="statistiquesRec.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="tables.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Tables</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="billing.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Billing</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="consulterRecGest.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">ConsulterReclamation</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="Createreclamation.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Reclamation</span>
-          </a>
-        </li>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="rtl.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">RTL</span>
-          </a>
-        </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
-            Account pages
-          </h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="profile.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Profile</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="sign-in.html">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign In</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="sign-up.html">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-collection text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Up</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="sign-up.html">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-collection text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Out</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </aside>
+  <?php require_once './dashHeader.php' ?>
   <main class="main-content position-relative border-radius-lg">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
@@ -288,6 +185,11 @@ require_once "../../../../Controller/Reclamations/paginationC.php";
                   width: 280px;
                 }
               </style>
+              <div class="ms-4 mt-3">
+                <p>
+                  <a class="link link-primary" href="./consultertypeRec.php"> <i class="fa fa-arrow-left me-2"></i>Consulter les types de reclamations</a>
+                </p>
+              </div>
               <div class="container d-flex flex-row justify-content-between w-100 mt-5">
                 <div class="form-group">
                   <input style="text-indent:20px" type="text" class="form-control form-control-alternative search searchBar " onkeyup="searchList()" placeholder="Search...">
@@ -358,7 +260,7 @@ require_once "../../../../Controller/Reclamations/paginationC.php";
                     <li class=" text-xs fw-bold  text-center"><?= $listreclamations[$reclamation]['date'] ?></li>
                     <li class=" text-xs fw-bold  text-center">
                       <?php if (!empty($listreclamations[$reclamation]["pieces_jointes"])) : ?>
-                        <a href="#" class="text-dark" onclick="downloadImage(<?= $listreclamations[$reclamation]['id_rec'] ?>)">
+                        <a href="#" class="text-dark">
                           <img src="data:image/jpeg;base64,<?= base64_encode($listreclamations[$reclamation]["pieces_jointes"]) ?>" class="w-10" />
                         </a>
                       <?php endif; ?>
@@ -383,7 +285,7 @@ require_once "../../../../Controller/Reclamations/paginationC.php";
                           </div>
                           <div class="modal-body">
                             <div class="card-body">
-                              <form method="post" action="../../../Controller/reclamationC.php" enctype="multipart/form-data">
+                              <form method="post" action="../../../Controller/Reclamations/reclamationC.php" enctype="multipart/form-data">
                                 <div class="form-group">
                                   <label for="nom">Nom:</label>
                                   <input type="text" class="form-control" name="nom" placeholder="Entrez le nom de la réclamation" id="nom" minlength="5" maxlength="50" value="<?= $listreclamations[$reclamation]['nom'] ?>" required>
@@ -564,7 +466,6 @@ require_once "../../../../Controller/Reclamations/paginationC.php";
   <script src="../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
   <script src="../../scriptjs/modifyInput.js"></script>
   <script>
-    debugger;
     const listReclamation = document.querySelector('.listReclamation');
 
     function deleteReclamation(button, id) {
@@ -572,13 +473,13 @@ require_once "../../../../Controller/Reclamations/paginationC.php";
       alert('Deleting ' + id);
       const row = button.parentNode.parentNode;
       row.parentNode.removeChild(row);
-      fetch('../../../Controller/reclamationC.php?id_rec=' + id)
+      fetch('../../../Controller/Reclamations/reclamationC.php?id_rec=' + id)
         .then(response => response.text())
         .then(data => console.log(data))
     }
 
     function sortList() {
-      fetch(`../../../Controller/sortC.php?sort=${document.querySelector('#sort-select').value}`)
+      fetch(`../../../Controller/Reclamations/sortC.php?sort=${document.querySelector('#sort-select').value}`)
         .then(response => response.text())
         .then(data => {
           listReclamation.innerHTML = data;
@@ -587,18 +488,10 @@ require_once "../../../../Controller/Reclamations/paginationC.php";
 
     function searchList() {
       const search = document.querySelector('.search').value;
-      fetch('../../../Controller/searchreclamation.php?search=' + search)
+      fetch('../../../Controller/Reclamations/searchreclamation.php?search=' + search)
         .then(response => response.text())
         .then(data => {
           listReclamation.innerHTML = data;
-        })
-    }
-
-    function downloadImage(id) {
-      fetch('../../../Controller/downloadC.php?id_rec=' + id)
-        .then(response => response.text())
-        .then(data => {
-          console.log(data);
         })
     }
   </script>

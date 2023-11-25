@@ -1,15 +1,16 @@
 <?php
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
+// Import PHPMailer classes into the global namespace
+// These must be at the top of your script, not inside a function
+session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
-require_once __DIR__ . '\..\View\vendor\autoload.php';
-require_once realpath(dirname(__FILE__)) . "/../../Model/Reclamations/reclamations.php";
-require_once realpath(dirname(__FILE__)) . "/../../Model/Reclamations/reclamation.php";
+require_once __DIR__ . '\..\..\View\vendor\autoload.php';
+require_once __DIR__ . "\..\..\Model\Reclamations\\reclamations.php";
+require_once __DIR__ . "\..\..\Model\Reclamations\\reclamation.php";
 
 function mailing()
 {
@@ -55,6 +56,7 @@ function mailing()
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
+        $id_user =  $_SESSION['id_user'];
         $nom = isset($_POST['nom']) ? $_POST['nom'] : '';
         $description = isset($_POST['description']) ? $_POST['description'] : '';
         $piecesJointes = $_FILES['pieces_jointes']['size'] !== 0 ? file_get_contents($_FILES['pieces_jointes']['tmp_name']) : '';
@@ -67,9 +69,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (isset($sendMail)) {
             mailing();
         }
-        $reclamation = new Reclamation($id_rec, $date, $nom, $description, $piecesJointes);
         $reclamations = new Reclamations();
-        $reclamations->addReclamation($reclamation);
+        $reclamation = $reclamations->addReclamation([
+            'id_rec' => $id_rec,
+            'date' => $date,
+            'description' => $description,
+            'pieces_jointes' => $piecesJointes,
+            'id_user' => $id_user,
+            'nom' => $nom
+        ]);
+        $_SESSION['id_rec'] = $reclamation->getIdRec();
         header('Location: http://localhost/View/pages/back/consulterRecGest.php');
     } catch (Exception $e) {
         echo $e->getMessage();

@@ -1,5 +1,11 @@
 <?php
-require_once "../../../../Controller/Reclamations/typereclamationC.php";
+require_once "../../../Controller/Users/authentification.php";
+require_once "../../../Model/Users/user.php";
+require_once "../../../Model/Users/passager.php";
+require_once "../../../Model/Users/admin.php";
+require_once "../../../Model/Users/passager.php";
+$user = unserialize($_SESSION['user']);
+require_once "../../../Controller/Reclamations/typereclamationC.php";
 ?>
 
 <!DOCTYPE html>
@@ -68,116 +74,7 @@ require_once "../../../../Controller/Reclamations/typereclamationC.php";
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
 <body class="g-sidenav-show bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
-  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
-    <!-- <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/argon-dashboard/pages/back/statistiquesRec.php " target="_blank">
-        <img src="../../assets/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">Argon Dashboard 2</span>
-      </a>
-    </div> -->
-    <div class="navdash">
-      <div class="navdash">
-        <div class="profile-container">
-          <img <?php echo 'src="../../../View/assets/images/person_1.jpg"' ?> alt="profile_image" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
-          <span id="profile-hover" onclick="changeImage()">+</span>
-        </div>
-      </div>
-      <p><?php echo 'hind' ?></p>
-    </div>
-    <hr class="horizontal dark mt-0" />
-    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
-      <ul class="navbar-nav dashnav">
-        <li class="nav-item">
-          <a class="nav-link" href="statistiquesRec.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="tables.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Tables</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="billing.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Billing</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="consulterRecGest.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">consultertypeReclamation</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link " href="Createtypereclamation.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">typereclamation</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="rtl.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">RTL</span>
-          </a>
-        </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
-            Account pages
-          </h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="profile.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Profile</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="sign-in.html">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign In</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="sign-up.html">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-collection text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Up</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="sign-up.html">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-collection text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Out</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </aside>
+  <?php require_once './dashHeader.php'; ?>
   <main class="main-content position-relative border-radius-lg">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
@@ -305,76 +202,6 @@ require_once "../../../../Controller/Reclamations/typereclamationC.php";
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-md-12 mt-4">
-          <!-- <div class="card rounded-3">
-            <div class="container mb-4">
-              <h1 class="text-center my-5">Liste typereclamations</h1>
-              <div class="d-flex flex-row justify-content-between my-3">
-                <input style="border-radius:12px" type="text" class="form-control search w-75 shadow-sm" onkeyup="searchList()">
-                <button class="btn" type="button" id="sort-button" onclick="sortList()">
-                  Sort List
-                </button>
-              </div>
-              <ul class="list-group listtypereclamation">
-                <?php for ($typereclamation = 0; $typereclamation < count($listtypereclamations); $typereclamation++) : ?>
-                  <li style="border-radius:12px" class="list-group-item" id="typereclamation-<?= $listtypereclamations[$typereclamation]['id_type'] ?>">
-                    <div class="d-flex flex-column">
-                      <h6 class="mb-3 text-sm">Utilisateur</h6>
-                      <span class="mb-2 text-xs fw-bold">Nom:</span>
-                      <span class="text-dark"><?= $listtypereclamations[$typereclamation]["nom"] ?></span>
-                      <span class="mb-2 text-xs fw-bold">categorie:</span>
-                      <span class="text-dark"><?= $listtypereclamations[$typereclamation]["categorie"] ?></span>
-                      <span class="text-xs fw-bold">modele_de_reponse:</span>
-                      <span class="text-dark"><?= $listtypereclamations[$typereclamation]["modele_de_reponse"] ?></span>
-                    </div>
-                    <div class="ms-auto text-end">
-                      <button type="button" class="btn btn-danger px-3 mb-0" onclick="deletetypereclamation(this,<?= $listtypereclamations[$typereclamation]['id_type'] ?>)">
-                        <i class="far fa-trash-alt me-2"></i>Delete
-                      </button>
-                      <button type="button" class="btn btn-primary px-3 mb-0" data-toggle="modal" data-target="#exampleModal<?= $listtypereclamations[$typereclamation]['id_type'] ?>">
-                        <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit
-                      </button>
-                    </div>
-                  </li>
-                  <div class="modal fade" id="exampleModal<?= $listtypereclamations[$typereclamation]['id_type'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <div class="card-body">
-                            <form method="post" action="../../../Controller/typereclamationC.php" enctype="multipart/form-data">
-                              <div class="form-group">
-                                <label for="nom">Nom:</label>
-                                <input type="text" class="form-control" name="nom" placeholder="Entrez le nom de la reclamation" id="nom" minlength="5" maxlength="50" value="<?= $listtypereclamations[$typereclamation]['nom'] ?>" required>
-                                <small class="text-muted">Le nom doit comporter entre 5 et 50 caractères.</small>
-                              </div>
-                              <div class="form-group">
-                                <label for="description">Categorie:</label>
-                                <input type="text" class="form-control" name="categorie" placeholder="Entrez la categorie de la reclamation" id="categorie" minlength="5" maxlength="50" value="<?= $listtypereclamations[$typereclamation]['categorie'] ?>" required>
-                                <small class="text-muted">La categorie doit comporter entre 10 et 500 caractères.</small>
-                              </div>
-                              <div class="form-group">
-                                <label for="description">modele_de_reponse:</label>
-                                <input type="text" class="form-control" name="modele_de_reponse" placeholder="Entrez le modele_de_reponse" id="modele_de_reponse" minlength="5" maxlength="50" value="<?= $listtypereclamations[$typereclamation]['modele_de_reponse'] ?>" required>
-                                <small class="text-muted">Le modele_de_reponse doit comporter entre 10 et 500 caractères.</small>
-                              </div>
-                              <input type="hidden" name="id_type" value="<?= $listtypereclamations[$typereclamation]['id_type'] ?>">
-                              <input type="submit" value="Update" class="btn btn-primary">
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                <?php endfor; ?>
-              </ul>
-            </div>
-          </div> -->
           <p>
             <button style="border-radius:20px;" class="btn bg-white w-100" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
               <h1 class="text-center my-2">Liste type reclamations</h1>
@@ -382,6 +209,14 @@ require_once "../../../../Controller/Reclamations/typereclamationC.php";
           </p>
           <div class="collapse" id="collapseExample">
             <div class="card rounded-3">
+              <div class="my-4 ms-4">
+                <a class="text-primary" href="./consulterRecGest.php"><i class="fa fa-arrow-left me-2"></i> Retour au gestion de Reclamations</a>
+              </div>
+              <div class="w-100 d-flex mt-2 justify-content-center">
+                <button style="border-radius:20px;" class="btn  bg-primary w-95" type="button">
+                  <h1 class="text-center text-white my-2"><a style="color:white;text-decoration:none;" href="./Createtypereclamation.php">Ajouter une type de reclamation</a></h1>
+                </button>
+              </div>
               <div class="container mb-4">
                 <div class="d-flex flex-row justify-content-between my-3">
                   <input style="border-radius:12px" type="text" class="form-control search w-75 shadow-sm" onkeyup="searchList()">
@@ -389,7 +224,7 @@ require_once "../../../../Controller/Reclamations/typereclamationC.php";
                     Sort List
                   </button>
                   <button class="btn" type="button" id="sort-button" onclick="sortList()">
-                    <a href="../../../Controller/pdf.php?file=my_file">Download PDF</a>
+                    <a href="../../../Controller/Reclamations/pdf.php?file=my_file">Download PDF</a>
                   </button>
                 </div>
                 <ul class="list-group listtypereclamation">
@@ -424,7 +259,7 @@ require_once "../../../../Controller/Reclamations/typereclamationC.php";
                           </div>
                           <div class="modal-body">
                             <div class="card-body">
-                              <form method="post" action="../../../Controller/typereclamationC.php" enctype="multipart/form-data">
+                              <form method="post" action="../../../Controller/Reclamations/typereclamationC.php" enctype="multipart/form-data">
                                 <div class="form-group">
                                   <label for="nom">Nom:</label>
                                   <input type="text" class="form-control" name="nom" placeholder="Entrez le nom de la reclamation" id="nom" minlength="5" maxlength="50" value="<?= $listtypereclamations[$typereclamation]['nom'] ?>" required>
@@ -586,7 +421,7 @@ require_once "../../../../Controller/Reclamations/typereclamationC.php";
       alert('Deleting ' + id);
       const row = button.parentNode.parentNode;
       row.parentNode.removeChild(row);
-      fetch('../../../Controller/typereclamationC.php?id_type=' + id)
+      fetch('../../../Controller/Reclamations/typereclamationC.php?id_type=' + id)
         .then(response => response.text())
         .then(data => console.log(data))
       alert('Deleted ' + id);
@@ -595,7 +430,7 @@ require_once "../../../../Controller/Reclamations/typereclamationC.php";
 
     function searchList() {
       const search = document.querySelector('.search').value;
-      fetch('../../../Controller/typereclamationC.php?id_type=' + id)
+      fetch('../../../Controller/Reclamations/searchtypereclamation.php?id_type=' + id)
         .then(response => response.text())
         .then(data => {
           console.log(data);
@@ -605,7 +440,7 @@ require_once "../../../../Controller/Reclamations/typereclamationC.php";
 
     function sortList() {
       const listtypeReclamation = document.querySelector('.listtypereclamation');
-      fetch('../../../Controller/sortTypeC.php?sort=asc')
+      fetch('../../../Controller/Reclamations/sortTypeC.php?sort=asc')
         .then(response => response.text())
         .then(data => {
           listtypeReclamation.innerHTML = data;
@@ -616,7 +451,7 @@ require_once "../../../../Controller/Reclamations/typereclamationC.php";
     function searchList() {
       const listtypeReclamation = document.querySelector('.listtypereclamation');
       const search = document.querySelector('.search').value;
-      fetch('../../../Controller/searchtypereclamation.php?search=' + search)
+      fetch('../../../Controller/Reclamations/searchtypereclamation.php?search=' + search)
         .then(response => response.text())
         .then(data => {
           listtypeReclamation.innerHTML = data;
