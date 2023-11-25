@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ .'\..\connection.php';
+require_once __DIR__ . '\..\connection.php';
 
 class reclamations
 {
@@ -11,19 +11,32 @@ class reclamations
     public function addReclamation($reclamation)
     {
         try {
-            $sql = "INSERT INTO reclamation (nom, description, date, pieces_jointes, id_type) 
-                    SELECT :nom, :description, :date, :pieces_jointes, id_type 
+            $sql = "INSERT INTO reclamation (nom, description, date, pieces_jointes,id_user, id_type) 
+                    SELECT :nom, :description, :date, :pieces_jointes ,:id_user, id_type  
                     FROM classification 
                     WHERE nom = :nom";
             $query = $this->db->prepare($sql);
-            $query->bindValue('nom', $reclamation->getNom());
-            $query->bindValue('description', $reclamation->getDescription());
-            $query->bindValue('date', $reclamation->getDate());
-            $query->bindValue('pieces_jointes', $reclamation->getPiecesJointes(), PDO::PARAM_LOB);
+            $query->bindValue(':nom', $reclamation['nom']);
+            $query->bindValue(':description', $reclamation['description']);
+            $query->bindValue(':date', $reclamation['date']);
+            $query->bindValue(':pieces_jointes', $reclamation['pieces_jointes']);
+            $query->bindValue(':id_user', $reclamation['id_user']);
             $query->execute();
         } catch (Exception $e) {
             die('Error: ' . $e->getMessage());
         }
+        var_dump($query->rowCount() > 0);
+        var_dump($this->db->lastInsertId());
+        return $query->rowCount() > 0
+            ? new reclamation([
+                'id_rec' => $this->db->lastInsertId(),
+                'nom' => $reclamation['nom'],
+                'description' => $reclamation['description'],
+                'date' => $reclamation['date'],
+                'pieces_jointes' => $reclamation['pieces_jointes'],
+                'id_user' => $reclamation['id_user']
+            ])
+            : null;
     }
 
     public function displayreclamations($pageRec = 0, $sizeRec = 5)
@@ -31,6 +44,18 @@ class reclamations
         try {
             $sql = "SELECT * from reclamation LIMIT " . $pageRec * $sizeRec . "," . $sizeRec;
             $query = $this->db->prepare($sql);
+            $query->execute();
+            return $query->fetchAll();
+        } catch (Exception $e) {
+            die('Error: ' . $e->getMessage());
+        }
+    }
+    public function displayUserReclamations($userId, $pageRec = 0, $sizeRec = 5)
+    {
+        try {
+            $sql = "SELECT * from reclamation where id_user = :id_user LIMIT " . $pageRec * $sizeRec . "," . $sizeRec;
+            $query = $this->db->prepare($sql);
+            $query->bindValue(':id_user', $userId);
             $query->execute();
             return $query->fetchAll();
         } catch (Exception $e) {
@@ -96,12 +121,40 @@ class reclamations
             die('Error: ' . $e->getMessage());
         }
     }
+
+    public function sortUserreclamations($id_user, $order = 'asc')
+    {
+        try {
+            $sql = "SELECT * FROM reclamation WHERE id_user = :id_user ORDER BY date " . ($order === 'asc' ? 'ASC' : 'DESC');
+            $query = $this->db->prepare($sql);
+            $query->bindValue(':id_user', $id_user);
+            $query->execute();
+            return $query->fetchAll();
+        } catch (Exception $e) {
+            die('Error: ' . $e->getMessage());
+        }
+    }
+
+
     public function searchreclamations($search)
     {
         try {
             $sql = "SELECT * FROM reclamation WHERE nom LIKE :search OR description LIKE :search OR date LIKE :search";
             $query = $this->db->prepare($sql);
             $query->bindValue(':search', '%' . $search . '%');
+            $query->execute();
+            return $query->fetchAll();
+        } catch (Exception $e) {
+            die('Error: ' . $e->getMessage());
+        }
+    }
+    public function searchUserreclamations($id_user, $search)
+    {
+        try {
+            $sql = "SELECT * FROM reclamation WHERE (nom LIKE :search OR description LIKE :search OR date LIKE :search) AND (id_user = :id_user)";
+            $query = $this->db->prepare($sql);
+            $query->bindValue(':search', '%' . $search . '%');
+            $query->bindValue(':id_user', $id_user);
             $query->execute();
             return $query->fetchAll();
         } catch (Exception $e) {

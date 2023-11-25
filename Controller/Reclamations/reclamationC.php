@@ -1,6 +1,6 @@
 <?php
-require_once realpath(dirname(__FILE__)) . "/../../Model/Reclamations/reclamations.php";
-require_once realpath(dirname(__FILE__)) . "/../Model/Reclamations/reclamation.php";
+require_once __DIR__ . "\..\..\Model\Reclamations\\reclamations.php";
+require_once __DIR__ . "\..\..\Model\Reclamations\\reclamation.php";
 
 $reclamations = new reclamations();
 $listreclamations = $reclamations->displayreclamations();
@@ -26,7 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nom = isset($_POST['nom']) ? $_POST['nom'] : '';
         $description = isset($_POST['description']) ? $_POST['description'] : '';
         $piecesJointes = $_FILES['pieces_jointes']['size'] !== 0 ? file_get_contents($_FILES['pieces_jointes']['tmp_name']) : '';
-        $rec = new reclamation($id_rec, $date, $nom, $description, $piecesJointes);
+        $rec = new reclamation([
+            'id_rec' => $id_rec,
+            'date' => $date,
+            'description' => $description,
+            'pieces_jointes' => $piecesJointes,
+            'nom' => $nom
+        ]);
         $reclamations->updateReclamation($id_rec, $rec);
 
         header('Location: http://localhost/View/pages/back/consulterRecGest.php');

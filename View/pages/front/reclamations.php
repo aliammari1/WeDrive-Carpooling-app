@@ -1,343 +1,308 @@
+<?php
+require_once "../../../Controller/Users/authentification.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
-</html>
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png" />
+  <title>We-Drive</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
-    <title>WeDrive</title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <!-- Nucleo Icons -->
-    <link href="../../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- CSS Files -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../assets/css/open-iconic-bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.0/css/all.min.css" integrity="sha384-G8Nv55OhLaLxjkfzDOw27ikW8+wrGEGnm9XkysaJ0t0+NR8jPcJxPveo31CHfztG" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flaticon@11.0.1/css/flaticon.css" integrity="sha384-31IkX41D6+3qgJqxYtr1kbyxHmGQzOm/+6lJU6fZU9XuSY7cL/HSdGn4V4Jz5u5K" crossorigin="anonymous" />
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="../../assets/css/open-iconic-bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.0/css/all.min.css" integrity="sha384-G8Nv55OhLaLxjkfzDOw27ikW8+wrGEGnm9XkysaJ0t0+NR8jPcJxPveo31CHfztG" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flaticon@11.0.1/css/flaticon.css" integrity="sha384-31IkX41D6+3qgJqxYtr1kbyxHmGQzOm/+6lJU6fZU9XuSY7cL/HSdGn4V4Jz5u5K" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+  <link rel="icon" type="image/png" href="../../assets/images/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="../../assets/css/open-iconic-bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../assets/css/animate.css" />
 
+  <link rel="stylesheet" type="text/css" href="../../assets/css/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../assets/css/owl.theme.default.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../assets/css/magnific-popup.css" />
 
-    <link rel="stylesheet" type="text/css" href="../../assets/css/style.css" />
-    <link id="pagestyle" href="../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../../assets/css/aos.css" />
 
+  <link rel="stylesheet" type="text/css" href="../../assets/css/ionicons.min.css" />
+
+  <link rel="stylesheet" type="text/css" href="../../assets/css/bootstrap-datepicker.css" />
+  <link rel="stylesheet" type="text/css" href="../../assets/css/jquery.timepicker.css" />
+
+  <link rel="stylesheet" type="text/css" href="../../assets/css/flaticon.css" />
+  <link rel="stylesheet" type="text/css" href="../../assets/css/icomoon.css" />
+  <link rel="stylesheet" type="text/css" href="../../assets/css/style.css" />
 </head>
 
-<body class="g-sidenav-show bg-gray-100">
-    <main class="main-content position-relative border-radius-lg">
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="../../index.html">We<span>Drive</span></a>
 
-        <?php
-        require_once "frontHeader.php"
-        ?>
-        <div class="container-fluid py-4">
-            <div class="row">
-                <div class="col-md-12 mt-4">
-                    <div class="card">
-                        <div class="card-header pb-0 px-3">
-                            <h6 class="mb-0">informations de réclamation</h6>
-                        </div>
-                        <div class="container">
-                            <h1 class="text-center my-5">formulaire de réclamation</h1>
-                            <div class="row justify-content-center">
-                                <div class="col-md-8">
-                                    <div class="card">
-                                        <div class="card-header">Ajouter une réclamation</div>
-                                        <div class="card-body">
-                                            <div class="form-group"></div>
-                                            <form method="POST" action="../../../Controller/addreclamation.php" enctype="multipart/form-data" class="needs-validation">
-                                                <div class="form-group">
-                                                    <label for="nom" class="form-label">
-                                                        Nom<span class="required">*</span>
-                                                    </label>
-                                                    <div class="input-group d-flex flex-column">
-                                                        <select class="form-control selectNom w-100" name="nom" id="nom" required></select>
-                                                        <div id="nomError"></div>
-                                                    </div>
-                                                </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
 
-                                                <div class="form-group">
-                                                    <label for="description" class="form-label">
-                                                        Description<span class="required">*</span>
-                                                    </label>
-                                                    <div class="input-group d-flex flex-column">
-                                                        <textarea class="form-control w-100" name="description" id="description"></textarea>
-                                                        <div id="descriptionError"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="date" class="form-label">
-                                                        Date<span class="required">*</span>
-                                                    </label>
-                                                    <div class="input-group d-flex flex-column">
-                                                        <input type="date" class="form-control w-100" name="date" id="date">
-                                                        <div id="dateError"></div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="pieces_jointes" class="form-label">
-                                                        Pièces jointes
-                                                    </label>
-                                                    <div class="input-group">
-                                                        <input type="file" class="form-control" name="pieces_jointes" id="pieces_jointes" multiple>
-                                                    </div>
-                                                    <small class="form-text text-muted">Joindre une ou plusieurs pièces jointes si nécessaire.</small>
-                                                </div>
-
-
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input" type="checkbox" name="sendMail" id="flexSwitchCheckDefault">
-                                                    <label class="form-check-label" for="flexSwitchCheckDefault">Send Mail</label>
-                                                </div>
-
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-icon btn-3 btn-primary">
-                                                <span class="btn-inner--icon me-2"><i class="ni ni-send"></i></span>
-                                                <span class="btn-inner--text">Ajouter la réclamation</span>
-                                            </button>
-
-
-                                            </form>
-
-
-
-
-
-
-                                        </div>
-                                        <footer class="footer pt-3">
-                                            <div class="container-fluid">
-                                                <div class="row align-items-center justify-content-lg-between">
-                                                    <div class="col-lg-6 mb-lg-0 mb-4">
-                                                        <div class="copyright text-center text-sm text-muted text-lg-start">
-                                                            ©
-                                                            <script>
-                                                                document.write(new Date().getFullYear());
-                                                            </script>
-                                                            , made with <i class="fa fa-heart"></i> by
-                                                            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                                                            for a better web.
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                                                            <li class="nav-item">
-                                                                <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                                                            </li>
-                                                            <li class="nav-item">
-                                                                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </footer>
-    </main>
-
-    <div class="fixed-plugin">
-        <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-            <i class="fa fa-cog py-2"></i>
-        </a>
-        <div class="card shadow-lg">
-            <div class="card-header pb-0 pt-3">
-                <div class="float-start">
-                    <h5 class="mt-3 mb-0">Argon Configurator</h5>
-                    <p>See our dashboard options.</p>
-                </div>
-                <div class="float-end mt-4">
-                    <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-                        <i class="fa fa-close"></i>
-                    </button>
-                </div>
-                <!-- End Toggle Button -->
-            </div>
-            <hr class="horizontal dark my-1" />
-            <div class="card-body pt-sm-3 pt-0 overflow-auto">
-                <!-- Sidebar Backgrounds -->
-                <div>
-                    <h6 class="mb-0">Sidebar Colors</h6>
-                </div>
-                <a href="javascript:void(0)" class="switch-trigger background-color">
-                    <div class="badge-colors my-2 text-start">
-                        <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-                        <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
-                    </div>
-                </a>
-                <!-- Sidenav Type -->
-                <div class="mt-3">
-                    <h6 class="mb-0">Sidenav Type</h6>
-                    <p class="text-sm">Choose between 2 different sidenav types.</p>
-                </div>
-                <div class="d-flex">
-                    <button class="btn bg-gradient-primary w-100 px-3 mb-2 active me-2" data-class="bg-white" onclick="sidebarType(this)">
-                        White
-                    </button>
-                    <button class="btn bg-gradient-primary w-100 px-3 mb-2" data-class="bg-default" onclick="sidebarType(this)">
-                        Dark
-                    </button>
-                </div>
-                <p class="text-sm d-xl-none d-block mt-2">
-                    You can change the sidenav type just on desktop view.
-                </p>
-                <!-- Navbar Fixed -->
-                <div class="d-flex my-3">
-                    <h6 class="mb-0">Navbar Fixed</h6>
-                    <div class="form-check form-switch ps-0 ms-auto my-auto">
-                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)" />
-                    </div>
-                </div>
-                <hr class="horizontal dark my-sm-4" />
-                <div class="mt-2 mb-5 d-flex">
-                    <h6 class="mb-0">Light / Dark</h6>
-                    <div class="form-check form-switch ps-0 ms-auto my-auto">
-                        <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)" />
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="../../index.html" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="about.html" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="services.html" class="nav-link">Services</a>
+          </li>
+          <li class="nav-item">
+            <a href="pricing.html" class="nav-link">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a href="car.html" class="nav-link">Cars</a>
+          </li>
+          <li class="nav-item">
+            <a href="blog.html" class="nav-link">Blog</a>
+          </li>
+          <li class="nav-item active">
+            <a href="reclamation.html" class="nav-link">Contact</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <!--   Core JS Files   -->
-    <script src="../../assets/js/core/popper.min.js"></script>
-    <script src="../../assets/js/core/bootstrap.min.js"></script>
-    <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script>
-        var win = navigator.platform.indexOf("Win") > -1;
-        if (win && document.querySelector("#sidenav-scrollbar")) {
-            var options = {
-                damping: "0.5",
-            };
-            Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
-        }
-    </script>
-    <!-- Github buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
-    <script src="../../scriptjs/modifyInput.js"></script>
-    <script>
-        const form = document.querySelector('.needs-validation');
-        const nom = document.getElementById("nom");
-        const nomError = document.getElementById("nomError");
-        const date = document.getElementById("date");
-        const dateError = document.getElementById("dateError");
-        const description = document.getElementById("description");
-        const descriptionError = document.getElementById("descriptionError");
-        const pieces_jointes = document.getElementById("pieces_jointes");
-        let testNom = false;
-        let testDescription = false;
-        let testDate = false;
-        nom.addEventListener("change", () => {
-            if (nom.value === "") {
-                nom.style.borderColor = "red"
-                nomError.style.color = "red";
-                nomError.innerText = "Nom non valide";
-                testNom = false;
-            } else {
-                nom.style.borderColor = "green";
-                nomError.style.color = "green";
-                nomError.innerText = "Nom valide";
-                testNom = true;
-            }
-        })
+  </nav>
+  <!-- END nav -->
 
-        description.addEventListener("keyup", () => {
-            if (description.value.trim().length >= 10 && description.value.trim().length <= 500 && description.value.length !== "") {
-                description.style.borderColor = "green"
-                descriptionError.innerText = " Description valide";
-                descriptionError.style.borderColor = "green"
-                testDescription = true;
-            } else {
-                if (description.value === "")
-                    descriptionError.innerText = "description vide"
-                else if (description.value.length < 10)
-                    descriptionError.innerText = "description trop courte"
-                else if (description.value.length > 500)
-                    descriptionError.innerText = "description trop longue"
-                description.style.borderColor = "red";
-                descriptionError.style.borderColor = "red"
-                testDescription = false;
-            }
-        })
+  <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('../../assets/images/bg_1.jpg')" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+        <div class="col-md-9 ftco-animate pb-5">
+          <p class="breadcrumbs">
+            <span class="mr-2"><a href="../../index.html">Home <i class="ion-ios-arrow-forward"></i></a></span>
+            <span>Contact <i class="ion-ios-arrow-forward"></i></span>
+          </p>
+          <h1 class="mb-3 bread">Contact Us</h1>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        date.addEventListener("change", () => {
-            if (date.value === "") {
-                date.style.borderColor = "red"
-                dateError.style.color = "red";
-                dateError.innerText = "date non valide";
-                testDate = false;
-            } else {
-                date.style.borderColor = "green";
-                dateError.style.color = "green";
-                dateError.innerText = "date valide";
-                testDate = true;
-            }
-        })
+  <section class="ftco-section contact-section">
+    <div class="container">
+      <div class="row d-flex mb-5 contact-info">
+        <div class="col-md-4">
+          <div class="row mb-5">
+            <div class="col-md-12">
+              <div class="border w-100 p-4 rounded mb-2 d-flex">
+                <div class="icon mr-3">
+                  <span class="icon-map-o"></span>
+                </div>
+                <p>
+                  <span>Address:</span> 198 West 21th Street, Suite 721 New
+                  York NY 10016
+                </p>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="border w-100 p-4 rounded mb-2 d-flex">
+                <div class="icon mr-3">
+                  <span class="icon-mobile-phone"></span>
+                </div>
+                <p>
+                  <span>Phone:</span>
+                  <a href="tel://1234567920">+ 1235 2355 98</a>
+                </p>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="border w-100 p-4 rounded mb-2 d-flex">
+                <div class="icon mr-3">
+                  <span class="icon-envelope-o"></span>
+                </div>
+                <p>
+                  <span>Email:</span>
+                  <a href="mailto:info@yoursite.com">info@yoursite.com</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8 block-9 mb-md-5">
+          <form action="../../../Controller/Reclamations/addreclamation.php" class="p-5 bg-primary contact-form" style="opacity: 0.775; border-radius: 40px" method="post" enctype="multipart/form-data">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="nom" class="form-label text-white">Nom</label>
+                <select class="form-control selectNom w-100" name="nom" id="nom" required></select>
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="date" class="form-label text-white">Date</label>
+                <input type="date" class="form-control form-control-alternative" id="date" name="date" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="description" class="form-label text-white">Description</label>
+              <textarea name="description" id="description" cols="30" rows="7" class="form-control form-control-alternative" placeholder="Entrez une description de votre demande" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="pieces_jointes" class="form-label text-white">Pièce jointe</label>
+              <input type="file" class="form-control form-control-alternative" id="pieces_jointes" name="pieces_jointes" />
+            </div>
+            <div class="form-group mt-4">
+              <button type="submit" class="btn btn-block btn-lg shadow-lg text-white" style="background-color: #130ac77b; border-radius: 20px">
+                Envoyer
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <div id="map" class="bg-white"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        form.addEventListener("submit", (event) => {
-            event.preventDefault();
-            Swal.fire({
-                icon: 'error',
-                title: 'Erreur!',
-                text: 'Une erreur est survenue lors de l\'ajout de votre réclamation.',
-                confirmButtonText: 'OK'
-            });
-            if (testNom && testDescription && testDate) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Réclamation ajoutée!',
-                    text: 'Votre réclamation a été ajoutée avec succès.',
-                    confirmButtonText: 'OK'
-                }).then(function() {
-                    form.submit();
-                    //location.href = "consulterRecGest.php";
-                });
-            }
+  <footer class="ftco-footer ftco-bg-dark ftco-section">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">
+              <a href="#" class="logo">We<span>Drive</span></a>
+            </h2>
+            <p>
+              Far far away, behind the word mountains, far from the countries
+              Vokalia and Consonantia, there live the blind texts.
+            </p>
+            <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+              <li class="ftco-animate">
+                <a href="#"><span class="icon-twitter"></span></a>
+              </li>
+              <li class="ftco-animate">
+                <a href="#"><span class="icon-facebook"></span></a>
+              </li>
+              <li class="ftco-animate">
+                <a href="#"><span class="icon-instagram"></span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4 ml-md-5">
+            <h2 class="ftco-heading-2">Information</h2>
+            <ul class="list-unstyled">
+              <li><a href="#" class="py-2 d-block">About</a></li>
+              <li><a href="#" class="py-2 d-block">Services</a></li>
+              <li>
+                <a href="#" class="py-2 d-block">Term and Conditions</a>
+              </li>
+              <li>
+                <a href="#" class="py-2 d-block">Best Price Guarantee</a>
+              </li>
+              <li>
+                <a href="#" class="py-2 d-block">Privacy &amp; Cookies Policy</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Customer Support</h2>
+            <ul class="list-unstyled">
+              <li><a href="#" class="py-2 d-block">FAQ</a></li>
+              <li><a href="#" class="py-2 d-block">Payment Option</a></li>
+              <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
+              <li><a href="#" class="py-2 d-block">How it works</a></li>
+              <li>
+                <a href="#" class="py-2 d-block">Ajouter une réclamation</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="ftco-footer-widget mb-4">
+            <h2 class="ftco-heading-2">Have a Questions?</h2>
+            <div class="block-23 mb-3">
+              <ul>
+                <li>
+                  <span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California,
+                    USA</span>
+                </li>
+                <li>
+                  <a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a>
+                </li>
+                <li>
+                  <a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            All rights reserved | This template is made with
+            <i class="icon-heart color-danger" aria-hidden="true"></i> by
+            <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+      <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+      <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
+    </svg>
+  </div>
+
+  <script src="../../assets/js/jquery.min.js"></script>
+  <script src="../../assets/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="../../assets/js/popper.min.js"></script>
+  <script src="../../assets/js/bootstrap.min.js"></script>
+  <script src="../../assets/js/jquery.easing.1.3.js"></script>
+  <script src="../../assets/js/jquery.waypoints.min.js"></script>
+  <script src="../../assets/js/jquery.stellar.min.js"></script>
+  <script src="../../assets/js/owl.carousel.min.js"></script>
+  <script src="../../assets/js/jquery.magnific-popup.min.js"></script>
+  <script src="../../assets/js/aos.js"></script>
+  <script src="../../assets/js/jquery.animateNumber.min.js"></script>
+  <script src="../../assets/js/bootstrap-datepicker.js"></script>
+  <script src="../../assets/js/jquery.timepicker.min.js"></script>
+  <script src="../../assets/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="../../assets/js/google-map.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script>
+    const selectNom = document.querySelector('.selectNom')
+    fetch('../../../Controller/Reclamations/getType.php')
+      .then(res => res.text())
+      .then(data => {
+        selectNom.innerHTML = data;
+        console.log(data);
+      })
+    setInterval(() => {
+      fetch('../../../Controller/Reclamations/getType.php')
+        .then(res => res.text())
+        .then(data => {
+          selectNom.innerHTML = data;
+          console.log(data);
         })
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script>
-        const selectNom = document.querySelector('.selectNom')
-        const request = new XMLHttpRequest();
-        request.open('GET', '../../../Controller/getType.php');
-        request.onload = () => {
-            selectNom.innerHTML = request.responseText;
-        }
-        request.send();
-        setInterval(() => {
-            request.open('GET', '../../../Controller/getType.php');
-            request.onload = () => {
-                selectNom.innerHTML = request.responseText;
-            }
-            request.send();
-        }, 3600000);
-    </script>
-    <script src="../../assets/js/jquery.min.js"></script>
-    <script src="../../assets/js/popper.min.js"></script>
-    <script src="../../assets/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="../../assets/js/aos.js"></script>
-    <script src="../../assets/js/jquery.animateNumber.min.js"></script>
-    <script src="../../assets/js/bootstrap-datepicker.js"></script>
-    <script src="../../assets/js/jquery.timepicker.min.js"></script>
-    <script src="../../assets/js/scrollax.min.js"></script>
+    }, 3600000);
+  </script>
 </body>
 
 </html>

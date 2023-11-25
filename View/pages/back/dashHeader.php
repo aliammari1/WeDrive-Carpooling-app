@@ -3,11 +3,7 @@
     <div class="navdash">
         <div class="navdash">
             <div class="profile-container">
-                <img src="data:image/jpeg;base64,
-    <?php
-    echo base64_encode($user->getProfileImage());
-    ?>
-        " alt="profileImage" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
+                <img src="data:image/jpeg;base64,<?= base64_encode($user->getProfileImage()); ?>" alt="profileImage" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
                 <span id="profile-hover" onclick="changeImage()">+</span>
             </div>
         </div>
@@ -21,8 +17,8 @@
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav dashnav">
             <?php
-            $hrefList = ["dashboard", "tables", "billing", "virtual-reality", "rtl"];
-            $stringList = ["Dashboard", "Tables", "Billing", "Virtual Reality", "RTL"];
+            $hrefList = ["dashboard", "tables", "billing", "consulterRecGest"];
+            $stringList = ["Statistiques", "Tables", "Billing", "Reclamations"];
             $iconList = ["ni ni-tv-2 text-primary", "ni ni-calendar-grid-58 text-warning", "ni ni-credit-card text-success", "ni ni-app text-info", "ni ni-world-2 text-danger"];
             for ($i = 0; $i < count($stringList); $i++) {
             ?>

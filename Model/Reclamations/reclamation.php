@@ -7,8 +7,7 @@ class Reclamation
     private string $description;
     private string $pieces_jointes; // blob type
     private string $date;
-
-
+    private int $id_user;
     public function getIdRec(): ?int
     {
         return $this->id_rec;
@@ -33,6 +32,10 @@ class Reclamation
     {
         return $this->pieces_jointes;
     }
+    public function getIdUser(): int
+    {
+        return $this->id_user;
+    }
 
     public function setNom(string $nom): void
     {
@@ -53,13 +56,20 @@ class Reclamation
     {
         $this->date = $date;
     }
-    public function __construct(int $id_rec = NULL, string $date = '', string $nom = '', string $description = '', ?string $pieces_jointes = '')
+    public function setIdUser($id_user)
     {
-        if ($id_rec !== null)
-            $this->id_rec = $id_rec;
-        $this->date = $date ?? date("now");
-        $this->nom = $nom;
-        $this->description = $description;
-        $this->pieces_jointes = $pieces_jointes;
+        $this->id_user = $id_user;
+    }
+    public function __construct(array $data)
+    {
+        var_dump($data);
+        if ($data['id_rec'] !== null)
+            $this->id_rec = $data['id_rec'];
+        $this->date = $data['date'] ?? date("now");
+        $this->nom = $data['nom'];
+        $this->description = $data['description'];
+        $this->pieces_jointes = $data['pieces_jointes'];
+        if ($data['id_user'] !== null)
+            $this->id_user = $data['id_user'];
     }
 }

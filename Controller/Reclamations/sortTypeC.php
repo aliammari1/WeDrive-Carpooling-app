@@ -1,8 +1,8 @@
 <?php
 
-require_once realpath(dirname(__FILE__)) . "\..\..\Model\\connection.php";
-require_once realpath(dirname(__FILE__)) . "\..\..\Model\\Reclamations\typesreclamation.php";
-require_once realpath(dirname(__FILE__)) . "\..\..\Model\\Reclamations\typereclamation.php";
+require_once __DIR__ . "\..\..\Model\\connection.php";
+require_once __DIR__ . "\..\..\Model\\Reclamations\\typesreclamation.php";
+require_once __DIR__ . "\..\..\Model\\Reclamations\\typereclamation.php";
 $db = new connection();
 $typesreclamations = new typeReclamations();
 $listtypereclamations = $typesreclamations->sorttypereclamations($_GET['sort']);

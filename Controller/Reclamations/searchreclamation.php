@@ -1,10 +1,10 @@
 <?php
 
-require_once realpath(dirname(__FILE__)) . "\..\..\Model\\connection.php";
-require_once realpath(dirname(__FILE__)) . "\..\..\Model\Reclamations\\reclamations.php";
-require_once realpath(dirname(__FILE__)) . "\..\..\Model\Reclamations\\reclamation.php";
+require_once __DIR__ . "\..\..\Model\\connection.php";
+require_once __DIR__ . "\..\..\Model\Reclamations\\reclamations.php";
+require_once __DIR__ . "\..\..\Model\Reclamations\\reclamation.php";
 $db = new connection();
-$reclamations = new reclamations($db->getDb());
+$reclamations = new reclamations();
 $listreclamations = $reclamations->searchreclamations($_GET['search']);
 ?>
 <div class="d-flex flex-column align-items-center">

@@ -1,5 +1,5 @@
 <?php
-require_once  __DIR__ . '\..\Model\PDF.php';
+require_once  __DIR__ . '\..\..\Model\pdf.php';
 require_once  __DIR__ . '\..\..\Model\Reclamations\reclamations.php';
 $reclamation = new reclamations();
 $file = $_GET["file"] . ".pdf";
