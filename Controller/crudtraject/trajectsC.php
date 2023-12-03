@@ -2,12 +2,12 @@
 <?php
 
 /*include_once ('../../../Model/connection.php');
-	include_once ('../../../Model/crudtraject/tarjects.php');*/
+	include_once ('../../../Model/ tarjects.php');*/
 	
 	#require_once(__DIR__ . '/../../Model/connection.php');
-#require_once(__DIR__ . '/../../Model/crudtraject/trajects.php');
+#require_once(__DIR__ . '/../../Model/ trajects.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/integration/project2223_2a30-2a30-tnraiders/Model/connection.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/integration/project2223_2a30-2a30-tnraiders/Model/crudtraject/tarjects.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/integration/project2223_2a30-2a30-tnraiders/Model/ tarjects.php');
 
 
 
