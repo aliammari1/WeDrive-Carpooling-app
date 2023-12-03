@@ -1,9 +1,9 @@
 <?php
 	#include_once '../Config.php';
 	include_once '../../../../Model/connection.php';
-	//include_once '../../../../../Model/crudtraject/trajects.php';
+	//include_once '../../../../../Model/ trajects.php';
 #	require_once($_SERVER['DOCUMENT_ROOT'] . '/integration/project2223_2a30-2a30-tnraiders/Model/connection.php');
-	require_once($_SERVER['DOCUMENT_ROOT'] . '/integration/project2223_2a30-2a30-tnraiders/Model/crudtraject/adresss.php');
+	require_once($_SERVER['DOCUMENT_ROOT'] . '/integration/project2223_2a30-2a30-tnraiders/Model/ adresss.php');
 	class adressC {
 		private $db;
 		function __construct()
@@ -39,11 +39,11 @@
 		}
 /////////....................................................................../////////////////
 
-function search($chearch){
-	$sql="SELECT * FROM adress WHERE adressid LIKE :chearch OR adressA LIKE :chearch OR adressB LIKE :chearch OR type LIKE :chearch ";
+function search($search){
+	$sql="SELECT * FROM adress WHERE adressid LIKE :search OR adressA LIKE :search OR adressB LIKE :search OR type LIKE :search ";
 	
 	$req=$this->db->prepare($sql);
-	$req->bindValue(':chearch', '%'.$chearch.'%'); // adding '%' before and after the search string to allow partial match
+	$req->bindValue(':search', '%'.$search.'%'); // adding '%' before and after the search string to allow partial match
 	
 	try{
 		$req->execute(); // execute the prepared statement
@@ -56,11 +56,11 @@ function search($chearch){
 }
 
 /*
-function search($chearch){
-	$sql="SELECT * FROM adress WHERE adressid LIKE :chearch OR adressA LIKE :chearch OR adressB LIKE :chearch OR type LIKE :chearch ";
+function search($search){
+	$sql="SELECT * FROM adress WHERE adressid LIKE :search OR adressA LIKE :search OR adressB LIKE :search OR type LIKE :search ";
 	$this->db = config::getConnexion();
 	$req=$this->db->prepare($sql);
-			$req->bindValue(':chearch', $chearch); 
+			$req->bindValue(':search', $search); 
 
 	
 	try{
