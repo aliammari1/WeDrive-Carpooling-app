@@ -4,7 +4,7 @@ require_once "../../../Controller/Users/authentification.php"; ?>
 <html lang="en">
 
 <head>
-  <title>We-Drive</title>
+  <title>WeDrive</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 

@@ -3,7 +3,7 @@
 try {
     session_start();
     if (!isset($_SESSION['authentification']) || $_SESSION['authentification'] !== true) {
-        header('Location: login.php');
+        header('Location: ' . __DIR__ . '\front\login.php');
         exit;
     }
 } catch (Throwable $e) {

@@ -2,7 +2,7 @@
 require_once "../../../Controller/Users/authentification.php";
 require_once "../../../Model/Users/user.php";
 require_once "../../../Model/Users/passager.php";
-require_once "../../../Model/Users/conducteur.php";
+require_once "../../../../Model/Users/conducteur.php";
 require_once "../../../Model/Users/admin.php";
 $user = unserialize($_SESSION['user']) ?>
 <!DOCTYPE html>
@@ -132,7 +132,7 @@ $user = unserialize($_SESSION['user']) ?>
                     <div class="d-flex py-1">
                       <div class="avatar avatar-sm bg-gradient-secondary me-3 my-auto">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                          <title>credit-card</title>
+                          <title>WeDrive</title>
                           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
                               <g transform="translate(1716.000000, 291.000000)">

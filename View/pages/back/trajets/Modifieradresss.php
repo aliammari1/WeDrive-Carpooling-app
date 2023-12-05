@@ -1,62 +1,62 @@
 <?php
-  
-   include_once '../../../../Controller/crudtraject/adressC.php';
 
-   require_once "../../../../Controller/Users/authentification.php";
-   require_once "../../../../Model/Users/user.php";
-   require_once "../../../../Model/Users/passager.php";
-   require_once "../../../../Model/Users/admin.php";
-   require_once "../../../../Model/Users/passager.php";
-   
-   $user = unserialize($_SESSION['user']);
+require_once '../../../../Controller/trajets/adressC.php';
+
+require_once "../../../../Controller/Users/authentification.php";
+require_once "../../../../Model/Users/user.php";
+require_once "../../../../Model/Users/passager.php";
+require_once "../../../../Model/Users/admin.php";
+require_once "../../../../Model/Users/passager.php";
+
+$user = unserialize($_SESSION['user']);
 
 
 
-    $error = "";
+$error = "";
 
-    // create user
-    $adress = null;
+// create user
+$adress = null;
 
-    // create an instance of the controller
-    $adressC = new adressC();
+// create an instance of the controller
+$adressC = new adressC();
 
-   # var_dump($_POST);
+# var_dump($_POST);
 
-    if (
-        isset ($_POST['adressid']) &&
-		isset($_POST["adressA"]) &&		
-        isset($_POST["adressB"]) &&
-		isset($_POST["type"]))
-        {
-        if (
-            !empty($_POST['adressid']) &&
-			!empty($_POST["adressA"]) &&
-            !empty($_POST["adressB"]) && 
-			!empty($_POST["type"]) 
-           
-        ) {
-            $adress = new adress(
-				$_POST['adressA'],
-                $_POST['adressB'], 
-				$_POST['type'],
-              
-                $_POST['adressid']
-            );
-            $adressC->Modifieradress($adress, $_POST['adressid']);
-            header('Location:Afficheradresss.php');
-        }
-        else
-            $error = "Missing information";
-    }    
+if (
+  isset($_POST['adressid']) &&
+  isset($_POST["adressA"]) &&
+  isset($_POST["adressB"]) &&
+  isset($_POST["type"])
+) {
+  if (
+    !empty($_POST['adressid']) &&
+    !empty($_POST["adressA"]) &&
+    !empty($_POST["adressB"]) &&
+    !empty($_POST["type"])
+
+  ) {
+    $adress = new adress(
+      $_POST['adressA'],
+      $_POST['adressB'],
+      $_POST['type'],
+
+      $_POST['adressid']
+    );
+    $adressC->Modifieradress($adress, $_POST['adressid']);
+    header('Location:Afficheradresss.php');
+  } else
+    $error = "Missing information";
+}
 ?>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-   
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="76x76" href="../../../assets/img/apple-icon.png" />
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="apple-touch-icon" sizes="76x76" href="../../../assets/img/apple-icon.png" />
   <link rel="icon" type="image/png" href="../../../assets/img/favicon.png" />
- 
+
   <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
   <link id="pagestyle" href="../../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
@@ -64,152 +64,221 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
-	<link rel="stylesheet" href="../../material-dashbord.css">
- 
-    <style>
-#customers {font-family: Arial, Helvetica, sans-serif;border-collapse: collapse; width: 40%;}
+  <link rel="stylesheet" href="../../material-dashbord.css">
 
-#customers td, #customers th {border: 1px solid #ddd; padding: 8px;}
+  <style>
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 40%;
+    }
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
+    #customers td,
+    #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
 
-#customers tr:hover {background-color: #ddd;}
+    #customers tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
 
-#customers th { padding-top: 12px;padding-bottom: 12px;text-align: left;background-color:  #04a2aa;color: white;}
+    #customers tr:hover {
+      background-color: #ddd;
+    }
 
-.button {background-color: #4CAF50; /* Green */border: none;color: white;padding: 16px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;transition-duration: 0.4s; cursor: pointer;}
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #04a2aa;
+      color: white;
+    }
 
-.button1 {background-color: white; color: black; border: 2px solid #4CAF50;}
+    .button {
+      background-color: #4CAF50;
+      /* Green */
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+    }
 
-.button1:hover {background-color: #4CAF50;color: white;}
+    .button1 {
+      background-color: white;
+      color: black;
+      border: 2px solid #4CAF50;
+    }
 
-.button2 {background-color: white; color: black; border: 2px solid #008CBA;}
+    .button1:hover {
+      background-color: #4CAF50;
+      color: white;
+    }
 
-.button2:hover {background-color: #008CBA;color: white;}
+    .button2 {
+      background-color: white;
+      color: black;
+      border: 2px solid #008CBA;
+    }
 
-.button3 {background-color: white; color: black; border: 2px solid #f44336;}
+    .button2:hover {
+      background-color: #008CBA;
+      color: white;
+    }
 
-.button3:hover {background-color: #f44336;color: white;}
+    .button3 {
+      background-color: white;
+      color: black;
+      border: 2px solid #f44336;
+    }
 
-.button4 {background-color: white;color: black;border: 2px solid #e7e7e7;}
+    .button3:hover {
+      background-color: #f44336;
+      color: white;
+    }
 
-.button4:hover {background-color: #e7e7e7;}
+    .button4 {
+      background-color: white;
+      color: black;
+      border: 2px solid #e7e7e7;
+    }
 
-.button5 {background-color: white;color: black;border: 2px solid #555555;}
+    .button4:hover {
+      background-color: #e7e7e7;
+    }
 
-.button5:hover {
-  background-color: #555555;color: white;}
-#map { width:800; height:350; }
-</style>
-    <title>adress</title>
+    .button5 {
+      background-color: white;
+      color: black;
+      border: 2px solid #555555;
+    }
+
+    .button5:hover {
+      background-color: #555555;
+      color: white;
+    }
+
+    #map {
+      width: 800;
+      height: 350;
+    }
+  </style>
+  <title>WeDrive</title>
 </head>
 
-    <!--//////////////////////////////////////////////////////////////////-->
-    <body class="g-sidenav-show bg-gray-100">
-    <div class="min-height-300 bg-primary position-absolute w-100"></div>
-    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
+<!--//////////////////////////////////////////////////////////////////-->
 
-        <div class="navdash">
-            <div class="navdash">
-                <div class="profile-container">
-                    <img <?php echo 'src="data:image/jpeg;base64,' . base64_encode($user->getProfileImage()) . '"' ?> alt="profileImage" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
-                    <span id="profile-hover" onclick="changeImage()">+</span>
-                </div>
-            </div>
-            <p><?php echo $user->getPrenom(); ?></p>
+<body class="g-sidenav-show bg-gray-100">
+  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
+
+    <div class="navdash">
+      <div class="navdash">
+        <div class="profile-container">
+          <img <?php echo 'src="data:image/jpeg;base64,' . base64_encode($user->getProfileImage()) . '"' ?> alt="profileImage" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
+          <span id="profile-hover" onclick="changeImage()">+</span>
         </div>
-        <hr class="horizontal dark mt-0" />
-        <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
-            <ul class="navbar-nav dashnav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="../dashboard.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="tables.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Tables</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-          <a class="nav-link" href="crudtrajectviews/Affichertrajects.php">
+      </div>
+      <p><?php echo $user->getPrenom(); ?></p>
+    </div>
+    <hr class="horizontal dark mt-0" />
+    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+      <ul class="navbar-nav dashnav">
+        <li class="nav-item">
+          <a class="nav-link active" href="../dashboard.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="tables.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">gestion des trajectes</span>
+            <span class="nav-link-text ms-1">Tables</span>
           </a>
         </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="billing.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Billing</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="virtual-reality.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-app text-info text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Virtual Reality</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="rtl.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">RTL</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
-                        Account pages
-                    </h6>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Profile</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Sign In</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="register.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-collection text-info text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Sign Up</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../../../Controller/Users/ControlSignout.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-collection text-info text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Sign Out</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <li class="nav-item">
+          <a class="nav-link" href="trajets/Affichertrajects.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">gestion des trajets</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="billing.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Billing</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="virtual-reality.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-app text-info text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Virtual Reality</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="rtl.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">RTL</span>
+          </a>
+        </li>
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
+            Account pages
+          </h6>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="profile.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Profile</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Sign In</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="register.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-collection text-info text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Sign Up</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../../Controller/Users/ControlSignout.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-collection text-info text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Sign Out</span>
+          </a>
+        </li>
+      </ul>
+    </div>
 
-   
+
 
     <!--//////////////////////////////////////////////////////////////////-->
   </aside>
@@ -304,7 +373,7 @@
                     <div class="d-flex py-1">
                       <div class="avatar avatar-sm bg-gradient-secondary me-3 my-auto">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                          <title>credit-card</title>
+                          <title>WeDrive</title>
                           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
                               <g transform="translate(1716.000000, 291.000000)">
@@ -343,144 +412,144 @@
 
 
 
-     <body>
-     <div class="card z-index-2 h-70">
-            <div class="card-header pb-0 pt-3 bg-transparent">
-    
-        <button  class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"  ><a href="Afficheradresss.php">Retour a la liste des adresss</a></button>
-        <hr>
-        
-        <div id="#">
-     <?php ?>
+    <body>
+      <div class="card z-index-2 h-70">
+        <div class="card-header pb-0 pt-3 bg-transparent">
+
+          <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Afficheradresss.php">Retour a la liste des adresss</a></button>
+          <hr>
+
+          <div id="#">
+            <?php ?>
+          </div>
+          <?php
+          if (isset($_GET['adressid'])) {
+            $adress = $adressC->Recupereradress($_GET['adressid']);
+          }
+          ?>
+          <form action="" method="POST">
+            <h6 class="text-capitalize">>modifer un adress</h6>
+            <p class="text-sm mb-0">
+              <i class="fa fa-arrow-up text-success"></i>
+              <span class="font-weight-bold"> change the info you need </span> in 2023
+            </p>
+
+
+            <label class="form-control-label" for="adressA">adressA:
+            </label>
+            <input class="form-control" type="text" name="adressA" id="adressA" value="<?php echo $adress['adressA']; ?>" maxlength="20" readonly></td>
+
+            <label class="form-control-label" for="adressB">adressB:
+            </label>
+
+            <input class="form-control" type="text" name="adressB" id="adressB" value="<?php echo $adress['adressB']; ?>" readonly></td>
+            <script>
+              const usernameInput = document.querySelector('#adressB');
+              usernameInput.addEventListener('blur', function(event) {
+                const username = event.target.value;
+                if (username.trim() === '') {
+                  usernameInput.setCustomValidity('adressB is required');
+                } else {
+                  usernameInput.setCustomValidity('');
+                }
+              });
+            </script>
+            <center>
+              <label>Map
+              </label></td>
+              <div id="map"></div>
+              </td>
+              </tr>
+
+              <div>
+                <a id="myadressA" href="#">adressA</a><a id="myadressB" href="#" maxlength="20">adressB</a>
+              </div>
+
         </div>
-        <?php
-    if (isset($_GET['adressid'])) {
-        $adress = $adressC->Recupereradress($_GET['adressid']);
-    }
-    ?>
-        <form action="" method="POST">
-        <h6 class="text-capitalize">>modifer un adress</h6>
-              <p class="text-sm mb-0">
-                <i class="fa fa-arrow-up text-success"></i>
-                <span class="font-weight-bold"> change the info you need </span> in 2023
-              </p>
-           
-				
-                        <label  class="form-control-label"for="adressA">adressA:
-                        </label>
-                   <input  class="form-control"   type="text" name="adressA" id="adressA" value="<?php echo $adress['adressA']; ?>" maxlength="20"  readonly ></td>
-             
-                        <label  class="form-control-label"for="adressB">adressB:
-                        </label>
-                  
-                    <input  class="form-control"  type="text" name="adressB" id="adressB"  value="<?php echo $adress['adressB']; ?>"  readonly ></td>
-                    <script>
-                     const usernameInput = document.querySelector('#adressB');
-                     usernameInput.addEventListener('blur', function(event) {
-                      const username = event.target.value;
-                     if (username.trim() === '') {
-                     usernameInput.setCustomValidity('adressB is required');
-                    } else {
-                      usernameInput.setCustomValidity('');
-                    }
-                    });
-                  </script>
-                  <center> 
-                  <label>Map
-                        </label></td>
-                  <div id="map"></div></td>
-                        </tr>
-                     
-                       <div> 
-                         <a id="myadressA" href="#">adressA</a><a id="myadressB" href="#" maxlength="20">adressB</a> </div> 
-             
-                                </div>
-                             </center>
-                  
-              
-                  
-                        <label  class="form-control-label"for="type">type:
-                        </label>
-                  
-                  
-                        <input class="form-control"  type="text" name="type" id="type" value="<?php echo $adress['type']; ?>">
-                        <script>
-                         const ageInput = document.querySelector('#type');
-                         ageInput.addEventListener('blur', function(event) {
-                           const age = event.target.value;
-                         if (age === '') {
-                        ageInput.setCustomValidity('type is required');
-                        } else {
-                        ageInput.setCustomValidity('');
-                         }
-                         });
-                       </script>
-                           <div>
-                       
-                    <input type="hidden" name="adressid" id="adressid" value="<?php echo $_GET['adressid']; ?>">
-                     <br>  
-                     <div class="row justify-content-center">
-
-                      <div class="col-md-2">
-                     
-                     <input  class="btn btn-sm btn-info mb-0" type="submit" value="Modifier"> 
-                     </div>
-                        <div class="col-md-2">
-                           <input  class="btn btn-sm btn-warning mb-0" type="reset" value="Annuler" >
-                           </div>
-                        </div>
-                        </form>
-            </div> 
-            </div>
-           </body>
+        </center>
 
 
 
+        <label class="form-control-label" for="type">type:
+        </label>
 
 
-
-
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-     crossorigin=""/>
-      <!-- Make sure you put this AFTER Leaflet's CSS -->
- <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-     crossorigin=""></script>
-
-    
-    <script>
-        var map = L.map('map').setView([36.7983312,9.9739643], 13);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-        var popup = L.popup();
-let x;
-let y;
-let z;
-let vtc="adressA";
-var button = document.getElementById("myadressA");
-  button.addEventListener("click", function() {
-    vtc="adressA";
-  });
-  var button = document.getElementById("myadressB");
-  button.addEventListener("click", function() {
-    vtc="adressB";
-  });
-function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("Selected Start Path" + e.latlng.toString())
-        .openOn(map);
-       x=e.latlng.toString();
-    y=x.slice(7);
-    z=y.slice(0, y.length - 1);
-
-    document.getElementById(vtc).value=z;
-}
-
-map.on('click', onMapClick);
+        <input class="form-control" type="text" name="type" id="type" value="<?php echo $adress['type']; ?>">
+        <script>
+          const ageInput = document.querySelector('#type');
+          ageInput.addEventListener('blur', function(event) {
+            const age = event.target.value;
+            if (age === '') {
+              ageInput.setCustomValidity('type is required');
+            } else {
+              ageInput.setCustomValidity('');
+            }
+          });
         </script>
+        <div>
+
+          <input type="hidden" name="adressid" id="adressid" value="<?php echo $_GET['adressid']; ?>">
+          <br>
+          <div class="row justify-content-center">
+
+            <div class="col-md-2">
+
+              <input class="btn btn-sm btn-info mb-0" type="submit" value="Modifier">
+            </div>
+            <div class="col-md-2">
+              <input class="btn btn-sm btn-warning mb-0" type="reset" value="Annuler">
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </body>
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+
+    <script>
+      var map = L.map('map').setView([36.7983312, 9.9739643], 13);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+      var popup = L.popup();
+      let x;
+      let y;
+      let z;
+      let vtc = "adressA";
+      var button = document.getElementById("myadressA");
+      button.addEventListener("click", function() {
+        vtc = "adressA";
+      });
+      var button = document.getElementById("myadressB");
+      button.addEventListener("click", function() {
+        vtc = "adressB";
+      });
+
+      function onMapClick(e) {
+        popup
+          .setLatLng(e.latlng)
+          .setContent("Selected Start Path" + e.latlng.toString())
+          .openOn(map);
+        x = e.latlng.toString();
+        y = x.slice(7);
+        z = y.slice(0, y.length - 1);
+
+        document.getElementById(vtc).value = z;
+      }
+
+      map.on('click', onMapClick);
+    </script>
+
 </html>

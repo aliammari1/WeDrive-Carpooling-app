@@ -1,6 +1,6 @@
 <?php
-require __DIR__ . "\..\..\Model\pdf.php";
-require __DIR__ . "\..\..\Model\Users\users.php";
+require_once__DIR__ . "\..\..\Model\pdf.php";
+require_once__DIR__ . "\..\..\Model\Users\users.php";
 $pdf = new PDF();
 $header = array('Country', 'Capital', 'Area (sq km)', 'Pop. (thousands)');
 $data = $pdf->LoadData('countries.txt');
