@@ -1,6 +1,6 @@
 <?php
-include __DIR__.'\..\..\Model\connection.php';
-include __DIR__.'\..\..\Model\avis\commentaires.php'; 
+require_once__DIR__ . '\..\..\Model\connection.php';
+require_once__DIR__ . '\..\..\Model\avis\commentaires.php';
 
 class commentairesc
 {
@@ -11,19 +11,20 @@ class commentairesc
     }
     public function listcommentaires()
     {
-        $sql="SELECT * FROM commentaires";
-       
+        $sql = "SELECT * FROM commentaires";
+
         try {
             $liste = $this->db->query($sql);
             return $liste;
-        }catch (Exception $e)
-        {   die ('Error:'. $e->getMessage());}
+        } catch (Exception $e) {
+            die('Error:' . $e->getMessage());
+        }
     }
 
     public function deletecommentaires($comment_id)
     {
         $sql = "DELETE FROM commentaires WHERE comment_id = :comment_id";
-      
+
         $req = $this->db->prepare($sql);
         $req->bindValue(':comment_id', $comment_id);
 
@@ -37,10 +38,10 @@ class commentairesc
     function addcommentaires($commentairesc)
     {
         $sql = "INSERT INTO commentaires  (comment_id,name, message) VALUES ( :id,:vision, :comment,:notepro)";
-        
-    
+
+
         try {
-          
+
             $query = $this->db->prepare($sql);
             $query->execute([
                 'id' => $commentairesc->getid(),
@@ -52,9 +53,4 @@ class commentairesc
             echo 'Error: ' . $e->getMessage();
         }
     }
-	
-    
-    
 }
-
-?>

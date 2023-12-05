@@ -1,11 +1,11 @@
 <link rel="stylesheet" href="style.css">
 
 <?php
-$pdo = new PDO("mysql:host=localhost;dbname=projet;charset=utf8","root","");
+$pdo = new PDO("mysql:host=localhost;dbname=projet;charset=utf8", "root", "");
 
 $post = isset($_GET['id']) ? $_GET['id'] : null;
 
-include '../config/config.php';
+require_once '../config/config.php';
 
 if (isset($_POST['post_comment'])) {
     $name = $_POST['name'];
@@ -28,16 +28,18 @@ if (isset($_POST['post_comment'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comments</title>
+    <title>WeDrive</title>
 </head>
+
 <body>
 
     <div class="wrapper">
-    <h2>Ajouter un commentaire</h2>
+        <h2>Ajouter un commentaire</h2>
         <form action="" method="post" class="form">
             <input type="text" class="name" name="name" placeholder="Name">
             <br>
@@ -52,23 +54,25 @@ if (isset($_POST['post_comment'])) {
 
         $post = isset($_GET['id']) ? $_GET['id'] : null;
 
-        $sql = "SELECT * FROM commentaires where post_id=:post";    
-        
+        $sql = "SELECT * FROM commentaires where post_id=:post";
+
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['post' => $post]);
 
         if ($stmt->rowCount() > 0) {
 
 
-              $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-              foreach ($comments as $comment) {
+            foreach ($comments as $comment) {
         ?>
-        
-        <h3><?php echo $comment['name']; ?></h3>
-        <p id="message"><?php echo $comment['message']; ?></p>
 
-        <?php } } ?>
+                <h3><?php echo $comment['name']; ?></h3>
+                <p id="message"><?php echo $comment['message']; ?></p>
+
+        <?php }
+        } ?>
     </div>
 </body>
+
 </html>

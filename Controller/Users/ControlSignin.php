@@ -23,17 +23,17 @@ try {
             case "admin":
                 $admin = new admin($user);
                 $_SESSION['user'] = serialize($user);
-                header("Location: ../../View/pages/back/dashboard.php");
+                header("Location: ../../View/pages/back/Users/dashboard.php");
                 break;
             case "conducteur":
                 $conducteur = new conducteur($user, $modeleVoiture, $nbPlaces);
                 $_SESSION['user'] = serialize($conducteur);
-                header("Location: ../../View/pages/back/dashboard.php");
+                header("Location: ../../View/pages/back/Users/dashboard.php");
                 break;
             case "passager":
                 $passager = new passager($user);
                 $_SESSION['user'] = serialize($passager);
-                header("Location: ../../View/pages/back/dashboard.php");
+                header("Location: ../../View/pages/back/Users/dashboard.php");
                 break;
         }
     }

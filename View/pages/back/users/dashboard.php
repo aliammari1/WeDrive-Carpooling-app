@@ -1,10 +1,9 @@
 <?php
-require_once "../../../Controller/Users/authentification.php";
-require_once "../../../Model/Users/user.php";
-require_once "../../../Model/Users/passager.php";
-require_once "../../../Model/Users/admin.php";
-require_once "../../../Model/Users/passager.php";
-
+require_once "../../../../Controller/Users/authentification.php";
+require_once "../../../../Model/Users/user.php";
+require_once "../../../../Model/Users/passager.php";
+require_once "../../../../Model/Users/admin.php";
+require_once "../../../../Model/Users/passager.php";
 $user = unserialize($_SESSION['user'])
 ?>
 <!DOCTYPE html>
@@ -13,157 +12,24 @@ $user = unserialize($_SESSION['user'])
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png" />
-    <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../../../assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="../../../assets/img/favicon.png" />
     <title>WeDrive</title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
-    <link href="../../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
-    <link id="pagestyle" href="../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+    <link id="pagestyle" href="../../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 </head>
 
 
 <body class="g-sidenav-show bg-gray-100">
-    <div class="min-height-300 bg-primary position-absolute w-100"></div>
-    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
-
-        <div class="navdash">
-            <div class="navdash">
-                <div class="profile-container">
-                    <img <?php echo 'src="data:image/jpeg;base64,' . base64_encode($user->getProfileImage()) . '"' ?> alt="profileImage" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
-                    <span id="profile-hover" onclick="changeImage()">+</span>
-                </div>
-            </div>
-            <p><?php echo $user->getPrenom(); ?></p>
-        </div>
-        <hr class="horizontal dark mt-0" />
-        <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
-            <ul class="navbar-nav dashnav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="dashboard.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="tables.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Tables</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="crudtrajectviews/Affichertrajects.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">gestion des trajectes</span>
-                    </a>
-                </li>
-
-
-
-
-                <li class="nav-item">
-                    <a class="nav-link" href="view/page.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">gestion des Avis</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="consulterRecGest.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">gestion des reclamations</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="reservation.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">reservation</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="billing.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Billing</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="virtual-reality.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-app text-info text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Virtual Reality</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="rtl.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">RTL</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
-                        Account pages
-                    </h6>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Profile</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Sign In</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="register.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-collection text-info text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Sign Up</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../../../Controller/Users/ControlSignout.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-collection text-info text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Sign Out</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <!--//////////////////////////////////////////////////////////////////-->
-    </aside>
+    <?php require_once "../dashHeader.php" ?>
     <main class="main-content position-relative border-radius-lg">
         <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
@@ -216,7 +82,7 @@ $user = unserialize($_SESSION['user'])
                                     <a class="dropdown-item border-radius-md" href="javascript:">
                                         <div class="d-flex py-1">
                                             <div class="my-auto">
-                                                <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
+                                                <img src="../../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="text-sm font-weight-normal mb-1">
@@ -235,7 +101,7 @@ $user = unserialize($_SESSION['user'])
                                     <a class="dropdown-item border-radius-md" href="javascript:">
                                         <div class="d-flex py-1">
                                             <div class="my-auto">
-                                                <img src="../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
+                                                <img src="../../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="text-sm font-weight-normal mb-1">
@@ -255,7 +121,7 @@ $user = unserialize($_SESSION['user'])
                                         <div class="d-flex py-1">
                                             <div class="avatar avatar-sm bg-gradient-secondary me-3 my-auto">
                                                 <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                    <title>credit-card</title>
+                                                    <title>WeDrive</title>
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                         <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
                                                             <g transform="translate(1716.000000, 291.000000)">
@@ -314,7 +180,7 @@ $user = unserialize($_SESSION['user'])
                     </div>
                 </div>
             </div>
-            <?php require_once "dashFooter.php" ?>
+            <?php require_once "../dashFooter.php" ?>
         </div>
     </main>
     <div class="fixed-plugin">
@@ -384,11 +250,11 @@ $user = unserialize($_SESSION['user'])
         </div>
     </div>
     <!--   Core JS Files   -->
-    <script src="../../assets/js/core/popper.min.js"></script>
-    <script src="../../assets/js/core/bootstrap.min.js"></script>
-    <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
-    <script src="../../assets/js/plugins/chartjs.min.js"></script>
+    <script src="../../../assets/js/core/popper.min.js"></script>
+    <script src="../../../assets/js/core/bootstrap.min.js"></script>
+    <script src="../../../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../../../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="../../../assets/js/plugins/chartjs.min.js"></script>
     <script>
         var ctx1 = document.getElementById("chart-line").getContext("2d");
 
@@ -397,10 +263,9 @@ $user = unserialize($_SESSION['user'])
         gradientStroke1.addColorStop(1, "rgba(94, 114, 228, 0.2)");
         gradientStroke1.addColorStop(0.2, "rgba(94, 114, 228, 0.1)");
         gradientStroke1.addColorStop(0, "rgba(94, 114, 228, 0)");
-        fetch('../../../Controller/Reclamations/chartC.php')
+        fetch('../../../../Controller/Reclamations/chartC.php')
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 new Chart(ctx1, {
                     type: "pie",
                     data: {
@@ -479,7 +344,7 @@ $user = unserialize($_SESSION['user'])
 
         var ctx2 = document.getElementById("pie-chart").getContext("2d");
         var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-        fetch("../../../Controller/Users/ControlChart.php")
+        fetch("../../../../Controller/Users/ControlChart.php")
             .then(response => response.json())
             .then(data => {
                 labelList = ["Admin", "Passager", "Conducteur"]
@@ -574,8 +439,8 @@ $user = unserialize($_SESSION['user'])
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
-    <script src="../../scriptjs/modifyInput.js"></script>
+    <script src="../../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+    <script src="../../../scriptjs/modifyInput.js"></script>
 </body>
 
 </html>

@@ -17,9 +17,9 @@
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav dashnav">
             <?php
-            $hrefList = ["dashboard", "tables", "billing", "consulterRecGest"];
-            $stringList = ["Statistiques", "Tables", "Billing", "Reclamations"];
-            $iconList = ["ni ni-tv-2 text-primary", "ni ni-calendar-grid-58 text-warning", "ni ni-credit-card text-success", "ni ni-app text-info", "ni ni-world-2 text-danger"];
+            $hrefList = ["dashboard", "tables", "trajets/Affichertrajects", "view/page", "reservation",  "consulterRecGest", "billing", "virtual-reality"];
+            $stringList = ["Statistiques", "Tables", "gestion des trajets", "gestion des Avis", "reservation",  "Reclamations", "Billing", "Virtual Reality"];
+            $iconList = ["ni ni-tv-2 text-primary", "ni ni-calendar-grid-58 text-warning", "ni ni-calendar-grid-58 text-warning", "ni ni-calendar-grid-58 text-warning", "ni ni-calendar-grid-58 text-warning",  "ni ni-calendar-grid-58 text-warning", "ni ni-credit-card text-success", "ni ni-app text-info"];
             for ($i = 0; $i < count($stringList); $i++) {
             ?>
                 <li class="nav-item">

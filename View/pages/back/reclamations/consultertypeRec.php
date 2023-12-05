@@ -74,7 +74,7 @@ require_once "../../../Controller/Reclamations/typereclamationC.php";
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
 <body class="g-sidenav-show bg-gray-100">
-  <?php require_once './dashHeader.php'; ?>
+  <?php require_once '../dashHeader.php'; ?>
   <main class="main-content position-relative border-radius-lg">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
@@ -166,7 +166,7 @@ require_once "../../../Controller/Reclamations/typereclamationC.php";
                     <div class="d-flex py-1">
                       <div class="avatar avatar-sm bg-gradient-secondary me-3 my-auto">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                          <title>credit-card</title>
+                          <title>WeDrive</title>
                           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
                               <g transform="translate(1716.000000, 291.000000)">

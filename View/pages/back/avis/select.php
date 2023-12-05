@@ -1,4 +1,3 @@
-
 <?php
 
 // php select option value from database
@@ -25,9 +24,8 @@ $result2 = mysqli_query($connect, $query);
 
 $options = "";
 
-while($row2 = mysqli_fetch_array($result2))
-{
-    $options = $options."<option>$row2[1]</option>";
+while ($row2 = mysqli_fetch_array($result2)) {
+    $options = $options . "<option>$row2[1]</option>";
 }
 
 ?>
@@ -36,36 +34,36 @@ while($row2 = mysqli_fetch_array($result2))
 
 <html>
 
-    <head>
+<head>
 
-        <title> PHP SELECT OPTIONS FROM DATABASE </title>
+    <title>WeDrive</title>
 
-        <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    </head>
+</head>
 
-    <body>
+<body>
 
-        <!--Method One-->
+    <!--Method One-->
 
-        <select>
+    <select>
 
-            <?php while($row1 = mysqli_fetch_array($result1)):;?>
+        <?php while ($row1 = mysqli_fetch_array($result1)) :; ?>
 
-            <option value="<?php echo $row1[0];?>"><?php echo $row1[1];?></option>
+            <option value="<?php echo $row1[0]; ?>"><?php echo $row1[1]; ?></option>
 
-            <?php endwhile;?>
+        <?php endwhile; ?>
 
-        </select>
-        
-        <!-- Method Two -->
+    </select>
 
-        <select>
-            <?php echo $options;?>
-        </select>
+    <!-- Method Two -->
 
-    </body>
+    <select>
+        <?php echo $options; ?>
+    </select>
+
+</body>
 
 </html

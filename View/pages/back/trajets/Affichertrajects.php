@@ -1,29 +1,29 @@
 <?php
 
-   require_once "../../../../Controller/crudtraject/trajectsC.php";
-   #include_once '../../../../Controller/crudtraject/adressC.php';
+require_once "../../../../Controller/trajets/trajectsC.php";
+#require_once '../../../../Controller/trajets/adressC.php';
 
-   require_once "../../../../Controller/Users/authentification.php";
-   require_once "../../../../Model/Users/user.php";
-   require_once "../../../../Model/Users/passager.php";
-   require_once "../../../../Model/Users/admin.php";
-   require_once "../../../../Model/Users/passager.php";
-   
-   $user = unserialize($_SESSION['user']);
+require_once "../../../../Controller/Users/authentification.php";
+require_once "../../../../Model/Users/user.php";
+require_once "../../../../Model/Users/passager.php";
+require_once "../../../../Model/Users/admin.php";
+require_once "../../../../Model/Users/passager.php";
+
+$user = unserialize($_SESSION['user']);
 
 
-	$trajectC=new trajectsC();
-	$listetraject=$trajectC->Affichertraject(); 
-	
+$trajectC = new trajectsC();
+$listetraject = $trajectC->Affichertraject();
+
 ?>
 <html>
 
-	<head>
-	<meta charset="utf-8" />
+<head>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="apple-touch-icon" sizes="76x76" href="../../../assets/img/apple-icon.png" />
   <link rel="icon" type="image/png" href="../../../assets/img/favicon.png" />
- 
+
   <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
   <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
   <link id="pagestyle" href="../../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
@@ -31,202 +31,211 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
-	<link rel="stylesheet" href="../../material-dashbord.css">
-	<style>
-#customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 60%;
-}
+  <link rel="stylesheet" href="../../material-dashbord.css">
+  <style>
+    #customers {
+      font-family: Arial, Helvetica, sans-serif;
+      border-collapse: collapse;
+      width: 60%;
+    }
 
-#customers td, #customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
+    #customers td,
+    #customers th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
+    #customers tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
 
-#customers tr:hover {background-color: #ddd;}
+    #customers tr:hover {
+      background-color: #ddd;
+    }
 
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color:  #b48b8b;
-  color: white;
-}
-.button {
-  background-color: #e6fbd4; /* Green */
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
+    #customers th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #b48b8b;
+      color: white;
+    }
 
-.button1 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #e6fbd4;
-}
+    .button {
+      background-color: #e6fbd4;
+      /* Green */
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+    }
 
-.button1:hover {
-  background-color: #e6fbd4;
-  color: white;
-}
+    .button1 {
+      background-color: white;
+      color: black;
+      border: 2px solid #e6fbd4;
+    }
 
-.button2 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #008CBA;
-}
+    .button1:hover {
+      background-color: #e6fbd4;
+      color: white;
+    }
 
-.button2:hover {
-  background-color: #008CBA;
-  color: white;
-}
+    .button2 {
+      background-color: white;
+      color: black;
+      border: 2px solid #008CBA;
+    }
 
-.button3 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #f44336;
-}
+    .button2:hover {
+      background-color: #008CBA;
+      color: white;
+    }
 
-.button3:hover {
-  background-color: #f44336;
-  color: white;
-}
+    .button3 {
+      background-color: white;
+      color: black;
+      border: 2px solid #f44336;
+    }
 
-.button4 {
-  background-color: white;
-  color: black;
-  border: 2px solid #e7e7e7;
-}
+    .button3:hover {
+      background-color: #f44336;
+      color: white;
+    }
 
-.button4:hover {background-color: #e7e7e7;}
+    .button4 {
+      background-color: white;
+      color: black;
+      border: 2px solid #e7e7e7;
+    }
 
-.button5 {
-  background-color: white;
-  color: black;
-  border: 2px solid #555555;
-}
+    .button4:hover {
+      background-color: #e7e7e7;
+    }
 
-.button5:hover {
-  background-color: #555555;
-  color: white;
-}
-</style>
-	<title>traject</title>
-	</head>
+    .button5 {
+      background-color: white;
+      color: black;
+      border: 2px solid #555555;
+    }
 
-  <body class="g-sidenav-show bg-gray-100">
-    <div class="min-height-300 bg-primary position-absolute w-100"></div>
-    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
+    .button5:hover {
+      background-color: #555555;
+      color: white;
+    }
+  </style>
+  <title>WeDrive</title>
+</head>
 
-        <div class="navdash">
-            <div class="navdash">
-                <div class="profile-container">
-                    <img <?php echo 'src="data:image/jpeg;base64,' . base64_encode($user->getProfileImage()) . '"' ?> alt="profileImage" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
-                    <span id="profile-hover" onclick="changeImage()">+</span>
-                </div>
-            </div>
-            <p><?php echo $user->getPrenom(); ?></p>
+<body class="g-sidenav-show bg-gray-100">
+  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
+
+    <div class="navdash">
+      <div class="navdash">
+        <div class="profile-container">
+          <img <?php echo 'src="data:image/jpeg;base64,' . base64_encode($user->getProfileImage()) . '"' ?> alt="profileImage" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
+          <span id="profile-hover" onclick="changeImage()">+</span>
         </div>
-        <hr class="horizontal dark mt-0" />
-        <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
-            <ul class="navbar-nav dashnav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="../dashboard.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../tables.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Tables</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-          <a class="nav-link" href="crudtrajectviews/Affichertrajects.php">
+      </div>
+      <p><?php echo $user->getPrenom(); ?></p>
+    </div>
+    <hr class="horizontal dark mt-0" />
+    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+      <ul class="navbar-nav dashnav">
+        <li class="nav-item">
+          <a class="nav-link active" href="../dashboard.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../tables.php">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
             </div>
-            <span class="nav-link-text ms-1">gestion des trajectes</span>
+            <span class="nav-link-text ms-1">Tables</span>
           </a>
         </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../billing.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Billing</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../virtual-reality.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-app text-info text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Virtual Reality</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../rtl.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">RTL</span>
-                    </a>
-                </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
-                        Account pages
-                    </h6>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../profile.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Profile</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../login.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Sign In</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../register.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-collection text-info text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Sign Up</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../../../../Controller/Users/ControlSignout.php">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-collection text-info text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Sign Out</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <li class="nav-item">
+          <a class="nav-link" href="trajets/Affichertrajects.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">gestion des trajets</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../billing.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Billing</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../virtual-reality.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-app text-info text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Virtual Reality</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../rtl.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">RTL</span>
+          </a>
+        </li>
+        <li class="nav-item mt-3">
+          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
+            Account pages
+          </h6>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../profile.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Profile</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../login.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Sign In</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../register.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-collection text-info text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Sign Up</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../../../Controller/Users/ControlSignout.php">
+            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="ni ni-collection text-info text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Sign Out</span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </aside>
   <main class="main-content position-relative border-radius-lg">
     <!-- Navbar -->
@@ -241,7 +250,7 @@
               Dashboard
             </li>
           </ol>
-          <h6 class="font-weight-bolder text-white mb-0">liste des trajectes</h6>
+          <h6 class="font-weight-bolder text-white mb-0">liste des trajets</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -319,7 +328,7 @@
                     <div class="d-flex py-1">
                       <div class="avatar avatar-sm bg-gradient-secondary me-3 my-auto">
                         <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                          <title>credit-card</title>
+                          <title>WeDrive</title>
                           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                             <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
                               <g transform="translate(1716.000000, 291.000000)">
@@ -355,90 +364,90 @@
 
 
     <div class="container-fluid">
-<div class="row">
-<div class="col-12">
-<div class="card mb-4">
-<div class="card-header pb-0">
-<h6>Trajects Table</h6>
-<button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Ajoutertrajects.php">Ajouter un traject</a></button>
-			<button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Afficheradresss.php">gestion des adress</a></button><br>
-		
-</div>
-<div class="card-body px-0 pt-0 pb-2">
-<div class="table-responsive p-0">
-<table class="table align-items-center mb-0">
-<thead>
-<tr>
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>Trajects Table</h6>
+              <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Ajoutertrajects.php">Ajouter un traject</a></button>
+              <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Afficheradresss.php">gestion des adress</a></button><br>
 
-					<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">idtraject</th>
-					<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">idConducteur</th>
-					<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">lien_depar_arriver</th>
-					<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">tarif</th>
-					<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">Date_D</th>
-					<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">img</th>
-					<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">Modifier</th>
-					<th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">Supprimer</th>
-				</tr>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
 
-
-
-</thead>
-<tbody>
-<?php
-					foreach($listetraject as $trajects){
-				?>
-				<tr>
-					<td class="align-middle text-center"><?php echo $trajects['idtraject']; ?></td>
-					<td class="align-middle text-center"><?php echo $trajects['idConducteur']; ?></td>
-					<td class="align-middle text-center"><?php echo $trajects['lien_depar_arriver']; ?></td>
-					<td class="align-middle text-center"><?php echo $trajects['tarif']; ?></td>
-					<td class="align-middle text-center"><?php echo $trajects['Date_D']; ?></td>
-					<td> <img src="<?php echo $trajects['img']?>" width="100" height="100" alt=""></td>
-					<td>
-						<form method="GET" action="Modifiertrajects.php">
-							<input  class="text-secondary font-weight-bold text-xs" type="submit" name="Modifier" value="Modifier">
-							<input type="hidden" value=<?php echo $trajects['idtraject']; ?> name="idtraject">
-						</form>
-					</td>
-					<td>
-						<a class="text-secondary font-weight-bold text-xs" href="Supprimertrajects.php?idtraject=<?php echo $trajects['idtraject']; ?>">Supprimer</a>
-					</td>
-				</tr>
-				<?php
-					}
-				?>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
-        </div>
-	
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">idtraject</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">idConducteur</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">lien_depar_arriver</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">tarif</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">Date_D</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">img</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">Modifier</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">Supprimer</th>
+                    </tr>
 
 
 
-
-
-      <footer class="footer pt-3">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                ©
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                , made with <i class="fa fa-heart"></i> by
-                <a href="#" class="font-weight-bold" target="_blank">tn Raiders</a>
-                for a better web.
+                  </thead>
+                  <tbody>
+                    <?php
+                    foreach ($listetraject as $trajects) {
+                    ?>
+                      <tr>
+                        <td class="align-middle text-center"><?php echo $trajects['idtraject']; ?></td>
+                        <td class="align-middle text-center"><?php echo $trajects['idConducteur']; ?></td>
+                        <td class="align-middle text-center"><?php echo $trajects['lien_depar_arriver']; ?></td>
+                        <td class="align-middle text-center"><?php echo $trajects['tarif']; ?></td>
+                        <td class="align-middle text-center"><?php echo $trajects['Date_D']; ?></td>
+                        <td> <img src="<?php echo $trajects['img'] ?>" width="100" height="100" alt=""></td>
+                        <td>
+                          <form method="GET" action="Modifiertrajects.php">
+                            <input class="text-secondary font-weight-bold text-xs" type="submit" name="Modifier" value="Modifier">
+                            <input type="hidden" value=<?php echo $trajects['idtraject']; ?> name="idtraject">
+                          </form>
+                        </td>
+                        <td>
+                          <a class="text-secondary font-weight-bold text-xs" href="Supprimertrajects.php?idtraject=<?php echo $trajects['idtraject']; ?>">Supprimer</a>
+                        </td>
+                      </tr>
+                    <?php
+                    }
+                    ?>
+                  </tbody>
+                </table>
               </div>
             </div>
-           
           </div>
         </div>
-      </footer>
+      </div>
+    </div>
+
+
+
+
+
+
+    <footer class="footer pt-3">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6 mb-lg-0 mb-4">
+            <div class="copyright text-center text-sm text-muted text-lg-start">
+              ©
+              <script>
+                document.write(new Date().getFullYear());
+              </script>
+              , made with <i class="fa fa-heart"></i> by
+              <a href="#" class="font-weight-bold" target="_blank">tn Raiders</a>
+              for a better web.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </footer>
     </div>
   </main>
   <div class="fixed-plugin">
@@ -513,7 +522,7 @@
   <script src="../../../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../../../assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="../../../assets/js/plugins/chartjs.min.js"></script>
- 
+
   <script>
     var win = navigator.platform.indexOf("Win") > -1;
     if (win && document.querySelector("#sidenav-scrollbar")) {
@@ -531,32 +540,33 @@
 </body>
 
 
-			<?php
-				foreach($listetraject as $trajects){
-			?>
-			<tr>
-				<td class="align-middle text-center"><?php echo $trajects['idtraject']; ?></td>
-				<td class="align-middle text-center"><?php echo $trajects['idConducteur']; ?></td>
-				<td class="align-middle text-center"><?php echo $trajects['lien_depar_arriver']; ?></td>
-				<td class="align-middle text-center"><?php echo $trajects['tarif']; ?></td>
-				<td class="align-middle text-center"><?php echo $trajects['Date_D']; ?></td>
-				<td> <img src="<?php echo $trajects['img']?>" width="100" height="100" alt=""></td>
-				<td>
-					<form method="GET" action="Modifiertrajects.php">
-						<input  class="button button1" type="submit" name="Modifier" value="Modifier">
-						<input type="hidden" value=<?php echo $trajects['idtraject']; ?> name="idtraject">
-					</form>
-				</td>
-				<td>
-					<a href="Supprimertrajects.php?idtraject=<?php echo $trajects['idtraject']; ?>">Supprimer</a>
-				</td>
-			</tr>
-			<?php
-				}
-			?>
-			
-		</table>
-		</main>
-		
-	</body>-->
+<?php
+foreach ($listetraject as $trajects) {
+?>
+  <tr>
+    <td class="align-middle text-center"><?php echo $trajects['idtraject']; ?></td>
+    <td class="align-middle text-center"><?php echo $trajects['idConducteur']; ?></td>
+    <td class="align-middle text-center"><?php echo $trajects['lien_depar_arriver']; ?></td>
+    <td class="align-middle text-center"><?php echo $trajects['tarif']; ?></td>
+    <td class="align-middle text-center"><?php echo $trajects['Date_D']; ?></td>
+    <td> <img src="<?php echo $trajects['img'] ?>" width="100" height="100" alt=""></td>
+    <td>
+      <form method="GET" action="Modifiertrajects.php">
+        <input class="button button1" type="submit" name="Modifier" value="Modifier">
+        <input type="hidden" value=<?php echo $trajects['idtraject']; ?> name="idtraject">
+      </form>
+    </td>
+    <td>
+      <a href="Supprimertrajects.php?idtraject=<?php echo $trajects['idtraject']; ?>">Supprimer</a>
+    </td>
+  </tr>
+<?php
+}
+?>
+
+</table>
+</main>
+
+</body>-->
+
 </html>

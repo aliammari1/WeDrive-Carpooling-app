@@ -1,9 +1,10 @@
 <?php
-require_once "../../../Controller/Users/authentification.php";
-require_once "../../../Model/Users/user.php";
-require_once "../../../Model/Users/passager.php";
-require_once "../../../Model/Users/conducteur.php";
-require_once "../../../Model/Users/admin.php";
+require_once "../../../../Controller/Users/authentification.php";
+require_once "../../../../Model/Users/user.php";
+require_once "../../../../Model/Users/passager.php";
+
+require_once "../../../../Model/Users/conducteur.php";
+require_once "../../../../Model/Users/admin.php";
 $user = unserialize($_SESSION['user']) ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,23 +12,23 @@ $user = unserialize($_SESSION['user']) ?>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png" />
-    <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../../../assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="../../../assets/img/favicon.png" />
     <title>WeDrive</title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
-    <link href="../../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
-    <link id="pagestyle" href="../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+    <link id="pagestyle" href="../../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-    <?php require_once "dashHeader.php" ?>
+    <?php require_once "../dashHeader.php" ?>
     <main class="main-content position-relative border-radius-lg">
         <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
@@ -80,7 +81,7 @@ $user = unserialize($_SESSION['user']) ?>
                                     <a class="dropdown-item border-radius-md" href="javascript:">
                                         <div class="d-flex py-1">
                                             <div class="my-auto">
-                                                <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
+                                                <img src="../../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="text-sm font-weight-normal mb-1">
@@ -99,7 +100,7 @@ $user = unserialize($_SESSION['user']) ?>
                                     <a class="dropdown-item border-radius-md" href="javascript:">
                                         <div class="d-flex py-1">
                                             <div class="my-auto">
-                                                <img src="../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
+                                                <img src="../../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
                                             </div>
                                             <div class="d-flex flex-column justify-content-center">
                                                 <h6 class="text-sm font-weight-normal mb-1">
@@ -119,7 +120,7 @@ $user = unserialize($_SESSION['user']) ?>
                                         <div class="d-flex py-1">
                                             <div class="avatar avatar-sm bg-gradient-secondary me-3 my-auto">
                                                 <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                    <title>credit-card</title>
+                                                    <title>WeDrive</title>
                                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                         <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
                                                             <g transform="translate(1716.000000, 291.000000)">
@@ -182,7 +183,7 @@ $user = unserialize($_SESSION['user']) ?>
                                                 </div>
                                             </div>
                                             <div class="ms-auto w-20 d-flex align-items-end justify-content-end">
-                                                <img class="w-60 mt-2" src="../../assets/img/logos/mastercard.png" alt="logo" />
+                                                <img class="w-60 mt-2" src="../../../assets/img/logos/mastercard.png" alt="logo" />
                                             </div>
                                         </div>
                                     </div>
@@ -240,7 +241,7 @@ $user = unserialize($_SESSION['user']) ?>
                                     <div class="row">
                                         <div class="col-md-6 mb-md-0 mb-4">
                                             <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                                                <img class="w-10 me-3 mb-0" src="../../assets/img/logos/mastercard.png" alt="logo" />
+                                                <img class="w-10 me-3 mb-0" src="../../../assets/img/logos/mastercard.png" alt="logo" />
                                                 <h6 class="mb-0">
                                                     ****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;7852
                                                 </h6>
@@ -249,7 +250,7 @@ $user = unserialize($_SESSION['user']) ?>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                                                <img class="w-10 me-3 mb-0" src="../../assets/img/logos/visa.png" alt="logo" />
+                                                <img class="w-10 me-3 mb-0" src="../../../assets/img/logos/visa.png" alt="logo" />
                                                 <h6 class="mb-0">
                                                     ****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;5248
                                                 </h6>
@@ -522,7 +523,7 @@ $user = unserialize($_SESSION['user']) ?>
                     </div>
                 </div>
             </div>
-            <?php require_once "dashFooter.php" ?>
+            <?php require_once "../dashFooter.php" ?>
         </div>
     </main>
     <div class="fixed-plugin">
@@ -592,10 +593,10 @@ $user = unserialize($_SESSION['user']) ?>
         </div>
     </div>
     <!--   Core JS Files   -->
-    <script src="../../assets/js/core/popper.min.js"></script>
-    <script src="../../assets/js/core/bootstrap.min.js"></script>
-    <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="../../../assets/js/core/popper.min.js"></script>
+    <script src="../../../assets/js/core/bootstrap.min.js"></script>
+    <script src="../../../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../../../assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script>
         var win = navigator.platform.indexOf("Win") > -1;
         if (win && document.querySelector("#sidenav-scrollbar")) {
@@ -608,8 +609,8 @@ $user = unserialize($_SESSION['user']) ?>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
-    <script src="../../scriptjs/modifyInput.js"></script>
+    <script src="../../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+    <script src="../../../scriptjs/modifyInput.js"></script>
 </body>
 
 </html>
