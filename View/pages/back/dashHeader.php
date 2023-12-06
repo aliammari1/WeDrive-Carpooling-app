@@ -9,7 +9,7 @@
         </div>
         <p>
             <?php
-            echo $user->getPrenom();
+            echo $user->getPrenom() . getenv("ali_password");
             ?>
         </p>
     </div>
@@ -38,7 +38,7 @@
                 </h6>
             </li>
             <?php
-            $hrefList = ["profile", "sign-in", "sign-up", "../../../Controller/Users/ControlSignout"];
+            $hrefList = ["profile", "sign-in", "sign-up", "../../../../Controller/Users/ControlSignout"];
             $stringList = ["Profile", "Sign In", "Sign up", "Sign Out"];
             $iconList = ["ni ni-single-02 text-dark", "ni ni-single-copy-04 text-warning", "ni ni-collection text-info", "ni ni-collection text-info"];
             for ($i = 0; $i < count($stringList); $i++) {

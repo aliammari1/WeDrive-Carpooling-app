@@ -1,7 +1,8 @@
 {
     "require": {
         "fpdf/fpdf": "^1.85",
-        "phpmailer/phpmailer": "^6.8"
+        "phpmailer/phpmailer": "^6.8",
+        "vlucas/phpdotenv": "^5.6"
     },
     "config": {
         "allow-plugins": {
