@@ -1,50 +1,12 @@
 <?php
-// require_once "C:/xampp/htdocs/xampp/trajets/Model/tarjects.php";
-require_once "../../../../Controller/trajets/trajectsC.php";
 require_once "../../../../Controller/Users/authentification.php";
 require_once "../../../../Model/Users/user.php";
 require_once "../../../../Model/Users/passager.php";
 require_once "../../../../Model/Users/admin.php";
-require_once "../../../../Model/Users/passager.php";
+require_once '../../../../Controller/trajets/modifyTrajet.php';
 
 $user = unserialize($_SESSION['user']);
 
-$error = "";
-
-// create user
-$trajects = null;
-
-// create an instance of the controller
-$trajectC = new trajectsC();
-if (
-  isset($_POST['idtraject']) &&
-  isset($_POST["idConducteur"]) &&
-  isset($_POST["lien_depar_arriver"]) &&
-  isset($_POST["tarif"]) &&
-  isset($_POST["Date_D"]) &&
-  isset($_POST["img"])
-) {
-  if (
-    !empty($_POST['idtraject']) &&
-    !empty($_POST["idConducteur"]) &&
-    !empty($_POST["lien_depar_arriver"]) &&
-    !empty($_POST["tarif"]) &&
-    !empty($_POST["Date_D"]) &&
-    !empty($_POST["img"])
-  ) {
-    $trajects = new traject(
-      $_POST['idConducteur'],
-      $_POST['lien_depar_arriver'],
-      $_POST['tarif'],
-      $_POST['Date_D'],
-      $_POST['img'],
-      $_POST['idtraject']
-    );
-    $trajectC->Modifiertraject($trajects, $_POST['idtraject']);
-    header('Location:Affichertrajects.php');
-  } else
-    $error = "Missing information";
-}
 ?>
 <html lang="en">
 
@@ -61,7 +23,7 @@ if (
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
-  <link rel="stylesheet" href="../../material-dashbord.css">
+
   <style>
     #customers {
       font-family: Arial, Helvetica, sans-serif;
@@ -164,109 +126,7 @@ if (
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
-  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
-
-    <div class="navdash">
-      <div class="navdash">
-        <div class="profile-container">
-          <img <?php echo 'src="data:image/jpeg;base64,' . base64_encode($user->getProfileImage()) . '"' ?> alt="profileImage" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
-          <span id="profile-hover" onclick="changeImage()">+</span>
-        </div>
-      </div>
-      <p><?php echo $user->getPrenom(); ?></p>
-    </div>
-    <hr class="horizontal dark mt-0" />
-    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
-      <ul class="navbar-nav dashnav">
-        <li class="nav-item">
-          <a class="nav-link active" href="../dashboard.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="tables.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Tables</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="trajets/Affichertrajects.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">gestion des trajets</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="billing.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Billing</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="virtual-reality.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-app text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Virtual Reality</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="rtl.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">RTL</span>
-          </a>
-        </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
-            Account pages
-          </h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="profile.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Profile</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign In</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="register.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-collection text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Up</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../../../Controller/Users/ControlSignout.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-collection text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Out</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </aside>
+  <?php require_once "../dashHeader.php" ?>
   <main class="main-content position-relative border-radius-lg">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
@@ -319,7 +179,7 @@ if (
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
+                        <img src="../../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -338,7 +198,7 @@ if (
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
+                        <img src="../../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -403,21 +263,21 @@ if (
         <div class="card z-index-2 h-90">
           <div class="card-header pb-0 pt-3 bg-transparent">
 
-            <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Affichertrajects.php">Retour a la liste des trajects</a></button>
+            <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Affichertrajets.php">Retour a la liste des trajets</a></button>
             <hr>
 
             <div id="#">
               <?php ?>
             </div>
             <?php
-            if (isset($_GET['idtraject'])) {
-              $trajet = $trajectC->Recuperertraject($_GET['idtraject']);
+            if (isset($_GET['idtrajet'])) {
+              $trajet = $trajetC->Recuperertraject($_GET['idtrajet']);
             }
             ?>
             <div class="card z-index-2 h-70">
               <div class="card-header pb-0 pt-3 bg-transparent">
                 <form class="form" action="" method="POST">
-                  <h6 class="text-capitalize">>modifer un trajects</h6>
+                  <h6 class="text-capitalize">>modifer un trajets</h6>
                   <p class="text-sm mb-0">
                     <i class="fa fa-arrow-up text-success"></i>
                     <span class="font-weight-bold">this table containe the info you need </span> from 2023
@@ -505,7 +365,7 @@ if (
                       <div class="row justify-content-center">
                         <div class="col-md-2">
 
-                          <input class="btn btn-sm btn-info mb-0" type="hidden" name="idtraject" id="idtraject" value="<?php echo $_GET['idtraject']; ?>">
+                          <input class="btn btn-sm btn-info mb-0" type="hidden" name="idtrajet" id="idtrajet" value="<?php echo $_GET['idtrajet']; ?>">
                           <input class="btn btn-sm btn-info mb-0" type="submit" value="Modifier">
                           <input class="btn btn-sm btn-warning mb-0" type="reset" value="Annuler">
 
@@ -522,25 +382,7 @@ if (
 
 
 
-    <footer class="footer pt-3">
-
-      <div class="container-fluid">
-        <div class="row align-items-center justify-content-lg-between">
-          <div class="col-lg-6 mb-lg-0 mb-4">
-            <div class="copyright text-center text-sm text-muted text-lg-start">
-              ©
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              , made with <i class="fa fa-heart"></i> by
-              <a href="#" class="font-weight-bold" target="_blank">tn Raiders</a>
-              for a better web.
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </footer>
+    <?php require_once "../dashFooter.php" ?>
     </div>
   </main>
   <div class="fixed-plugin">
@@ -629,7 +471,7 @@ if (
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
-  <script src="../../../../scriptjs/modifyInput.js"></script>
+  <script src="../../../scriptjs/modifyInput.js"></script>
 </body>
 
 </html>
@@ -670,19 +512,19 @@ if (
 
 <!--
    <body>
-        <button  class="button button1" ><a href="Affichertrajects.php">Retour a la liste des trajects</a></button>
+        <button  class="button button1" ><a href="Affichertrajets.php">Retour a la liste des trajets</a></button>
         <hr>
         
         <div id="#">
         <?php ?>
         </div>
         <?php
-        if (isset($_GET['idtraject'])) {
-          $trajet = $trajectC->Recuperertraject($_GET['idtraject']);
+        if (isset($_GET['idtrajet'])) {
+          $trajet = $trajetC->Recuperertraject($_GET['idtrajet']);
         }
         ?>
         <form action="" method="POST">
-        <center><h1 >modifer un trajects</h1></center>
+        <center><h1 >modifer un trajets</h1></center>
             <table   id="customers" border="1" align="center">
 				<tr>
                     <td>
@@ -764,7 +606,7 @@ if (
                 <tr>
                     <td></td>
                     <td>
-                    <input type="hidden" name="idtraject" id="idtraject" value="<?php echo $_GET['idtraject']; ?>">
+                    <input type="hidden" name="idtrajet" id="idtrajet" value="<?php echo $_GET['idtrajet']; ?>">
                      <br>   <input type="submit" value="Modifier"> 
                         <input type="reset" value="Annuler" >
                     </td>

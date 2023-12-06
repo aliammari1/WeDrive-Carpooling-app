@@ -7,7 +7,7 @@ class user
     private string $nom;
     private string $prenom;
     private string $email;
-    private string $adresse;
+    private string $addresse;
     private string $password;
     private int $numTel;
     private string $role;
@@ -19,7 +19,7 @@ class user
         $this->prenom = $data['prenom'];
         $this->email = $data['email'];
         $this->password = $data['password'];
-        $this->adresse = $data['adresse'];
+        $this->addresse = $data['addresse'];
         $this->numTel = $data['numTel'];
         $this->role = $data['role'];
         $this->profileImage = $data['profileImage'];
@@ -54,11 +54,11 @@ class user
     }
     public function getAdresse()
     {
-        return $this->adresse;
+        return $this->addresse;
     }
-    public function setAdresse($adresse)
+    public function setAdresse($addresse)
     {
-        $this->adresse = $adresse;
+        $this->addresse = $addresse;
     }
     public function getPassword()
     {

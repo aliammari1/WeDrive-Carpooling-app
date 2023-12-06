@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../connection.php';
 require_once __DIR__ . '/address.php';
 
-class adressC
+class addressC
 {
     private $db;
     function __construct()
@@ -10,9 +10,9 @@ class adressC
         $this->db = (new connection())->getDb();
     }
     /////..............................Afficher............................../////
-    function Afficheradress()
+    function Afficheraddress()
     {
-        $sql = "SELECT * FROM adress";
+        $sql = "SELECT * FROM address";
 
         try {
             $connection = new connection();
@@ -25,9 +25,9 @@ class adressC
     }
     //////////.................................././/////////
 
-    function Afficheradresstri($value, $order)
+    function Afficheraddresstri($value, $order)
     {
-        $sql = "SELECT * FROM adress ORDER BY $value $order";
+        $sql = "SELECT * FROM address ORDER BY $value $order";
 
         try {
             $liste = $this->db->query($sql);
@@ -40,7 +40,7 @@ class adressC
 
     function search($search)
     {
-        $sql = "SELECT * FROM adress WHERE adressid LIKE :search OR adressA LIKE :search OR adressB LIKE :search OR type LIKE :search ";
+        $sql = "SELECT * FROM address WHERE addressid LIKE :search OR addressA LIKE :search OR addressB LIKE :search OR type LIKE :search ";
 
         $req = $this->db->prepare($sql);
         $req->bindValue(':search', '%' . $search . '%'); // adding '%' before and after the search string to allow partial match
@@ -56,7 +56,7 @@ class adressC
 
     /*
 function search($search){
-$sql="SELECT * FROM adress WHERE adressid LIKE :search OR adressA LIKE :search OR adressB LIKE :search OR type LIKE :search ";
+$sql="SELECT * FROM address WHERE addressid LIKE :search OR addressA LIKE :search OR addressB LIKE :search OR type LIKE :search ";
 $this->db = config::getConnexion();
 $req=$this->db->prepare($sql);
 $req->bindValue(':search', $search);
@@ -71,12 +71,12 @@ die('Erreur:'. $e->getMessage());
 }
 }*/
     /////..............................Supprimer............................../////
-    function Supprimeradress($adressid)
+    function Supprimeraddress($addressid)
     {
-        $sql = "DELETE FROM adress WHERE adressid=:adressid";
+        $sql = "DELETE FROM address WHERE addressid=:addressid";
 
         $req = $this->db->prepare($sql);
-        $req->bindValue(':adressid', $adressid);
+        $req->bindValue(':addressid', $addressid);
         try {
             $req->execute();
         } catch (Exception $e) {
@@ -86,17 +86,17 @@ die('Erreur:'. $e->getMessage());
 
 
     /////..............................Ajouter............................../////
-    function Ajouteradress($adress)
+    function Ajouteraddress($address)
     {
-        $sql = "INSERT INTO adress (adressA,adressB,type) VALUES (:adressA,:adressB,:type);";
+        $sql = "INSERT INTO address (addressA,addressB,type) VALUES (:addressA,:addressB,:type);";
         $connection = new connection();
         $db = $connection->getDb();
         try {
             $query = $this->db->prepare($sql);
             $query->execute([
-                ':adressA' => $adress->getadressA(),
-                ':adressB' => $adress->getadressB(),
-                ':type' => $adress->gettype(),
+                ':addressA' => $address->getaddressA(),
+                ':addressB' => $address->getaddressB(),
+                ':type' => $address->gettype(),
 
             ]);
         } catch (Exception $e) {
@@ -105,16 +105,16 @@ die('Erreur:'. $e->getMessage());
     }
 
     /////..............................Affichage par la cle Primaire............................../////
-    function Recupereradress($adressid)
+    function Recupereraddress($addressid)
     {
-        $sql = "SELECT * from adress where adressid=$adressid";
+        $sql = "SELECT * from address where addressid=$addressid";
         //$this->db = config::getConnexion();
         try {
             $query = $this->db->prepare($sql);
             $query->execute();
 
-            $adress = $query->fetch();
-            return $adress;
+            $address = $query->fetch();
+            return $address;
         } catch (Exception $e) {
             die('Erreur: ' . $e->getMessage());
         }
@@ -122,15 +122,15 @@ die('Erreur:'. $e->getMessage());
 
 
     /////..............................Update............................../////
-    function Modifieradress($adress, $id)
+    function Modifieraddress($address, $id)
     {
         try {
             // $this->db = config::getConnexion();
-            $query = $this->db->prepare('UPDATE adress SET adressA = :adressA, adressB = :adressB, type = :type WHERE adressid = :id');
+            $query = $this->db->prepare('UPDATE address SET addressA = :addressA, addressB = :addressB, type = :type WHERE addressid = :id');
             $query->execute([
-                'adressA' => $adress->getadressA(),
-                'adressB' => $adress->getadressB(),
-                'type' => $adress->gettype(),
+                'addressA' => $address->getaddressA(),
+                'addressB' => $address->getaddressB(),
+                'type' => $address->gettype(),
                 'id' => $id
             ]);
             echo $query->rowCount() . " records UPDATED successfully <br>";

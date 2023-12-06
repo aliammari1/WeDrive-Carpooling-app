@@ -127,7 +127,7 @@ require_once "../../../Controller/Reclamations/typereclamationC.php";
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
+                        <img src="../../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -146,7 +146,7 @@ require_once "../../../Controller/Reclamations/typereclamationC.php";
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
+                        <img src="../../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -412,7 +412,7 @@ require_once "../../../Controller/Reclamations/typereclamationC.php";
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
-  <script src="../../scriptjs/modifyInput.js"></script>
+  <script src="../../../scriptjs/modifyInput.js"></script>
   <script>
     console.log("hello");
 

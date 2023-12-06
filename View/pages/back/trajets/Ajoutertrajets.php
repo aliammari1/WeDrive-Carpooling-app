@@ -1,49 +1,12 @@
 <?php
-//require_once "C:/xampp/htdocs/xampp/trajets/Model/tarjects.php";
-require_once "../../../../Controller/trajets/adressC.php";
-require_once "../../../../Model/trajets/adresss.php";
-
-
 require_once "../../../../Controller/Users/authentification.php";
 require_once "../../../../Model/Users/user.php";
 require_once "../../../../Model/Users/passager.php";
 require_once "../../../../Model/Users/admin.php";
 require_once "../../../../Model/Users/passager.php";
+require_once '../../../../Controller/trajets/addTrajet.php';
 
 $user = unserialize($_SESSION['user']);
-$error = "";
-
-// create user
-$adress = null;
-
-// create an instance of the controller
-$adressC = new adressC();
-
-
-if (
-  isset($_POST["adressA"]) &&
-  isset($_POST["adressB"]) &&
-  isset($_POST["type"])
-
-) {
-  if (
-    !empty($_POST['adressA']) &&
-    !empty($_POST["adressB"]) &&
-    !empty($_POST["type"])
-
-  ) {
-    $adress = new adress(
-      $_POST['adressA'],
-      $_POST['adressB'],
-      $_POST['type']
-
-    );
-
-    $adressC->Ajouteradress($adress);
-    header('Location:Afficheradresss.php');
-  } else
-    $error = "Missing information";
-}
 
 
 ?>
@@ -51,6 +14,7 @@ if (
 
 <head>
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="apple-touch-icon" sizes="76x76" href="../../../assets/img/apple-icon.png" />
   <link rel="icon" type="image/png" href="../../../assets/img/favicon.png" />
@@ -62,7 +26,7 @@ if (
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
-  <link rel="stylesheet" href="../../material-dashbord.css">
+
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
   <!-- Make sure you put this AFTER Leaflet's CSS -->
@@ -151,7 +115,7 @@ if (
     }
 
     #map {
-      width: 800;
+      width: 425;
       height: 350;
     }
   </style>
@@ -164,112 +128,10 @@ if (
 
 
 
+
+
   <body class="g-sidenav-show bg-gray-100">
-    <div class="min-height-300 bg-primary position-absolute w-100"></div>
-    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
-
-      <div class="navdash">
-        <div class="navdash">
-          <div class="profile-container">
-            <img <?php echo 'src="data:image/jpeg;base64,' . base64_encode($user->getProfileImage()) . '"' ?> alt="profileImage" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
-            <span id="profile-hover" onclick="changeImage()">+</span>
-          </div>
-        </div>
-        <p><?php echo $user->getPrenom(); ?></p>
-      </div>
-      <hr class="horizontal dark mt-0" />
-      <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
-        <ul class="navbar-nav dashnav">
-          <li class="nav-item">
-            <a class="nav-link active" href="../dashboard.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="tables.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Tables</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="trajets/Affichertrajects.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">gestion des trajets</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="billing.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Billing</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="virtual-reality.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-app text-info text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Virtual Reality</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="rtl.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">RTL</span>
-            </a>
-          </li>
-          <li class="nav-item mt-3">
-            <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
-              Account pages
-            </h6>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="profile.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Profile</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Sign In</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="register.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-collection text-info text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Sign Up</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../../Controller/Users/ControlSignout.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-collection text-info text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Sign Out</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-
-    </aside>
+    <?php require_once "../dashHeader.php" ?>
     <main class="main-content position-relative border-radius-lg">
       <!-- Navbar -->
       <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
@@ -283,7 +145,7 @@ if (
                 Dashboard
               </li>
             </ol>
-            <h6 class="font-weight-bolder text-white mb-0">gestion trajects</h6>
+            <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
           </nav>
           <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -322,7 +184,7 @@ if (
                     <a class="dropdown-item border-radius-md" href="javascript:;">
                       <div class="d-flex py-1">
                         <div class="my-auto">
-                          <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
+                          <img src="../../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
                         </div>
                         <div class="d-flex flex-column justify-content-center">
                           <h6 class="text-sm font-weight-normal mb-1">
@@ -341,7 +203,7 @@ if (
                     <a class="dropdown-item border-radius-md" href="javascript:;">
                       <div class="d-flex py-1">
                         <div class="my-auto">
-                          <img src="../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
+                          <img src="../../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
                         </div>
                         <div class="d-flex flex-column justify-content-center">
                           <h6 class="text-sm font-weight-normal mb-1">
@@ -395,108 +257,106 @@ if (
       <!-- End Navbar -->
 
 
+
+
+
+
       <body>
         <main>
           <div class="card z-index-2 h-90">
             <div class="card-header pb-0 pt-3 bg-transparent">
 
-              <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Afficheradresss.php">Retour a la liste des adresss</a></button>
+              <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Affichertrajets.php">Retour a la liste des trajets</a></button>
               <hr>
 
 
 
-              <form action="" method="POST">
+              <form class="form" action="" method="POST">
                 <center>
-                  <h2 class="card-title">ajouter un adress </h2>
+                  <h2 class="card-title">ajouter un trajet </h2>
                 </center>
-
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-
-
-
-
-                      <label class="form-control-label" for="adressA">adressA:
+                      <label class="form-control-label" for="idConducteur">idConducteur:
                       </label>
 
-                      <input class="form-control" type="text" name="adressA" id="adressA" maxlength="20" readonly>
+                      <select class="form-control" name="idConducteur" id="idConducteur">
+                        <?php
 
+                        foreach ($listeconducteur as $row) :
+                        ?>
+                          <option value="<?= $row['id_conducteur']; ?>"> <?= $row['id_conducteur']; ?></option>
+                        <?php endforeach ?>
+                      </select>
                     </div>
                   </div>
 
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label class="form-control-label" for="adressB">adressB
+                      <label class="form-control-label" for="lien_depar_arriver">lien_depar_arriver
+                      </label>
+                      <input class="form-control" type="text" name="lien_depar_arriver" id="lien_depar_arriver" maxlength="20">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="tarif">tarif:
                       </label>
 
-                      <input class="form-control" type="text" name="adressB" id="adressB" maxlength="20" readonly></td>
+
+                      <input class="form-control" type="number" name="tarif" id="tarif">
                     </div>
                   </div>
 
 
                   <div class="col-md-6">
                     <div class="form-group">
-
-                      <label class="form-control-label" for="type">type:
+                      <label class="form-control-label" for="Date_D"> Date_De_depart:
                       </label>
-                      <input class="form-control" type="text" name="type" id="type" readonly>
+
+
+                      <input class="form-control" type="date" name="Date_D" id="Date_D" required min="<?php echo date('Y-m-d'); ?>" max="2025-01-01">
                     </div>
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
+                </div>
 
-                      <label class="form-control-label" for="estimation">estimated distance:
-                      </label>
-                      <input class="form-control" type="text" name="estimation" id="estimation" readonly>
 
-                    </div>
+                <label class="form-control-label" for="img">Image de voiteur:
+                </label>
+
+
+                <input class="form-control" type="file" name="img" id="img">
+
+                <br>
+                <br>
+
+
+
+
+                <div class="row justify-content-center">
+
+                  <div class="col-md-2">
+
+                    <input class="btn btn-sm btn-info mb-0" type="submit" value="Envoyer">
                   </div>
-                  <center> <label class="form-control-label">Map
-                    </label>
-                    <div id="map"></div>
-                  </center>
-                  <br>
-                  <br>
-                  <center>
-                    <div>
-                      <div> <a id="myadressA" href="#">adressA</a><a href="#">' '</a> <a id="myadressB" href="#" maxlength="20">adressB</a> </div>
-                    </div>
-                    <br><br>
-                  </center>
-                  <div class="row justify-content-center">
+                  <div class="col-md-2">
 
-                    <div class="col-md-2">
-                      <input class="btn btn-sm btn-info mb-0" type="submit" value="Envoyer">
-                    </div>
-                    <div class="col-md-2">
-                      <input class="btn btn-sm btn-warning mb-0" type="reset" value="Annuler">
-                    </div>
+                    <input class="btn btn-sm btn-warning mb-0" type="reset" value="Annuler">
                   </div>
+                </div>
+
+
+
               </form>
             </div>
+
           </div>
+
       </body>
 
-      <footer class="footer pt-3">
 
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                ©
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                , made with <i class="fa fa-heart"></i> by
-                <a href="#" class="font-weight-bold" target="_blank">tn Raiders</a>
-                for a better web.
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </footer>
+      <?php require_once "../dashFooter.php" ?>
       </div>
     </main>
     <div class="fixed-plugin">
@@ -581,105 +441,11 @@ if (
         Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
       }
     </script>
-
-
-
-
-
-
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
-    <script src="../../../../scriptjs/modifyInput.js"></script>
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin="">
-    </script>
-
-    <script>
-      const text1 = document.getElementById("adressA");
-      const text2 = document.getElementById("adressB");
-      const type = document.getElementById("type");
-      const estimation = document.getElementById("estimation");
-      type.value = "";
-
-      function calculateDistance(point1, point2) {
-        const [lat1, long1] = point1.split(",");
-        const [lat2, long2] = point2.split(",");
-
-        const R = 6371; // Radius of the Earth in kilometers
-        const dLat = deg2rad(lat2 - lat1);
-        const dLon = deg2rad(long2 - long1);
-        const a =
-          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-          Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-          Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        const distance = R * c;
-        estimation.value = distance.toFixed(2) + " km";
-        if (distance < 20) {
-          type.value = "short trip "
-        } else {
-          type.value = "long trip"
-        }
-        return distance;
-      }
-
-      function deg2rad(degrees) {
-        return degrees * (Math.PI / 180);
-      }
-
-      console.log(text1);
-      /*
-      setInterval(function(){
-        calculateDistance(text1.value.toString(), text2.value.toString());
-      if (  (calculateDistance(text1.value.toString(), text2.value.toString()))< 20 ){ type.value= "short trip " }else{ type.value="long trip" }
-
-      }, 1000);
-      */
-    </script>
-
-    <script>
-      var map = L.map('map').setView([36.7983312, 9.9739643], 13);
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; '
-      }).addTo(map);
-      var popup = L.popup();
-      let x;
-      let y;
-      let z;
-      let vtc = "adressA";
-      var button = document.getElementById("myadressA");
-      button.addEventListener("click", function() {
-        vtc = "adressA";
-      });
-      var button = document.getElementById("myadressB");
-      button.addEventListener("click", function() {
-        vtc = "adressB";
-      });
-
-      function onMapClick(e) {
-        popup
-          .setLatLng(e.latlng)
-          .setContent("Selected Start Path" + e.latlng.toString())
-          .openOn(map);
-        x = e.latlng.toString();
-        y = x.slice(7);
-        z = y.slice(0, y.length - 1);
-
-        document.getElementById(vtc).value = z;
-        if ((text2.value.toString() != "") && (text1.value.toString() != ""))
-          calculateDistance(text1.value.toString(), text2.value.toString());
-
-
-      }
-
-
-      map.on('click', onMapClick);
-    </script>
-
+    <script src="../../../scriptjs/modifyInput.js"></script>
+  </body>
 
 </html>

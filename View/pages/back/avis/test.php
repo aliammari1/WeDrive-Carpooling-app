@@ -63,7 +63,7 @@
             <label>type</label>
             <input type="text" name="vision" value="<?= $row['vision'] ?>">
             <label>note</label>
-            <input type="adresse" name="comment" value="<?= $row['comment'] ?>">
+            <input type="addresse" name="comment" value="<?= $row['comment'] ?>">
             <label>dob</label>
             <input type="date" name="notepro" value="<?= $row['notepro'] ?>">
 

@@ -1,19 +1,17 @@
 <?php
 
-require_once "../../../../Controller/trajets/trajectsC.php";
-#require_once '../../../../Controller/trajets/adressC.php';
-
 require_once "../../../../Controller/Users/authentification.php";
 require_once "../../../../Model/Users/user.php";
 require_once "../../../../Model/Users/passager.php";
 require_once "../../../../Model/Users/admin.php";
 require_once "../../../../Model/Users/passager.php";
+require_once "../../../../Controller/trajets/showTrajet.php";
+
 
 $user = unserialize($_SESSION['user']);
 
 
-$trajectC = new trajectsC();
-$listetraject = $trajectC->Affichertraject();
+
 
 ?>
 <html>
@@ -31,7 +29,7 @@ $listetraject = $trajectC->Affichertraject();
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
-  <link rel="stylesheet" href="../../material-dashbord.css">
+
   <style>
     #customers {
       font-family: Arial, Helvetica, sans-serif;
@@ -134,109 +132,7 @@ $listetraject = $trajectC->Affichertraject();
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
-  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
-
-    <div class="navdash">
-      <div class="navdash">
-        <div class="profile-container">
-          <img <?php echo 'src="data:image/jpeg;base64,' . base64_encode($user->getProfileImage()) . '"' ?> alt="profileImage" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
-          <span id="profile-hover" onclick="changeImage()">+</span>
-        </div>
-      </div>
-      <p><?php echo $user->getPrenom(); ?></p>
-    </div>
-    <hr class="horizontal dark mt-0" />
-    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
-      <ul class="navbar-nav dashnav">
-        <li class="nav-item">
-          <a class="nav-link active" href="../dashboard.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../tables.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Tables</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="trajets/Affichertrajects.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">gestion des trajets</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../billing.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Billing</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../virtual-reality.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-app text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Virtual Reality</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../rtl.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">RTL</span>
-          </a>
-        </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
-            Account pages
-          </h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../profile.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Profile</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../login.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign In</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../register.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-collection text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Up</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../../../../Controller/Users/ControlSignout.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-collection text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Out</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </aside>
+  <?php require_once "../dashHeader.php" ?>
   <main class="main-content position-relative border-radius-lg">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
@@ -369,8 +265,8 @@ $listetraject = $trajectC->Affichertraject();
           <div class="card mb-4">
             <div class="card-header pb-0">
               <h6>Trajects Table</h6>
-              <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Ajoutertrajects.php">Ajouter un traject</a></button>
-              <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Afficheradresss.php">gestion des adress</a></button><br>
+              <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Ajoutertrajets.php">Ajouter un trajet</a></button>
+              <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Afficheraddress.php">gestion des address</a></button><br>
 
             </div>
             <div class="card-body px-0 pt-0 pb-2">
@@ -379,7 +275,7 @@ $listetraject = $trajectC->Affichertraject();
                   <thead>
                     <tr>
 
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">idtraject</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">idtrajet</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">idConducteur</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">lien_depar_arriver</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">tarif</th>
@@ -394,23 +290,23 @@ $listetraject = $trajectC->Affichertraject();
                   </thead>
                   <tbody>
                     <?php
-                    foreach ($listetraject as $trajects) {
+                    foreach ($listetrajet as $trajets) {
                     ?>
                       <tr>
-                        <td class="align-middle text-center"><?php echo $trajects['idtraject']; ?></td>
-                        <td class="align-middle text-center"><?php echo $trajects['idConducteur']; ?></td>
-                        <td class="align-middle text-center"><?php echo $trajects['lien_depar_arriver']; ?></td>
-                        <td class="align-middle text-center"><?php echo $trajects['tarif']; ?></td>
-                        <td class="align-middle text-center"><?php echo $trajects['Date_D']; ?></td>
-                        <td> <img src="<?php echo $trajects['img'] ?>" width="100" height="100" alt=""></td>
+                        <td class="align-middle text-center"><?php echo $trajets['idtrajet']; ?></td>
+                        <td class="align-middle text-center"><?php echo $trajets['idConducteur']; ?></td>
+                        <td class="align-middle text-center"><?php echo $trajets['lien_depar_arriver']; ?></td>
+                        <td class="align-middle text-center"><?php echo $trajets['tarif']; ?></td>
+                        <td class="align-middle text-center"><?php echo $trajets['Date_D']; ?></td>
+                        <td> <img src="<?php echo $trajets['img'] ?>" width="100" height="100" alt=""></td>
                         <td>
-                          <form method="GET" action="Modifiertrajects.php">
+                          <form method="GET" action="Modifiertrajets.php">
                             <input class="text-secondary font-weight-bold text-xs" type="submit" name="Modifier" value="Modifier">
-                            <input type="hidden" value=<?php echo $trajects['idtraject']; ?> name="idtraject">
+                            <input type="hidden" value=<?php echo $trajets['idtrajet']; ?> name="idtrajet">
                           </form>
                         </td>
                         <td>
-                          <a class="text-secondary font-weight-bold text-xs" href="Supprimertrajects.php?idtraject=<?php echo $trajects['idtraject']; ?>">Supprimer</a>
+                          <a class="text-secondary font-weight-bold text-xs" href="../../../../Controller/trajets/supprimerTrajet.php?idtrajet=<?php echo $trajets['idtrajet']; ?>">Supprimer</a>
                         </td>
                       </tr>
                     <?php
@@ -429,25 +325,7 @@ $listetraject = $trajectC->Affichertraject();
 
 
 
-
-    <footer class="footer pt-3">
-      <div class="container-fluid">
-        <div class="row align-items-center justify-content-lg-between">
-          <div class="col-lg-6 mb-lg-0 mb-4">
-            <div class="copyright text-center text-sm text-muted text-lg-start">
-              ©
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              , made with <i class="fa fa-heart"></i> by
-              <a href="#" class="font-weight-bold" target="_blank">tn Raiders</a>
-              for a better web.
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </footer>
+    <?php require_once "../dashFooter.php" ?>
     </div>
   </main>
   <div class="fixed-plugin">
@@ -536,28 +414,28 @@ $listetraject = $trajectC->Affichertraject();
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
-  <script src="../../../../scriptjs/modifyInput.js"></script>
+  <script src="../../../scriptjs/modifyInput.js"></script>
 </body>
 
 
 <?php
-foreach ($listetraject as $trajects) {
+foreach ($listetrajet as $trajets) {
 ?>
   <tr>
-    <td class="align-middle text-center"><?php echo $trajects['idtraject']; ?></td>
-    <td class="align-middle text-center"><?php echo $trajects['idConducteur']; ?></td>
-    <td class="align-middle text-center"><?php echo $trajects['lien_depar_arriver']; ?></td>
-    <td class="align-middle text-center"><?php echo $trajects['tarif']; ?></td>
-    <td class="align-middle text-center"><?php echo $trajects['Date_D']; ?></td>
-    <td> <img src="<?php echo $trajects['img'] ?>" width="100" height="100" alt=""></td>
+    <td class="align-middle text-center"><?php echo $trajets['idtrajet']; ?></td>
+    <td class="align-middle text-center"><?php echo $trajets['idConducteur']; ?></td>
+    <td class="align-middle text-center"><?php echo $trajets['lien_depar_arriver']; ?></td>
+    <td class="align-middle text-center"><?php echo $trajets['tarif']; ?></td>
+    <td class="align-middle text-center"><?php echo $trajets['Date_D']; ?></td>
+    <td> <img src="<?php echo $trajets['img'] ?>" width="100" height="100" alt=""></td>
     <td>
-      <form method="GET" action="Modifiertrajects.php">
+      <form method="GET" action="Modifiertrajets.php">
         <input class="button button1" type="submit" name="Modifier" value="Modifier">
-        <input type="hidden" value=<?php echo $trajects['idtraject']; ?> name="idtraject">
+        <input type="hidden" value=<?php echo $trajets['idtrajet']; ?> name="idtrajet">
       </form>
     </td>
     <td>
-      <a href="Supprimertrajects.php?idtraject=<?php echo $trajects['idtraject']; ?>">Supprimer</a>
+      <a href="../../../../Controller/trajets/supprimerTrajet.php?idtrajet=<?php echo $trajets['idtrajet']; ?>">Supprimer</a>
     </td>
   </tr>
 <?php

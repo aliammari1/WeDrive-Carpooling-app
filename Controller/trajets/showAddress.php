@@ -1,11 +1,18 @@
 <?php
 require_once __DIR__ . "/../../Model/trajets/addressC.php";
 
-$adressC = new adressC();
-$listeadress = $adressC->Afficheradress();
-if (isset($_POST['chearch'])) :
-    $listeadress = $adressC->search($_POST['chearch']);
+$addressC = new addressC();
+$listeaddress = $addressC->Afficheraddress();
+if (isset($_POST['search'])) :
+    $listeaddress = $addressC->search($_POST['search']);
 endif;
 if (isset($_POST['valeur'])) :
-    $listeadress = $adressC->Afficheradresstri($_POST['valeur'], $_POST['order']);
+    $listeaddress = $addressC->Afficheraddresstri($_POST['valeur'], $_POST['order']);
 endif;
+
+/*
+    if(isset($_POST['search'])):
+    $listeaddress=$addressC->search($_POST['search']);
+    endif;
+   // var_dump($_POST['search']);
+*/

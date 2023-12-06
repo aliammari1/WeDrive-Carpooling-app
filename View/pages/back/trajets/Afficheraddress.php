@@ -1,73 +1,24 @@
 <?php
 
-#require_once(__DIR__ . 'Controller/trajets/trajectsC.php');
-require_once '../../../../Controller/trajets/trajectsC.php';
-
 require_once "../../../../Controller/Users/authentification.php";
 require_once "../../../../Model/Users/user.php";
 require_once "../../../../Model/Users/passager.php";
 require_once "../../../../Model/Users/admin.php";
 require_once "../../../../Model/Users/passager.php";
+require_once '../../../../Controller/trajets/showAddress.php';
 
 $user = unserialize($_SESSION['user']);
 
-function Afficherconducteur()
-{
-  $sql = "SELECT id_conducteur FROM conducteurs";
-  $connection = new connection();
-  $db = $connection->getDb();
-  try {
-    $liste = $db->query($sql);
-    return $liste;
-  } catch (Exception $e) {
-    die('Erreur:' . $e->getMessage());
-  }
-}
-
-
-$error = "";
-
-// create user
-$trajects = null;
-
-// create an instance of the controller
-$trajectC = new trajectsC();
-$listeconducteur = Afficherconducteur();
-if (
-  isset($_POST["idConducteur"]) &&
-  isset($_POST["lien_depar_arriver"]) &&
-  isset($_POST["tarif"]) &&
-  isset($_POST["Date_D"]) &&
-  isset($_POST["img"])
-) {
-  if (
-    !empty($_POST['idConducteur']) &&
-    !empty($_POST["lien_depar_arriver"]) &&
-    !empty($_POST["tarif"]) &&
-    !empty($_POST["Date_D"]) &&
-    !empty($_POST["img"])
-  ) {
-    $trajects = new traject(
-      $_POST['idConducteur'],
-      $_POST['lien_depar_arriver'],
-      $_POST['tarif'],
-      $_POST['Date_D'],
-      $_POST['img'],
-    );
-    $trajectC->Ajoutertraject($trajects);
-    header('Location:Affichertrajects.php');
-  } else
-    $error = "Missing information";
-}
-
-
 ?>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-  <meta charset="UTF-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="apple-touch-icon" sizes="76x76" href="../../../assets/img/apple-icon.png" />
+  <link rel="icon" type="image/png" href="../../../assets/img/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="apple-touch-icon" sizes="76x76" href="../../../assets/img/apple-icon.png" />
   <link rel="icon" type="image/png" href="../../../assets/img/favicon.png" />
 
@@ -77,17 +28,16 @@ if (
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="../../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
-  <link rel="stylesheet" href="../../material-dashbord.css">
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-  <!-- Make sure you put this AFTER Leaflet's CSS -->
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+
   <style>
     #customers {
       font-family: Arial, Helvetica, sans-serif;
       border-collapse: collapse;
-      width: 40%;
+      width: 60%;
     }
 
     #customers td,
@@ -108,8 +58,23 @@ if (
       padding-top: 12px;
       padding-bottom: 12px;
       text-align: left;
-      background-color: #04a2aa;
+      background-color: #6934c6df;
       color: white;
+    }
+
+    .button {
+      background-color: #4CAF50;
+      /* Green */
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
     }
 
     .button1 {
@@ -165,14 +130,7 @@ if (
       background-color: #555555;
       color: white;
     }
-
-    #map {
-      width: 425;
-      height: 350;
-    }
   </style>
-
-
   <title>WeDrive</title>
 </head>
 
@@ -181,113 +139,8 @@ if (
 
 
 
-
   <body class="g-sidenav-show bg-gray-100">
-    <div class="min-height-300 bg-primary position-absolute w-100"></div>
-    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
-
-      <div class="navdash">
-        <div class="navdash">
-          <div class="profile-container">
-            <img <?php echo 'src="data:image/jpeg;base64,' . base64_encode($user->getProfileImage()) . '"' ?> alt="profileImage" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
-            <span id="profile-hover" onclick="changeImage()">+</span>
-          </div>
-        </div>
-        <p><?php echo $user->getPrenom(); ?></p>
-      </div>
-      <hr class="horizontal dark mt-0" />
-      <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
-        <ul class="navbar-nav dashnav">
-          <li class="nav-item">
-            <a class="nav-link active" href="../dashboard.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="tables.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Tables</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="trajets/Affichertrajects.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">gestion des trajets</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="billing.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Billing</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="virtual-reality.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-app text-info text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Virtual Reality</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="rtl.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">RTL</span>
-            </a>
-          </li>
-          <li class="nav-item mt-3">
-            <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
-              Account pages
-            </h6>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="profile.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Profile</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="login.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Sign In</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="register.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-collection text-info text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Sign Up</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../../Controller/Users/ControlSignout.php">
-              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-collection text-info text-sm opacity-10"></i>
-              </div>
-              <span class="nav-link-text ms-1">Sign Out</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-
-    </aside>
+    <?php require_once "../dashHeader.php" ?>
     <main class="main-content position-relative border-radius-lg">
       <!-- Navbar -->
       <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
@@ -301,13 +154,13 @@ if (
                 Dashboard
               </li>
             </ol>
-            <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
+            <h6 class="font-weight-bolder text-white mb-0">liste des address</h6>
           </nav>
           <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
               <div class="input-group">
                 <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                <input class="form-control" type="text" class="form-control" placeholder="Type here..." />
+                <input type="text" class="form-control" placeholder="Type here..." />
               </div>
             </div>
             <ul class="navbar-nav justify-content-end">
@@ -340,7 +193,7 @@ if (
                     <a class="dropdown-item border-radius-md" href="javascript:;">
                       <div class="d-flex py-1">
                         <div class="my-auto">
-                          <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
+                          <img src="../../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
                         </div>
                         <div class="d-flex flex-column justify-content-center">
                           <h6 class="text-sm font-weight-normal mb-1">
@@ -359,7 +212,7 @@ if (
                     <a class="dropdown-item border-radius-md" href="javascript:;">
                       <div class="d-flex py-1">
                         <div class="my-auto">
-                          <img src="../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
+                          <img src="../../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
                         </div>
                         <div class="d-flex flex-column justify-content-center">
                           <h6 class="text-sm font-weight-normal mb-1">
@@ -413,124 +266,126 @@ if (
       <!-- End Navbar -->
 
 
+      <div class="card z-index-2 h-auto">
+        <div class="card-header pb-0 pt-3 bg-transparent">
 
+          <button class="btn bg-gradient-primary w-15 px-3 mb-2 active me-2"><a href="Ajouteraddress.php">Ajouter un address</a></button>
 
-
-
-      <body>
-        <main>
-          <div class="card z-index-2 h-90">
-            <div class="card-header pb-0 pt-3 bg-transparent">
-
-              <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Affichertrajects.php">Retour a la liste des trajects</a></button>
-              <hr>
-
-
-
-              <form class="form" action="" method="POST">
-                <center>
-                  <h2 class="card-title">ajouter un traject </h2>
-                </center>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="idConducteur">idConducteur:
-                      </label>
-
-                      <select class="form-control" name="idConducteur" id="idConducteur">
-                        <?php
-
-                        foreach ($listeconducteur as $row) :
-                        ?>
-                          <option value="<?= $row['id_conducteur']; ?>"> <?= $row['id_conducteur']; ?></option>
-                        <?php endforeach ?>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="lien_depar_arriver">lien_depar_arriver
-                      </label>
-                      <input class="form-control" type="text" name="lien_depar_arriver" id="lien_depar_arriver" maxlength="20">
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="tarif">tarif:
-                      </label>
-
-
-                      <input class="form-control" type="number" name="tarif" id="tarif">
-                    </div>
-                  </div>
-
-
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="form-control-label" for="Date_D"> Date_De_depart:
-                      </label>
-
-
-                      <input class="form-control" type="date" name="Date_D" id="Date_D" required min="<?php echo date('Y-m-d'); ?>" max="2025-01-01">
-                    </div>
-                  </div>
-                </div>
-
-
-                <label class="form-control-label" for="img">Image de voiteur:
-                </label>
-
-
-                <input class="form-control" type="file" name="img" id="img">
-
-                <br>
-                <br>
-
-
-
-
-                <div class="row justify-content-center">
-
-                  <div class="col-md-2">
-
-                    <input class="btn btn-sm btn-info mb-0" type="submit" value="Envoyer">
-                  </div>
-                  <div class="col-md-2">
-
-                    <input class="btn btn-sm btn-warning mb-0" type="reset" value="Annuler">
-                  </div>
-                </div>
-
-
-
-              </form>
+          <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Affichertrajets.php">Retour a la liste des trajets</a></button>
+          <br>
+          <br>
+          <form action="" method="POST">
+            <div class="col-md-9">
+              <div class="form-group">
+                <label for="search">chercher:</label>
+                <input class="form-control  w-20  " type="text" name="search" id="search" for="search">
+                <button class="btn btn-white border-radius-lg pb-2 d-block" type="submit" value="let's see what we have "> <i class="fas fa-search p-2" aria-hidden="true"></i> </button>
+              </div>
             </div>
+          </form>
+          <br>
+          <br>
 
-          </div>
 
-      </body>
+          <form method="POST" action="">
+            <div class="col-md-9">
+              <div class="form-group">
+                <label class="form-control-label" for="valeur">Valeur :
+                </label>
+                <select class="form-control" name="valeur" id="valeur">
+                  <option value=""></option>
+                  <option value="addressid">addressid</option>
+                  <option value="addressA">addressA</option>
+                  <option value="addressB">addressB</option>
+                  <option value="type">type</option>
+                </select>
+                <!--  <input class="form-control" type="text" name="valeur" id="valeur" maxlength="20">-->
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="form-group">
+                <label class="form-control-label" for="order">Order :
+                </label>
+                <select class="form-control" name="order" id="valeur">
+                  <option value=""></option>
+                  <option value="ASC">asending</option>
+                  <option value="DESC">desending</option>
+                </select>
+
+                <br>
+                <!--  <input   class="fas fa-search p-2"type="submit" name="tri by long trajet " value="sort ">-->
+                <button class="btn btn-white border-radius-lg pb-2 d-block" type="submit" value="let's see what we have "> <i class="fas fa-search p-2" aria-hidden="true"></i> </button>
 
 
-      <footer class="footer pt-3">
-
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                ©
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                , made with <i class="fa fa-heart"></i> by
-                <a href="#" class="font-weight-bold" target="_blank">tn Raiders</a>
-                for a better web.
+                <!--   <input class="form-control" type="text" name="order" id="order">-->
               </div>
             </div>
 
-          </div>
+          </form>
+          <br>
+          <br>
+          <h6 class="text-capitalize">address table</h6>
+
+          <p class="text-sm mb-0">
+            <i class="fa fa-arrow-up text-success"></i>
+            <span class="font-weight-bold">this table containe the info you need from</span> 2023
+          </p>
+          <center>
+            <div align="center">
+              <table class="table align-items-center mb-0">
+
+                <thead>
+                  <tr>
+
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">addressid</th>
+
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">addressA</th>
+
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">addressB</th>
+
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">type</th>
+
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">Modifier</th>
+
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 align-middle text-center">Supprimer</th>
+                  </tr>
+                </thead>
+                <tbody>
+            </div>
+          </center>
+          <?php
+          foreach ($listeaddress as $address) {
+          ?>
+            <tr>
+              <td class="align-middle text-center"> <?php echo $address['addressid']; ?></td>
+              <td class="align-middle text-center"> <?php echo $address['addressA']; ?></td>
+              <td class="align-middle text-center"> <?php echo $address['addressB']; ?></td>
+              <td class="align-middle text-center"> <?php echo $address['type']; ?></td>
+
+              <td>
+                <form method="GET" action="Modifieraddress.php">
+                  <input class="text-secondary font-weight-bold text-xs" type="submit" name="Modifier" value="Modifier">
+                  <input type="hidden" value=<?php echo $address['addressid']; ?> name="addressid">
+                </form>
+              </td>
+              <td>
+                <a class="text-secondary font-weight-bold text-xs" href="../../../../Controller/trajets/supprimerAddress.php?addressid=<?php echo $address['addressid']; ?>">Supprimer</a>
+              </td>
+            </tr>
+
+          <?php
+          }
+          ?>
+          </tbody>
+          </table>
         </div>
-      </footer>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+
+      <?php require_once "../dashFooter.php" ?>
       </div>
     </main>
     <div class="fixed-plugin">
@@ -586,14 +441,14 @@ if (
           <div class="d-flex my-3">
             <h6 class="mb-0">Navbar Fixed</h6>
             <div class="form-check form-switch ps-0 ms-auto my-auto">
-              <input class="form-control" class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)" />
+              <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)" />
             </div>
           </div>
           <hr class="horizontal dark my-sm-4" />
           <div class="mt-2 mb-5 d-flex">
             <h6 class="mb-0">Light / Dark</h6>
             <div class="form-check form-switch ps-0 ms-auto my-auto">
-              <input class="form-control" class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)" />
+              <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)" />
             </div>
           </div>
         </div>
@@ -619,7 +474,11 @@ if (
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
-    <script src="../../../../scriptjs/modifyInput.js"></script>
+    <script src="../../../scriptjs/modifyInput.js"></script>
+
+
+
+
   </body>
 
 </html>
