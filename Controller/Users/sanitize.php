@@ -9,7 +9,7 @@ function sanitize_user(array $inputs): array
             'prenom' => ['filter' => FILTER_DEFAULT, 'flags' => FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_LOW | FILTER_VALIDATE_REGEXP, 'options' => ['regexp' => '/^[A-Za-z\s]+$/']],
             'email' => FILTER_SANITIZE_EMAIL | FILTER_VALIDATE_EMAIL,
             'password' => FILTER_DEFAULT,
-            'adresse' => FILTER_DEFAULT | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_LOW,
+            'addresse' => FILTER_DEFAULT | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_LOW,
             'numTel' => FILTER_SANITIZE_NUMBER_INT | FILTER_VALIDATE_INT,
             'profileImage' => FILTER_DEFAULT
         ];

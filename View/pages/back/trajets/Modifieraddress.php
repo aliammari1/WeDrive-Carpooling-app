@@ -1,52 +1,13 @@
 <?php
-
-require_once '../../../../Controller/trajets/adressC.php';
-
 require_once "../../../../Controller/Users/authentification.php";
 require_once "../../../../Model/Users/user.php";
 require_once "../../../../Model/Users/passager.php";
 require_once "../../../../Model/Users/admin.php";
 require_once "../../../../Model/Users/passager.php";
+require_once '../../../../Controller/trajets/modifyAddress.php';
 
 $user = unserialize($_SESSION['user']);
 
-
-
-$error = "";
-
-// create user
-$adress = null;
-
-// create an instance of the controller
-$adressC = new adressC();
-
-# var_dump($_POST);
-
-if (
-  isset($_POST['adressid']) &&
-  isset($_POST["adressA"]) &&
-  isset($_POST["adressB"]) &&
-  isset($_POST["type"])
-) {
-  if (
-    !empty($_POST['adressid']) &&
-    !empty($_POST["adressA"]) &&
-    !empty($_POST["adressB"]) &&
-    !empty($_POST["type"])
-
-  ) {
-    $adress = new adress(
-      $_POST['adressA'],
-      $_POST['adressB'],
-      $_POST['type'],
-
-      $_POST['adressid']
-    );
-    $adressC->Modifieradress($adress, $_POST['adressid']);
-    header('Location:Afficheradresss.php');
-  } else
-    $error = "Missing information";
-}
 ?>
 <html lang="en">
 
@@ -64,7 +25,7 @@ if (
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="../../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
-  <link rel="stylesheet" href="../../material-dashbord.css">
+
 
   <style>
     #customers {
@@ -175,113 +136,7 @@ if (
 <!--//////////////////////////////////////////////////////////////////-->
 
 <body class="g-sidenav-show bg-gray-100">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
-  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
-
-    <div class="navdash">
-      <div class="navdash">
-        <div class="profile-container">
-          <img <?php echo 'src="data:image/jpeg;base64,' . base64_encode($user->getProfileImage()) . '"' ?> alt="profileImage" class="w-60 rounded-circle shadow-sm navbar-brand-img" id="profile-image" />
-          <span id="profile-hover" onclick="changeImage()">+</span>
-        </div>
-      </div>
-      <p><?php echo $user->getPrenom(); ?></p>
-    </div>
-    <hr class="horizontal dark mt-0" />
-    <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
-      <ul class="navbar-nav dashnav">
-        <li class="nav-item">
-          <a class="nav-link active" href="../dashboard.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="tables.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Tables</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="trajets/Affichertrajects.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">gestion des trajets</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="billing.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Billing</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="virtual-reality.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-app text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Virtual Reality</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="rtl.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">RTL</span>
-          </a>
-        </li>
-        <li class="nav-item mt-3">
-          <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
-            Account pages
-          </h6>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="profile.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Profile</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign In</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="register.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-collection text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Up</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../../../Controller/Users/ControlSignout.php">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-collection text-info text-sm opacity-10"></i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Out</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-
-
-    <!--//////////////////////////////////////////////////////////////////-->
-  </aside>
+  <?php require_once "../dashHeader.php" ?>
   <main class="main-content position-relative border-radius-lg">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
@@ -295,7 +150,7 @@ if (
               Dashboard
             </li>
           </ol>
-          <h6 class="font-weight-bolder text-white mb-0">gestion traject</h6>
+          <h6 class="font-weight-bolder text-white mb-0">gestion trajet</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -334,7 +189,7 @@ if (
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
+                        <img src="../../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -353,7 +208,7 @@ if (
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
+                        <img src="../../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -416,39 +271,39 @@ if (
       <div class="card z-index-2 h-70">
         <div class="card-header pb-0 pt-3 bg-transparent">
 
-          <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Afficheradresss.php">Retour a la liste des adresss</a></button>
+          <button class="btn bg-gradient-primary w-20 px-3 mb-2 active me-2"><a href="Afficheraddress.php">Retour a la liste des address</a></button>
           <hr>
 
           <div id="#">
             <?php ?>
           </div>
           <?php
-          if (isset($_GET['adressid'])) {
-            $adress = $adressC->Recupereradress($_GET['adressid']);
+          if (isset($_GET['addressid'])) {
+            $address = $addressC->Recupereraddress($_GET['addressid']);
           }
           ?>
           <form action="" method="POST">
-            <h6 class="text-capitalize">>modifer un adress</h6>
+            <h6 class="text-capitalize">>modifer un address</h6>
             <p class="text-sm mb-0">
               <i class="fa fa-arrow-up text-success"></i>
               <span class="font-weight-bold"> change the info you need </span> in 2023
             </p>
 
 
-            <label class="form-control-label" for="adressA">adressA:
+            <label class="form-control-label" for="addressA">addressA:
             </label>
-            <input class="form-control" type="text" name="adressA" id="adressA" value="<?php echo $adress['adressA']; ?>" maxlength="20" readonly></td>
+            <input class="form-control" type="text" name="addressA" id="addressA" value="<?php echo $address['addressA']; ?>" maxlength="20" readonly></td>
 
-            <label class="form-control-label" for="adressB">adressB:
+            <label class="form-control-label" for="addressB">addressB:
             </label>
 
-            <input class="form-control" type="text" name="adressB" id="adressB" value="<?php echo $adress['adressB']; ?>" readonly></td>
+            <input class="form-control" type="text" name="addressB" id="addressB" value="<?php echo $address['addressB']; ?>" readonly></td>
             <script>
-              const usernameInput = document.querySelector('#adressB');
+              const usernameInput = document.querySelector('#addressB');
               usernameInput.addEventListener('blur', function(event) {
                 const username = event.target.value;
                 if (username.trim() === '') {
-                  usernameInput.setCustomValidity('adressB is required');
+                  usernameInput.setCustomValidity('addressB is required');
                 } else {
                   usernameInput.setCustomValidity('');
                 }
@@ -462,7 +317,7 @@ if (
               </tr>
 
               <div>
-                <a id="myadressA" href="#">adressA</a><a id="myadressB" href="#" maxlength="20">adressB</a>
+                <a id="myaddressA" href="#">addressA</a><a id="myaddressB" href="#" maxlength="20">addressB</a>
               </div>
 
         </div>
@@ -474,7 +329,7 @@ if (
         </label>
 
 
-        <input class="form-control" type="text" name="type" id="type" value="<?php echo $adress['type']; ?>">
+        <input class="form-control" type="text" name="type" id="type" value="<?php echo $address['type']; ?>">
         <script>
           const ageInput = document.querySelector('#type');
           ageInput.addEventListener('blur', function(event) {
@@ -488,7 +343,7 @@ if (
         </script>
         <div>
 
-          <input type="hidden" name="adressid" id="adressid" value="<?php echo $_GET['adressid']; ?>">
+          <input type="hidden" name="addressid" id="addressid" value="<?php echo $_GET['addressid']; ?>">
           <br>
           <div class="row justify-content-center">
 
@@ -503,6 +358,7 @@ if (
           </form>
         </div>
       </div>
+      <?php require_once "../dashFooter.php" ?>
     </body>
 
 
@@ -527,14 +383,14 @@ if (
       let x;
       let y;
       let z;
-      let vtc = "adressA";
-      var button = document.getElementById("myadressA");
+      let vtc = "addressA";
+      var button = document.getElementById("myaddressA");
       button.addEventListener("click", function() {
-        vtc = "adressA";
+        vtc = "addressA";
       });
-      var button = document.getElementById("myadressB");
+      var button = document.getElementById("myaddressB");
       button.addEventListener("click", function() {
-        vtc = "adressB";
+        vtc = "addressB";
       });
 
       function onMapClick(e) {

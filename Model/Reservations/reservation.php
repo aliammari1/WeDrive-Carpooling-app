@@ -14,8 +14,8 @@ class reservation
     private $animal;
     private $nb_valize;
     private $mode_paiement;
-    private $adresse_dep;
-    private $adresse_arr;
+    private $addresse_dep;
+    private $addresse_arr;
     private $nb_place_vide;
     private $prix;
     private $date_meet;
@@ -25,7 +25,7 @@ class reservation
         $this->animal = $reservation['animal'];
         $this->nb_valize = $reservation['nb_place_vide'];
         $this->mode_paiement = $reservation['mode_paiement'];
-        $this->adresse_dep = $reservation['date_meet'];
+        $this->addresse_dep = $reservation['date_meet'];
     }
     public function getAnimal()
     {
@@ -80,4 +80,3 @@ class reservation
         $this->nb_place = $nb_place;
     }
 }
-?>

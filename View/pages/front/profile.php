@@ -93,7 +93,7 @@ $user = unserialize($_SESSION['user']) ?>
                   <a class="dropdown-item border-radius-md" href="javascript:">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
+                        <img src="../../../assets/img/team-2.jpg" class="avatar avatar-sm me-3" />
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -112,7 +112,7 @@ $user = unserialize($_SESSION['user']) ?>
                   <a class="dropdown-item border-radius-md" href="javascript:">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
+                        <img src="../../../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark me-3" />
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
@@ -289,7 +289,7 @@ $user = unserialize($_SESSION['user']) ?>
               <div class="col-4 col-lg-4 order-lg-2">
                 <div class="mt-n4 mt-lg-n6 mb-4 mb-lg-0">
                   <a href="javascript:">
-                    <img src="../../assets/img/team-2.jpg" class="rounded-circle img-fluid border border-2 border-white" />
+                    <img src="../../../assets/img/team-2.jpg" class="rounded-circle img-fluid border border-2 border-white" />
                   </a>
                 </div>
               </div>
@@ -423,7 +423,7 @@ $user = unserialize($_SESSION['user']) ?>
   <script src="../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
   <!-- sweet alerts  -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
-  <script src="../../scriptjs/modifyInput.js"></script>
+  <script src="../../../scriptjs/modifyInput.js"></script>
   <script>
     const roles = document.querySelectorAll("option");
     for (let i = 0; i < roles.length; i++)

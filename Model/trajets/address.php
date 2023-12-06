@@ -1,27 +1,31 @@
 <?php
-	class adress{
-		private $adressid=null;
-		private $adressA=null;
-		private $adressB=null;
-		private $type=null;
-	
-		function __construct($adressA, $adressB, $type){
-			$this->adressA=$adressA;
-			$this->adressB=$adressB;
-			$this->type=$type;
-		
-		}
-		function getadressid(){
-			return $this->adressid;
-		}
-		function getadressA(){
-			return $this->adressA;
-		}
-		function getadressB(){
-			return $this->adressB;
-		}
-		function gettype(){
-			return $this->type;
-		}
+class address
+{
+	private $addressid = null;
+	private $addressA = null;
+	private $addressB = null;
+	private $type = null;
+
+	function __construct($addressA, $addressB, $type)
+	{
+		$this->addressA = $addressA;
+		$this->addressB = $addressB;
+		$this->type = $type;
 	}
-	?>
+	function getaddressid()
+	{
+		return $this->addressid;
+	}
+	function getaddressA()
+	{
+		return $this->addressA;
+	}
+	function getaddressB()
+	{
+		return $this->addressB;
+	}
+	function gettype()
+	{
+		return $this->type;
+	}
+}

@@ -221,7 +221,7 @@ $user = unserialize($_SESSION['user'])
                             <?= $usersTable[$row]['role']; ?>
                           </p>
                           <p class="text-xs text-secondary mb-0">
-                            <?= $usersTable[$row]['adresse']; ?>
+                            <?= $usersTable[$row]['addresse']; ?>
                           </p>
                         </td>
                         <td class="align-middle text-center text-sm">
@@ -253,7 +253,7 @@ $user = unserialize($_SESSION['user'])
                                         <input type="tel" class="form-control mx-1" placeholder="Téléphone" aria-label="numTel" name="numTel" value="<?= $usersTable[$row]['numTel']; ?>" />
                                       </div>
                                       <div class="row w-100 ms-0 mb-3">
-                                        <input type="text" class="form-control mx-1" placeholder="Adresse" aria-label="adresse" name="adresse" value="<?= $usersTable[$row]['adresse']; ?>" />
+                                        <input type="text" class="form-control mx-1" placeholder="Adresse" aria-label="addresse" name="addresse" value="<?= $usersTable[$row]['addresse']; ?>" />
                                       </div>
                                       <div class="row w-100 ms-1 mb-3 form-group">
                                         <select class="form-select form-control" aria-label="role" name="role">
@@ -397,7 +397,7 @@ $user = unserialize($_SESSION['user'])
                             <?= $adminsTable[$row]['role']; ?>
                           </p>
                           <p class="text-xs text-secondary mb-0">
-                            <?= $adminsTable[$row]['adresse']; ?>
+                            <?= $adminsTable[$row]['addresse']; ?>
                           </p>
                         </td>
                         <td class="align-middle text-center text-sm">
@@ -429,7 +429,7 @@ $user = unserialize($_SESSION['user'])
                                         <input type="tel" class="form-control mx-1" placeholder="Téléphone" aria-label="numTel" name="numTel" value="<?= $adminsTable[$row]['numTel']; ?>" />
                                       </div>
                                       <div class="row w-100 ms-0 mb-3">
-                                        <input type="text" class="form-control mx-1" placeholder="Adresse" aria-label="adresse" name="adresse" value="<?= $adminsTable[$row]['adresse']; ?>" />
+                                        <input type="text" class="form-control mx-1" placeholder="Adresse" aria-label="addresse" name="addresse" value="<?= $adminsTable[$row]['addresse']; ?>" />
                                       </div>
                                       <div class="row w-100 ms-1 mb-3 form-group">
                                         <select class="form-select form-control" aria-label="role" name="role">
@@ -531,7 +531,7 @@ $user = unserialize($_SESSION['user'])
 
                           </p>
                           <p class="text-xs text-secondary mb-0">
-                            <?= $passagersTable[$row]['adresse']; ?>
+                            <?= $passagersTable[$row]['addresse']; ?>
 
                           </p>
                         </td>
@@ -565,7 +565,7 @@ $user = unserialize($_SESSION['user'])
                                         <input type="tel" class="form-control mx-1" placeholder="Téléphone" aria-label="numTel" name="numTel" value="<?= $passagersTable[$row]['numTel']; ?>" />
                                       </div>
                                       <div class="row w-100 ms-0 mb-3">
-                                        <input type="text" class="form-control mx-1" placeholder="Adresse" aria-label="adresse" name="adresse" value="<?= $passagersTable[$row]['adresse']; ?>" />
+                                        <input type="text" class="form-control mx-1" placeholder="Adresse" aria-label="addresse" name="addresse" value="<?= $passagersTable[$row]['addresse']; ?>" />
                                       </div>
                                       <div class="row w-100 ms-1 mb-3 form-group">
                                         <select class="form-select form-control" aria-label="role" name="role">
@@ -666,7 +666,7 @@ $user = unserialize($_SESSION['user'])
                             <?= $conducteursTable[$row]['role']; ?>
                           </p>
                           <p class="text-xs text-secondary mb-0">
-                            <?= $conducteursTable[$row]['adresse']; ?>
+                            <?= $conducteursTable[$row]['addresse']; ?>
                           </p>
                         </td>
                         <td class="align-middle text-center text-sm">
@@ -698,7 +698,7 @@ $user = unserialize($_SESSION['user'])
                                         <input type="tel" class="form-control mx-1" placeholder="Téléphone" aria-label="numTel" name="numTel" value="<?= $conducteursTable[$row]['numTel']; ?>" />
                                       </div>
                                       <div class="row w-100 ms-0 mb-3">
-                                        <input type="text" class="form-control mx-1" placeholder="Adresse" aria-label="adresse" name="adresse" value="<?= $conducteursTable[$row]['adresse']; ?>" />
+                                        <input type="text" class="form-control mx-1" placeholder="Adresse" aria-label="addresse" name="addresse" value="<?= $conducteursTable[$row]['addresse']; ?>" />
                                       </div>
                                       <div class="row w-100 ms-1 mb-3 form-group">
                                         <select class="form-select form-control" aria-label="role" name="role">
