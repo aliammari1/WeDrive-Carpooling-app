@@ -37,7 +37,7 @@ try {
                 break;
         }
 
-        //header("Location: ../../View/pages/back/Users/dashboard.php");
+        header("Location: ../../View/pages/back/Users/dashboard.php");
     }
 } catch (Throwable $e) {
     echo $e->getMessage();
