@@ -1,12 +1,12 @@
 <?php
-require_once "../../../Controller/Users/authentification.php";
-require_once "../../../Model/Users/user.php";
-require_once "../../../Model/Users/passager.php";
-require_once "../../../Model/Users/admin.php";
-require_once "../../../Model/Users/passager.php";
+require_once "../../../../Controller/Users/authentification.php";
+require_once "../../../../Model/Users/user.php";
+require_once "../../../../Model/Users/passager.php";
+require_once "../../../../Model/Users/admin.php";
+require_once "../../../../Model/Users/passager.php";
 $user = unserialize($_SESSION['user']);
-require_once "../../../Controller/Reclamations/reclamationC.php";
-require_once "../../../Controller/Reclamations/paginationC.php";
+require_once "../../../../Controller/Reclamations/reclamationC.php";
+require_once "../../../../Controller/Reclamations/paginationC.php";
 ?>
 
 <!DOCTYPE html>
@@ -15,19 +15,19 @@ require_once "../../../Controller/Reclamations/paginationC.php";
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png" />
-    <link rel="icon" type="image/png" href="../../assets/img/favicon.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../../../assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="../../../assets/img/favicon.png" />
     <title>WeDrive</title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
-    <link href="../../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
-    <link id="pagestyle" href="../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+    <link id="pagestyle" href="../../../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/argon-design-system/dist/css/argon.min.css" rel="stylesheet">
     <style>
         input.search {
@@ -172,6 +172,11 @@ require_once "../../../Controller/Reclamations/paginationC.php";
                     <button style="border-radius:20px;" class="btn bg-white w-100" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                         <h1 class="text-center my-2">Liste reclamations</h1>
                     </button>
+                    <div class="w-100 d-flex mt-2 justify-content-center">
+                        <button style="border-radius:20px;" class="btn  bg-primary w-95" type="button">
+                            <h1 class="text-center text-white my-2"><a style="color:white;text-decoration:none;" href="./Createreclamation.php">Ajouter une reclamation</a></h1>
+                        </button>
+                    </div>
                     <div class="collapse" id="collapseExample">
                         <div class="card">
 
@@ -285,7 +290,7 @@ require_once "../../../Controller/Reclamations/paginationC.php";
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="card-body">
-                                                            <form method="post" action="../../../Controller/Reclamations/reclamationC.php" enctype="multipart/form-data">
+                                                            <form method="post" action="../../../../Controller/Reclamations/reclamationC.php" enctype="multipart/form-data">
                                                                 <div class="form-group">
                                                                     <label for="nom">Nom:</label>
                                                                     <input type="text" class="form-control" name="nom" placeholder="Entrez le nom de la réclamation" id="nom" minlength="5" maxlength="50" value="<?= $listreclamations[$reclamation]['nom'] ?>" required>
@@ -447,10 +452,10 @@ require_once "../../../Controller/Reclamations/paginationC.php";
     </div>
 
     <!--   Core JS Files   -->
-    <script src="../../assets/js/core/popper.min.js"></script>
-    <script src="../../assets/js/core/bootstrap.min.js"></script>
-    <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="../../../assets/js/core/popper.min.js"></script>
+    <script src="../../../assets/js/core/bootstrap.min.js"></script>
+    <script src="../../../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../../../assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script>
         var win = navigator.platform.indexOf("Win") > -1;
         if (win && document.querySelector("#sidenav-scrollbar")) {
@@ -463,7 +468,7 @@ require_once "../../../Controller/Reclamations/paginationC.php";
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+    <script src="../../../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
     <script src="../../../scriptjs/modifyInput.js"></script>
     <script>
         const listReclamation = document.querySelector('.listReclamation');
@@ -473,13 +478,13 @@ require_once "../../../Controller/Reclamations/paginationC.php";
             alert('Deleting ' + id);
             const row = button.parentNode.parentNode;
             row.parentNode.removeChild(row);
-            fetch('../../../Controller/Reclamations/reclamationC.php?id_rec=' + id)
+            fetch('../../../../Controller/Reclamations/reclamationC.php?id_rec=' + id)
                 .then(response => response.text())
                 .then(data => console.log(data))
         }
 
         function sortList() {
-            fetch(`../../../Controller/Reclamations/sortC.php?sort=${document.querySelector('#sort-select').value}`)
+            fetch(`../../../../Controller/Reclamations/sortC.php?sort=${document.querySelector('#sort-select').value}`)
                 .then(response => response.text())
                 .then(data => {
                     listReclamation.innerHTML = data;
@@ -488,7 +493,7 @@ require_once "../../../Controller/Reclamations/paginationC.php";
 
         function searchList() {
             const search = document.querySelector('.search').value;
-            fetch('../../../Controller/Reclamations/searchreclamation.php?search=' + search)
+            fetch('../../../../Controller/Reclamations/searchreclamation.php?search=' + search)
                 .then(response => response.text())
                 .then(data => {
                     listReclamation.innerHTML = data;

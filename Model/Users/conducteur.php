@@ -15,7 +15,7 @@ class conducteur extends user
             'prenom' => $user->getPrenom(),
             'email' => $user->getEmail(),
             'password' =>  $user->getPassword(),
-            'addresse' => $user->getAdresse(),
+            'adresse' => $user->getAdresse(),
             'numTel' => $user->getNumTel(),
             'role' => $user->getRole(),
             'profileImage' => $user->getProfileImage()

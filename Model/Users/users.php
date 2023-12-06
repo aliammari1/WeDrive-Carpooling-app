@@ -26,7 +26,7 @@ class users
                 'prenom' => $result['prenom'],
                 'email' => $result['email'],
                 'password' => $result['password'],
-                'addresse' => $result['addresse'],
+                'adresse' => $result['adresse'],
                 'numTel' => $result['numTel'],
                 'role' => $result['role'],
                 'profileImage' => $result['profileImage']
@@ -47,7 +47,7 @@ class users
                 'prenom' => $result['prenom'],
                 'email' => $result['email'],
                 'password' => $result['password'],
-                'addresse' => $result['addresse'],
+                'adresse' => $result['adresse'],
                 'numTel' => $result['numTel'],
                 'role' => $result['role'],
                 'profileImage' => $result['profileImage']
@@ -67,7 +67,7 @@ class users
     }
     public function addUser(array $data)
     {
-        $sql = "INSERT INTO users (nom, prenom, numTel, email, password, role, addresse, profileImage) VALUES (:nom, :prenom, :numTel, :email, :password, :role, :addresse, :profileImage)";
+        $sql = "INSERT INTO users (nom, prenom, numTel, email, password, role, adresse, profileImage) VALUES (:nom, :prenom, :numTel, :email, :password, :role, :adresse, :profileImage)";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':nom', $data['nom'], PDO::PARAM_STR);
         $stmt->bindParam(':prenom', $data['prenom'], PDO::PARAM_STR);
@@ -75,7 +75,7 @@ class users
         $stmt->bindParam(':email', $data['email'], PDO::PARAM_STR);
         $stmt->bindParam(':password', $data['password'], PDO::PARAM_STR);
         $stmt->bindParam(':role', $data['role'], PDO::PARAM_STR);
-        $stmt->bindParam(':addresse', $data['addresse'], PDO::PARAM_STR);
+        $stmt->bindParam(':adresse', $data['adresse'], PDO::PARAM_STR);
         $stmt->bindParam(':profileImage', $data['profileImage'], PDO::PARAM_LOB);
         $stmt->execute();
         return $stmt->rowCount() > 0 ?
@@ -85,7 +85,7 @@ class users
                 'prenom' => $data['prenom'],
                 'email' => $data['email'],
                 'password' => $data['password'],
-                'addresse' => $data['addresse'],
+                'adresse' => $data['adresse'],
                 'numTel' => $data['numTel'],
                 'role' => $data['role'],
                 'profileImage' => $data['profileImage']
@@ -116,7 +116,7 @@ class users
     public function updateUsers(array $data)
     {
         $data['profileImage'] = file_get_contents($_FILES['profileImage']['tmp_name']);
-        $sql = "UPDATE users SET nom = :nom, prenom = :prenom, numTel = :numTel, email = :email, password = :password, role = :role, addresse = :addresse, profileImage = :profileImage WHERE id_user = :id";
+        $sql = "UPDATE users SET nom = :nom, prenom = :prenom, numTel = :numTel, email = :email, password = :password, role = :role, adresse = :adresse, profileImage = :profileImage WHERE id_user = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $data['id_user']);
         $stmt->bindParam(':id', $data['id_user']);
@@ -126,7 +126,7 @@ class users
         $stmt->bindParam(':email', $data['email']);
         $stmt->bindParam(':password', $data['password']);
         $stmt->bindParam(':role', $data['role']);
-        $stmt->bindParam(':addresse', $data['addresse']);
+        $stmt->bindParam(':adresse', $data['adresse']);
         $stmt->bindParam(':profileImage', $data['profileImage']);
         $stmt->execute();
         return $stmt->rowCount() > 0 ?
@@ -136,7 +136,7 @@ class users
                 'prenom' => $data['prenom'],
                 'email' => $data['email'],
                 'password' => $data['password'],
-                'addresse' => $data['addresse'],
+                'adresse' => $data['adresse'],
                 'numTel' => $data['numTel'],
                 'role' => $data['role'],
                 'profileImage' => $data['profileImage']
@@ -261,7 +261,7 @@ class users
     public function modifyAdmin(array $data)
     {
         $data['profileImage'] = file_get_contents($_FILES['profileImage']['tmp_name']);
-        $sql = "UPDATE users SET nom = :nom, prenom = :prenom, numTel = :numTel, email = :email, password = :password, role = :role, addresse = :addresse, profileImage = :profileImage WHERE admins.id_user = :id";
+        $sql = "UPDATE users SET nom = :nom, prenom = :prenom, numTel = :numTel, email = :email, password = :password, role = :role, adresse = :adresse, profileImage = :profileImage WHERE admins.id_user = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $data['id_user']);
         $stmt->bindParam(':nom', $data['nom']);
@@ -270,7 +270,7 @@ class users
         $stmt->bindParam(':email', $data['email']);
         $stmt->bindParam(':password', $data['password']);
         $stmt->bindParam(':role', $data['role']);
-        $stmt->bindParam(':addresse', $data['addresse']);
+        $stmt->bindParam(':adresse', $data['adresse']);
         $stmt->bindParam(':profileImage', $data['profileImage']);
         $stmt->execute();
         return $stmt->rowCount() > 0 ?
@@ -280,7 +280,7 @@ class users
                 'prenom' => $data['prenom'],
                 'email' => $data['email'],
                 'password' => $data['password'],
-                'addresse' => $data['addresse'],
+                'adresse' => $data['adresse'],
                 'numTel' => $data['numTel'],
                 'role' => $data['role'],
                 'profileImage' => $data['profileImage']
