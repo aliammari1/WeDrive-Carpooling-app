@@ -1,0 +1,5 @@
+{
+  "name": "WeDrive-Carpooling-app",
+  "description": "A web-based carpooling application built with PHP following MVC architecture for connecting drivers and passengers",
+  "topics": ["php", "carpooling", "mvc-architecture", "web-application", "ride-sharing", "mysql", "transportation"]
+}
