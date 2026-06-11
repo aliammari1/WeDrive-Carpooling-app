@@ -2,10 +2,7 @@
 
 require_once __DIR__ . "\sanitize.php";
 try {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
     $data = sanitize_login($_POST);
-    var_dump($data);
     if (!empty($data)) {
         require_once "../../Model/Users/admin.php";
         require_once "../../Model/Users/conducteur.php";
@@ -13,9 +10,12 @@ try {
         require_once "../../Model/Users/users.php";
         session_start();
         $users = new users();
-        $user = $users->getUser($data['email'] /*, $data['password']*/);
-        if ($user === null) {
-            header("Location: ../../View/pages/front/login.php");
+        $user = $users->getUser($data['email']);
+        // SECURITY: verify the submitted password against the stored hash.
+        // Previously the password was never checked, so any password for an
+        // existing email logged in successfully.
+        if ($user === null || !password_verify($data['password'], $user->getPassword())) {
+            header("Location: ../../View/pages/front/login.php?error=invalid");
             exit;
         }
         require_once __DIR__ . '/../../View/vendor/autoload.php';

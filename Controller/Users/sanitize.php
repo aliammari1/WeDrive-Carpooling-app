@@ -41,7 +41,11 @@ function sanitize_login(array $inputs): array
             'password' => FILTER_DEFAULT,
         ];
         $data = filter_var_array(array_map('trim', $inputs), $filters);
-        if (!password_verify($data["password"], password_hash($data['password'], PASSWORD_DEFAULT, ['cost' => 12])))
+        // SECURITY: the password is verified against the STORED hash in
+        // ControlSignin.php — not here. The previous line verified the input
+        // against a fresh hash of the same input, which is always true and let
+        // any password through. Only validate that the fields are present.
+        if (empty($data['email']) || empty($data['password']))
             return [];
     } catch (Throwable $e) {
         echo $e->getMessage();
