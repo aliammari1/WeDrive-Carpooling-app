@@ -21,8 +21,25 @@ require_once __DIR__ . '/../../Model/trajets/trajetC.php';
 
 use WeDrive\Ai\GeoPoint;
 use WeDrive\Ai\RideMatcher;
+use WeDrive\Bootstrap;
+use WeDrive\Http\RateLimiter;
+use WeDrive\Http\SecurityHeaders;
+use WeDrive\Observability\Logger;
 
+Bootstrap::init();
+SecurityHeaders::send(apiJson: true);
 header('Content-Type: application/json');
+
+// Throttle this public, AI-backed endpoint: 30 requests / minute / IP.
+$limiter = new RateLimiter('match_rides', limit: 30, windowSeconds: 60);
+$state = $limiter->hit(RateLimiter::clientIp());
+$limiter->sendHeaders($state);
+if (!$state->allowed()) {
+    $limiter->sendRetryAfter($state->resetInSeconds);
+    Logger::get()->warning('rate_limit_exceeded', ['endpoint' => 'matchRides']);
+    echo json_encode(['error' => 'Too many requests. Slow down.']);
+    exit;
+}
 
 try {
     $pickupRaw  = $_REQUEST['pickup']  ?? '';
@@ -68,8 +85,14 @@ try {
     echo json_encode(['results' => $payload], JSON_PRETTY_PRINT);
 } catch (\InvalidArgumentException $e) {
     http_response_code(400);
+    Logger::get()->info('match_rides_bad_request', ['message' => $e->getMessage()]);
     echo json_encode(['error' => $e->getMessage()]);
 } catch (\Throwable $e) {
     http_response_code(500);
+    Logger::get()->error('match_rides_failed', [
+        'exception' => $e::class,
+        'message'   => $e->getMessage(),
+    ]);
+    \WeDrive\Observability\Sentry::capture($e);
     echo json_encode(['error' => 'Ride matching failed.']);
 }
