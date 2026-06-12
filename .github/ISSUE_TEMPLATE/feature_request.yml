@@ -1,0 +1,34 @@
+name: Feature request
+description: Suggest an idea for WeDrive
+title: "feat: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: The user need or pain point. "As a driver/passenger I want…"
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What should change in the app, the schema, or the AI matching?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: area
+    attributes:
+      label: Area
+      options:
+        - label: Drivers / rides (trajets)
+        - label: Reservations
+        - label: Reclamations / avis
+        - label: AI ride-matching / CO2 scoring
+        - label: Auth / users
+        - label: DevOps (Docker, CI, docs)
