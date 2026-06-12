@@ -108,9 +108,25 @@ zero-cost local run, `docker compose up` is still the fastest demo.
 | `DB_NAME` | `wedrive` | single consolidated schema |
 | `DB_USER` / `DB_PASSWORD` | `root` / _(empty)_ | credentials |
 | `ORS_API_KEY` | _(empty)_ | OpenRouteService; blank => offline fallback |
+| `GOOGLE_MAPS_API_KEY` | _(empty)_ | Google Maps JS key used by the View map widgets |
 
 No credentials live in source — everything reads from `.env` (git-ignored) via
 the single `WeDrive\Database::pdo()` factory.
+
+### Front-end Google Maps key
+
+The Google Maps JavaScript widgets in the `View/` layer read their key from
+`Config/keys.php`, which is **git-ignored**. Set it up once:
+
+```bash
+cp Config/keys.example.php Config/keys.php   # then edit, or just export the env var
+export GOOGLE_MAPS_API_KEY="your-real-key"   # preferred for prod / Docker
+```
+
+`Config/keys.php` resolves `getenv('GOOGLE_MAPS_API_KEY')` first and falls back
+to a `CHANGE_ME` placeholder, so the app still loads during local setup. The
+View files inject the value with `htmlspecialchars(...)` — no key is ever
+hardcoded in source.
 
 ## Architecture
 

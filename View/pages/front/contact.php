@@ -146,7 +146,8 @@
   <script src="../../assets/js/bootstrap-datepicker.js"></script>
   <script src="../../assets/js/jquery.timepicker.min.js"></script>
   <script src="../../assets/js/scrollax.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <?php $weDriveKeys = require __DIR__ . '/../../../Config/keys.php'; ?>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<?= htmlspecialchars($weDriveKeys['GOOGLE_MAPS_API_KEY'], ENT_QUOTES) ?>&sensor=false"></script>
   <script src="../../assets/js/google-map.js"></script>
   <script src="../../assets/js/main.js"></script>
 </body>

@@ -3,6 +3,9 @@
 .env.local
 /.vscode
 
+# Local API key config (use Config/keys.example.php as a template)
+/Config/keys.php
+
 # Composer
 /vendor/
 View/vendor/
