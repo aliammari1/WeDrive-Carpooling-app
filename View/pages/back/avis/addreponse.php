@@ -183,7 +183,7 @@
             require_once '../config/config.php';
             //requête d'ajout
 
-            $db = new PDO("mysql:host=localhost;dbname=projet;charset=utf8", "root", "");
+            require_once __DIR__ . '/../../../../vendor/autoload.php'; $db = \WeDrive\Database::pdo();
             $query = $db->prepare("INSERT INTO reponse VALUES(:idreponse,:id,:vision,:comment,:notepro)");
             $query->bindValue(':idreponse', $idreponse);
             $query->bindValue(':id', $id);

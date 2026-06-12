@@ -178,7 +178,7 @@
 
       <?php
 
-      $con = new PDO("mysql:host=localhost;dbname=covoiturage", 'root', '');
+      require_once __DIR__ . '/../../../../vendor/autoload.php'; $con = \WeDrive\Database::pdo();
 
       if (isset($_POST["submit"])) {
         $str = $_POST["search"];

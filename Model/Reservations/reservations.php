@@ -1,11 +1,15 @@
 <?php
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+
 class reservations
 {
     private $db;
-    public function __construct()
+    public function __construct(?PDO $db = null)
     {
-        $this->db = new PDO('mysql:host=localhost;dbname=covoiturage;charset=utf8', 'root', '');
+        // Accept an injected PDO (tests) or fall back to the shared,
+        // env-driven connection. No more hardcoded credentials.
+        $this->db = $db ?? \WeDrive\Database::pdo();
     }
     public function addReservation(array $reservation)
     {

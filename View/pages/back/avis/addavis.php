@@ -191,7 +191,7 @@
               require_once '../../../../Model/connection.php';
               //requête d'ajout
 
-              $db = new PDO("mysql:host=localhost;dbname=covoiturage;charset=utf8", "root", "");
+              require_once __DIR__ . '/../../../../vendor/autoload.php'; $db = \WeDrive\Database::pdo();
               $query = $db->prepare("INSERT INTO avis (typee,note,commentaire,datee,id_user) VALUES(:typee,:note,:commentaire,:datee,:id_user)");
               $query->bindValue(':typee', $typee);
               $query->bindValue(':note', $note);

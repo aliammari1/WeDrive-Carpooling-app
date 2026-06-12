@@ -141,7 +141,7 @@
 
 
           <?php
-          $pdo = new PDO("mysql:host=localhost;dbname=covoiturage;charset=utf8", "root", "");
+          require_once __DIR__ . '/../../../vendor/autoload.php'; $pdo = \WeDrive\Database::pdo();
 
           $post = isset($_GET['id']) ? $_GET['id'] : null;
 

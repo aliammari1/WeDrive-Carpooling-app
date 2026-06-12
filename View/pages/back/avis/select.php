@@ -2,10 +2,11 @@
 
 // php select option value from database
 
-$hostname = "localhost";
-$username = "root";
-$password = "";
-$databaseName = "projet";
+// Credentials read from the environment (.env) — no hardcoded secrets.
+$hostname = getenv('DB_HOST') ?: '127.0.0.1';
+$username = getenv('DB_USER') ?: 'root';
+$password = getenv('DB_PASSWORD') ?: '';
+$databaseName = getenv('DB_NAME') ?: 'wedrive';
 
 // connect to mysql database
 

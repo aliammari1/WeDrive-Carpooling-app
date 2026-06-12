@@ -6,9 +6,10 @@ require_once 'passager.php';
 class users
 {
     private $db;
-    public function __construct()
+    public function __construct(?PDO $db = null)
     {
-        $this->db = (new connection())->getDb();
+        // Injectable for tests; defaults to the shared env-driven connection.
+        $this->db = $db ?? (new connection())->getDb();
     }
     public function getUser(string $email/*, string $password*/)
     {

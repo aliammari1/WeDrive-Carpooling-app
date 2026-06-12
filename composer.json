@@ -1,0 +1,57 @@
+{
+    "name": "aliammari1/wedrive-carpooling-app",
+    "description": "WeDrive - a self-hostable carpooling platform (PHP MVC) with AI ride-matching and CO2-savings scoring.",
+    "type": "project",
+    "license": "MIT",
+    "keywords": [
+        "carpooling",
+        "rideshare",
+        "php",
+        "mvc",
+        "mysql",
+        "self-hosted"
+    ],
+    "authors": [
+        {
+            "name": "Ali Ammari",
+            "email": "ammari.ali.0001@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "ext-pdo": "*",
+        "fpdf/fpdf": "^1.85",
+        "phpmailer/phpmailer": "^6.8",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0",
+        "phpstan/phpstan": "^1.11",
+        "vimeo/psalm": "^5.24",
+        "squizlabs/php_codesniffer": "^3.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "WeDrive\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WeDrive\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "lint": "find Controller Model src -name '*.php' -print0 | xargs -0 -n1 php -l",
+        "stan": "phpstan analyse",
+        "psalm": "psalm",
+        "cs": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        },
+        "sort-packages": true
+    }
+}

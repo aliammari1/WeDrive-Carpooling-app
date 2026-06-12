@@ -18,9 +18,9 @@ try {
             header("Location: ../../View/pages/front/login.php?error=invalid");
             exit;
         }
-        require_once __DIR__ . '/../../View/vendor/autoload.php';
+        require_once __DIR__ . '/../../vendor/autoload.php';
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
-        $listed = $dotenv->load();
+        $dotenv->safeLoad();
         $_SESSION['authentification'] = true;
         switch ($user->getRole()) {
             case "admin":

@@ -164,7 +164,7 @@
                 $message = "avis ajouter!";
                 echo $message;
                 //requête d'ajou
-                $db = new PDO("mysql:host=localhost;dbname=projet;charset=utf8", "root", "");
+                require_once __DIR__ . '/../../../vendor/autoload.php'; $db = \WeDrive\Database::pdo();
                 $query = $db->prepare("INSERT INTO avis VALUES(:id,:typee,:note,:commentaire,:datee)");
                 $query->bindValue(':id', $id);
                 $query->bindValue(':typee', $typee);

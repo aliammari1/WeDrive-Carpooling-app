@@ -1,22 +1,14 @@
 <?php
+require_once __DIR__ . '/../../../../vendor/autoload.php';
 class Posts{
-    private $host  = 'localhost';
-    private $user  = 'root';
-    private $password   = '';
-    private $database  = 'covoiturage';    
     private $postTable = 'commentaires';
     private $postVotesTable = 'commentaires';
     private $dbConnect = false;
-    
+
     public function __construct(){
-        if(!$this->dbConnect){ 
-            try {
-                $conn = new PDO("mysql:host=$this->host;dbname=$this->database", $this->user, $this->password);
-                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $this->dbConnect = $conn;
-            } catch (PDOException $e) {
-                die("Error failed to connect to MySQL: " . $e->getMessage());
-            }
+        if(!$this->dbConnect){
+            // Credentials come from .env via WeDrive\Database (no hardcoding).
+            $this->dbConnect = \WeDrive\Database::pdo();
         }
     }
     

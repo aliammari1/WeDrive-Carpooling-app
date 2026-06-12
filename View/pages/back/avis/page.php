@@ -432,18 +432,13 @@
               </html>
 
               <?php
-              $host = "localhost";
-              $username = "root";
-              $password = "";
-              $dbname = "covoiturage";
-
+              require_once __DIR__ . '/../../../../vendor/autoload.php';
               try {
-                $dsn = "mysql:host=" . $host . ";dbname=" . $dbname;
-                $pdo = new PDO($dsn, $username, $password);
-                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                // Credentials come from .env via WeDrive\Database (no hardcoding).
+                $pdo = \WeDrive\Database::pdo();
                 echo "dernier version davis";
-              } catch (PDOException $e) {
-                echo "Connection failed: " . $e->getMessage();
+              } catch (Throwable $e) {
+                echo "Connection failed.";
               }
 
               ?>

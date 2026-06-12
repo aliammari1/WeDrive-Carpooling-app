@@ -1,2 +1,22 @@
-/.vscode
+# Secrets & local config
 .env
+.env.local
+/.vscode
+
+# Composer
+/vendor/
+View/vendor/
+
+# PHP tooling caches
+.phpunit.result.cache
+.phpunit.cache/
+.php-cs-fixer.cache
+.psalm/
+psalm-baseline-tmp.xml
+
+# Docs build
+/site/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
