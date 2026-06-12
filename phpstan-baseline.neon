@@ -1,0 +1,5 @@
+# PHPStan baseline. Empty for now — src/ is written to pass level 3 cleanly.
+# Regenerate when bringing legacy Model/Controller files under analysis:
+#   vendor/bin/phpstan analyse --generate-baseline
+parameters:
+    ignoreErrors: []
