@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/../connection.php';
-require_once 'conducteur.php';
-require_once 'admin.php';
-require_once 'passager.php';
+require_once __DIR__ . '/conducteur.php';
+require_once __DIR__ . '/admin.php';
+require_once __DIR__ . '/passager.php';
 class users
 {
     private $db;
