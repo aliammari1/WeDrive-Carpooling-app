@@ -13,6 +13,11 @@ View/vendor/
 .php-cs-fixer.cache
 .psalm/
 psalm-baseline-tmp.xml
+infection.log
+.infection.cache/
+
+# Local scratch
+.tmp/
 
 # Docs build
 /site/
