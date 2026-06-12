@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . "\..\..\Model\Reclamations\\reclamations.php";
-require_once __DIR__ . "\..\..\Model\Reclamations\\reclamation.php";
+require_once __DIR__ . "/../../Model/Reclamations//reclamations.php";
+require_once __DIR__ . "/../../Model/Reclamations//reclamation.php";
 
 $reclamations = new reclamations();
 $listreclamations = $reclamations->displayreclamations();

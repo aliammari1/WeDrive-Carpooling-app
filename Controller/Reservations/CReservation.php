@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '\..\..\Model\Reservations\reservations.php';
-require_once __DIR__ . '\..\..\Model\Reservations\reservation.php';
+require_once __DIR__ . '/../../Model/Reservations/reservations.php';
+require_once __DIR__ . '/../../Model/Reservations/reservation.php';
 
 $reservations = new reservations();
 $reservationsArray = $reservations->showReservations();

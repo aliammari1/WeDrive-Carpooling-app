@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "\..\..\Model\Reclamations\Reclamation.php";
+require_once __DIR__ . "/../../Model/Reclamations/Reclamation.php";
 try {
 
     $reclamations = new reclamations();

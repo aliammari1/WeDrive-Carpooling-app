@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "\sanitize.php";
+require_once __DIR__ . "/sanitize.php";
 try {
     $data = sanitize_login($_POST);
     if (!empty($data)) {

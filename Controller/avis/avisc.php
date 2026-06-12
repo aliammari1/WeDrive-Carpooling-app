@@ -1,6 +1,6 @@
 <?php
-require_once__DIR__ . '\..\..\Model\connection.php';
-require_once__DIR__ . '\..\..\Model\avis\avis.php';
+require_once __DIR__ . '/../../Model/connection.php';
+require_once __DIR__ . '/../../Model/avis/avis.php';
 
 class avisc
 {

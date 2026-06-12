@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '\..\..\View\vendor\autoload.php';
+require_once __DIR__ . '/../../View/vendor/autoload.php';
 
 use Fpdf\Fpdf;
 

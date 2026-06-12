@@ -8,9 +8,9 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
-require_once __DIR__ . '\..\..\View\vendor\autoload.php';
-require_once __DIR__ . "\..\..\Model\Reclamations\\reclamations.php";
-require_once __DIR__ . "\..\..\Model\Reclamations\\reclamation.php";
+require_once __DIR__ . '/../../View/vendor/autoload.php';
+require_once __DIR__ . "/../../Model/Reclamations//reclamations.php";
+require_once __DIR__ . "/../../Model/Reclamations//reclamation.php";
 
 function mailing()
 {
