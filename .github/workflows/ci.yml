@@ -102,6 +102,39 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   # ---------------------------------------------------------------------------
+  # Mutation testing (Infection) on the AI ride-matching + HTTP middleware
+  # logic — enforces that the PHPUnit suite actually kills injected bugs, with a
+  # minimum mutation score (MSI). Runs on a single PHP version; no DB needed
+  # (these suites use the offline providers + temp-file rate limiter).
+  # ---------------------------------------------------------------------------
+  mutation:
+    name: Infection (mutation testing)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@c541c155eee45413f5b09a52248675b1a2575231 # 2.31.1
+        with:
+          php-version: "8.3"
+          extensions: pdo, sqlite3, pdo_sqlite, curl, mbstring
+          coverage: pcov
+          tools: composer:v2
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Infection (min MSI gate)
+        run: |
+          vendor/bin/infection \
+            --threads=max \
+            --min-msi=70 \
+            --min-covered-msi=80 \
+            --no-progress \
+            --logger-github
+
+  # ---------------------------------------------------------------------------
   # Psalm taint / security analysis (the PHP SAST — CodeQL has no PHP support).
   # ---------------------------------------------------------------------------
   psalm-security:

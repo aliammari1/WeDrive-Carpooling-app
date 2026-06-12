@@ -1,0 +1,23 @@
+{
+    "$schema": "vendor/infection/infection/resources/schema.json",
+    "source": {
+        "directories": [
+            "src/Ai",
+            "src/Http"
+        ]
+    },
+    "timeout": 30,
+    "logs": {
+        "text": "infection.log",
+        "stryker": {
+            "report": "feat/upgrade"
+        }
+    },
+    "mutators": {
+        "@default": true
+    },
+    "minMsi": 70,
+    "minCoveredMsi": 80,
+    "testFramework": "phpunit",
+    "testFrameworkOptions": "--testsuite=WeDrive"
+}
