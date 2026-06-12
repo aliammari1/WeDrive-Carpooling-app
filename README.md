@@ -44,6 +44,27 @@ Demo credentials (all password `password123`): `admin@wedrive.test`,
 See the [full getting-started guide](docs/getting-started.md) for the local-PHP
 path.
 
+## Live demo & hosting
+
+PHP can't run on Cloudflare Workers/Pages (those host the docs only), so the app
+needs a real PHP host. Because the repo already ships a `docker-compose.yml`, the
+simplest free path is **[Railway](https://railway.com)** — its free trial grants
+a one-time **$5 credit** and it accepts a Compose file directly:
+
+1. Push this repo to GitHub, then **New Project → Deploy from GitHub repo** on
+   Railway (or drag `docker-compose.yml` onto the project canvas — Railway
+   imports each service as a separate Railway service).
+2. Add a **managed MySQL** database: **+ New → Database → MySQL**. Railway exposes
+   `MYSQL*` connection variables automatically.
+3. Map them to WeDrive's env (`DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`,
+   `DB_PASSWORD`) on the app service, plus an optional `ORS_API_KEY`.
+4. Load the schema once: `railway run mysql < database/schema.sql` (or
+   `railway shell` → `php database/seed.php` for demo data).
+
+See [docs/deployment.md](docs/deployment.md) for the full walkthrough and other
+free-tier options (Render, fly.io, InfinityFree) with their trade-offs. For a
+zero-cost local run, `docker compose up` is still the fastest demo.
+
 ## Configuration (`.env.example`)
 
 | Variable | Default | Purpose |
@@ -126,10 +147,22 @@ gitleaks, and a SHA-pinned Trivy image scan. All actions are SHA-pinned.
   `covoiturage`/`projet` split; a reconstructed `schema.sql` makes it reproducible.
 - **Psalm taint, not CodeQL** — CodeQL has no PHP support.
 - **MySQL 8.4, not MariaDB 10.4** — the old devcontainer DB was EOL.
-- **Cloudflare for docs only** — Workers/Pages can't run PHP; the app needs a PHP
-  host (CF Containers beta or a free PHP host), while CF Pages hosts these docs.
+- **Cloudflare for docs only, Railway for the app** — Workers/Pages run JS/WASM,
+  not PHP, so CF Pages hosts these docs while the app deploys to a PHP host. The
+  repo ships `docker-compose.yml`, so a Compose-aware host (Railway) is one
+  import away; see [docs/deployment.md](docs/deployment.md) for alternatives and
+  their trade-offs.
+
+## Contributing
+
+Issues and PRs are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) for the dev
+setup, the checks CI enforces, and the security conventions, and
+[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Now that WeDrive is MIT-licensed it is
+eligible for [awesome-selfhosted](https://github.com/awesome-selfhosted/awesome-selfhosted)
+(Mobility / Maps) — a submission is planned.
 
 ## License
 
 [MIT](LICENSE) © 2023–2025 Ali Ammari. Bundled third-party assets
-(Argon/Bootstrap theme, FPDF, PHPMailer) retain their own licenses.
+(Argon/Bootstrap theme — see [`View/LICENSE.md`](View/LICENSE.md) — FPDF,
+PHPMailer) retain their own licenses.

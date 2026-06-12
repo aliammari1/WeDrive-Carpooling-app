@@ -44,6 +44,7 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
+  - Deployment: deployment.md
   - Architecture: architecture.md
   - Database Schema: schema.md
   - AI Ride Matching: ai-matching.md
