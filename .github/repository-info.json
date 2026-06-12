@@ -1,19 +1,18 @@
 {
   "name": "WeDrive-Carpooling-app",
-  "description": "Self-hostable PHP carpooling platform with AI ride-matching and CO2-savings scoring. One-command docker compose up. MIT.",
+  "description": "Open-source carpooling / ride-sharing platform — self-hostable BlaBlaCar alternative (PHP MVC + MySQL + AI ride-matching). One-command docker compose up. MIT.",
   "topics": [
     "php",
+    "mvc",
     "carpooling",
     "ride-sharing",
-    "rideshare",
-    "mobility",
-    "self-hosted",
-    "mvc",
     "mysql",
+    "self-hosted",
+    "open-source-alternative",
+    "bootstrap",
     "docker-compose",
     "ai",
-    "co2",
-    "transportation",
-    "php8"
+    "mobility",
+    "blablacar-alternative"
   ]
 }

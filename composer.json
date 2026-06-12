@@ -5,11 +5,13 @@
     "license": "MIT",
     "keywords": [
         "carpooling",
-        "rideshare",
+        "ride-sharing",
         "php",
         "mvc",
         "mysql",
-        "self-hosted"
+        "self-hosted",
+        "open-source-alternative",
+        "blablacar-alternative"
     ],
     "authors": [
         {
