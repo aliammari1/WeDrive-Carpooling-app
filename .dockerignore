@@ -1,0 +1,17 @@
+.git
+.github
+.devcontainer
+.vscode
+vendor
+View/vendor
+node_modules
+site
+docs
+*.md
+!README.md
+.env
+.env.local
+.phpunit.result.cache
+.phpunit.cache
+.php-cs-fixer.cache
+tests

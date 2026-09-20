@@ -1,11 +1,13 @@
 <?php
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+
 class paiements
 {
     private $db;
-    public function __construct()
+    public function __construct(?PDO $db = null)
     {
-        $this->db = new PDO('mysql:host=localhost;dbname=covoiturage;charset=utf8', 'root', '');
+        $this->db = $db ?? \WeDrive\Database::pdo();
     }
     public function addPaiement(paiement $paiement)
     {

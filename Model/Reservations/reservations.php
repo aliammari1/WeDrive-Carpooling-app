@@ -1,11 +1,15 @@
 <?php
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+
 class reservations
 {
     private $db;
-    public function __construct()
+    public function __construct(?PDO $db = null)
     {
-        $this->db = new PDO('mysql:host=localhost;dbname=covoiturage;charset=utf8', 'root', '');
+        // Accept an injected PDO (tests) or fall back to the shared,
+        // env-driven connection. No more hardcoded credentials.
+        $this->db = $db ?? \WeDrive\Database::pdo();
     }
     public function addReservation(array $reservation)
     {
@@ -62,15 +66,22 @@ class reservations
     }
     public function sortReservation($sort)
     {
-        $sql = "SELECT * FROM reservation ORDER BY date_meet " . $sort;
+        // SECURITY: ORDER BY direction cannot be bound as a parameter, so
+        // whitelist it to ASC/DESC to prevent SQL injection via $sort.
+        $dir = strtoupper(trim((string) $sort)) === 'DESC' ? 'DESC' : 'ASC';
+        $sql = "SELECT * FROM reservation ORDER BY date_meet " . $dir;
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function searchReservation($search)
     {
-        $sql = "SELECT * FROM reservation WHERE animal LIKE '%" . $search . "%' OR nb_place_vide LIKE '%" . $search . "%' OR mode_paiement LIKE '%" . $search . "%' OR date_meet LIKE '%" . $search . "%'";
+        $sql = "SELECT * FROM reservation WHERE animal LIKE :a OR nb_place_vide LIKE :b OR mode_paiement LIKE :c OR date_meet LIKE :d";
         $stmt = $this->db->prepare($sql);
+        $like = '%' . $search . '%';
+        foreach (['a', 'b', 'c', 'd'] as $p) {
+            $stmt->bindValue(":$p", $like, PDO::PARAM_STR);
+        }
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

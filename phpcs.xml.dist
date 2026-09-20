@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ruleset name="WeDrive">
+    <description>PSR-12 coding standard for the modern src/ and tests/ layers.</description>
+
+    <file>src</file>
+    <file>tests</file>
+
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+
+    <arg name="colors"/>
+    <arg value="sp"/>
+
+    <rule ref="PSR12"/>
+</ruleset>

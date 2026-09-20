@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\Exception;
 function sendMail($date_meet)
 {
     //Load Composer's autoloader
-    require_once __DIR__ . '\..\..\View\vendor\autoload.php';
+    require_once __DIR__ . '/../../View/vendor/autoload.php';
     //Create an instance; passing `true` enables exceptions
     $mail = new PHPMailer(true);
     try {

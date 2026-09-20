@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability (private)
+    url: https://github.com/aliammari1/WeDrive-Carpooling-app/blob/main/SECURITY.md
+    about: Do NOT open a public issue. Email ammari.ali.0001@gmail.com — see SECURITY.md.
+  - name: Question / discussion
+    url: https://github.com/aliammari1/WeDrive-Carpooling-app/discussions
+    about: Ask setup questions or propose ideas in Discussions.

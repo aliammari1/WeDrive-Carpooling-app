@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ . "\..\..\Model\\connection.php";
-require_once __DIR__ . "\..\..\Model\Reclamations\\reclamations.php";
-require_once __DIR__ . "\..\..\Model\Reclamations\\reclamation.php";
+require_once __DIR__ . "/../../Model//connection.php";
+require_once __DIR__ . "/../../Model/Reclamations//reclamations.php";
+require_once __DIR__ . "/../../Model/Reclamations//reclamation.php";
 session_start();
 $db = new connection();
 $reclamations = new reclamations();

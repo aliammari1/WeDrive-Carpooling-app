@@ -1,0 +1,65 @@
+{
+    "name": "aliammari1/wedrive-carpooling-app",
+    "description": "WeDrive - a self-hostable carpooling platform (PHP MVC) with AI ride-matching and CO2-savings scoring.",
+    "type": "project",
+    "license": "MIT",
+    "keywords": [
+        "carpooling",
+        "ride-sharing",
+        "php",
+        "mvc",
+        "mysql",
+        "self-hosted",
+        "open-source-alternative",
+        "blablacar-alternative"
+    ],
+    "authors": [
+        {
+            "name": "Ali Ammari",
+            "email": "ammari.ali.0001@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "ext-pdo": "*",
+        "fpdf/fpdf": "^1.85",
+        "monolog/monolog": "^3.7",
+        "phpmailer/phpmailer": "^6.8",
+        "psr/log": "^3.0",
+        "sentry/sentry": "^4.9",
+        "vlucas/phpdotenv": "^5.6"
+    },
+    "require-dev": {
+        "infection/infection": "^0.29",
+        "phpunit/phpunit": "^11.0",
+        "phpstan/phpstan": "^1.11",
+        "vimeo/psalm": "^5.24",
+        "squizlabs/php_codesniffer": "^3.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "WeDrive\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WeDrive\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "lint": "find Controller Model src -name '*.php' -print0 | xargs -0 -n1 php -l",
+        "stan": "phpstan analyse",
+        "psalm": "psalm",
+        "cs": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit",
+        "infection": "infection --threads=max"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true,
+            "infection/extension-installer": true
+        },
+        "sort-packages": true
+    }
+}

@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '\..\..\Model\Reservations\reservations.php';
-require_once __DIR__ . '\..\..\Model\pdf.php';
+require_once __DIR__ . '/../../Model/Reservations/reservations.php';
+require_once __DIR__ . '/../../Model/pdf.php';
 $reservations = new reservations();
 $data = $reservations->pdf();
 $pdf = new PDF();

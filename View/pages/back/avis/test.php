@@ -15,11 +15,18 @@
     //connexion à la base de donnée
     require_once '../config/config.php';
     //on récupère le id dans le lien
-    $id = $_GET['id'];
-    //requête pour afficher les infos d'un employé
-    $con = mysqli_connect("localhost", "root", "", "projet");
-    $req = mysqli_query($con, "SELECT * FROM avis WHERE id = $id");
-    $row = mysqli_fetch_assoc($req);
+    $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+    //requête pour afficher les infos d'un avis (creds from .env, parameterized)
+    $con = mysqli_connect(
+        getenv('DB_HOST') ?: '127.0.0.1',
+        getenv('DB_USER') ?: 'root',
+        getenv('DB_PASSWORD') ?: '',
+        getenv('DB_NAME') ?: 'wedrive'
+    );
+    $stmt = mysqli_prepare($con, "SELECT * FROM avis WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, 'i', $id);
+    mysqli_stmt_execute($stmt);
+    $row = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
 
 
     //vérifier que le bouton ajouter a bien été cliqué
@@ -28,9 +35,10 @@
         extract($_POST);
         //verifier que tous les champs ont été remplis
         if (isset($idreponse)  && isset($vision) && isset($comment) && $notepro) {
-            //requête de modification
-            $con = mysqli_connect("localhost", "root", "", "projet");
-            $req = mysqli_query($con, "INSERT INTO reponse VALUES('$idreponse', '$vision','$comment','$notepro')");
+            //requête de modification (parameterized to prevent SQL injection)
+            $ins = mysqli_prepare($con, "INSERT INTO reponse VALUES(?, ?, ?, ?)");
+            mysqli_stmt_bind_param($ins, 'ssss', $idreponse, $vision, $comment, $notepro);
+            $req = mysqli_stmt_execute($ins);
             if ($req) { //si la requête a été effectuée avec succès , on fait une redirection
                 header("location: listreponse.php");
             } else { //si non

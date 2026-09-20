@@ -359,7 +359,7 @@
 
         //connexion à la base de donnée
         try {
-          $pdo = new PDO("mysql:host=localhost;dbname=covoiturage", "root", "");
+          require_once __DIR__ . '/../../../../vendor/autoload.php'; $pdo = \WeDrive\Database::pdo();
         } catch (PDOException $e) {
           die("Erreur de connexion : " . $e->getMessage());
         }

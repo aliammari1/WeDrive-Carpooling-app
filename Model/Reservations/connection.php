@@ -1,30 +1,6 @@
 <?php
 
-class connection
-{
-
-    private $db;
-    public function __construct()
-    {
-
-        try {
-            $this->db = new PDO("mysql:host=localhost;dbname=covoiturage", "root", "");
-            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-    public function get_db(){
-        return $this->db;
-    }
-
-
-}
-
-
-
-
-
-
-
-?>
+// The Reservations module historically shipped its own copy of the `connection`
+// class with hardcoded credentials. It now reuses the single, env-driven
+// connection defined in Model/connection.php (backed by WeDrive\Database).
+require_once __DIR__ . '/../connection.php';

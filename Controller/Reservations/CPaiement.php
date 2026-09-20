@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '\..\..\Model\Reservations\paiements.php';
-require_once __DIR__ . '\..\..\Model\Reservations\paiement.php';
+require_once __DIR__ . '/../../Model/Reservations/paiements.php';
+require_once __DIR__ . '/../../Model/Reservations/paiement.php';
 
 $paiements = new paiements();
 $paiementsArray = $paiements->showPaiement();

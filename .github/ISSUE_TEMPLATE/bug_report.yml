@@ -1,0 +1,53 @@
+name: Bug report
+description: Report a problem with WeDrive
+title: "fix: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. **Do not report security vulnerabilities here** —
+        see [SECURITY.md](../blob/main/SECURITY.md) and email the maintainer privately.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Run `docker compose up --build`
+        2. Go to '...'
+        3. See error
+    validations:
+      required: true
+  - type: dropdown
+    id: run-mode
+    attributes:
+      label: How are you running WeDrive?
+      options:
+        - Docker (docker compose up)
+        - Local PHP (php -S / Apache)
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP version
+      placeholder: "8.2 / 8.3 (output of `php -v`)"
+  - type: input
+    id: db
+    attributes:
+      label: Database
+      placeholder: "MySQL 8.4 / MariaDB 11 / SQLite (tests)"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: PHP errors, `docker compose logs`, or browser console output.
+      render: shell

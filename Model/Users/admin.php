@@ -1,7 +1,7 @@
 <?php
 
 
-require_once "user.php";
+require_once __DIR__ . "/user.php";
 
 class admin extends user
 {

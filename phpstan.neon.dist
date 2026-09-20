@@ -1,0 +1,14 @@
+parameters:
+    level: 3
+    paths:
+        - src
+        - tests
+    # The hand-rolled legacy Model/Controller layer predates types and is being
+    # migrated incrementally; the modern, type-safe code lives in src/.
+    excludePaths:
+        - vendor
+    treatPhpDocTypesAsCertain: false
+    # A baseline lets CI stay green while debt is paid down. Regenerate with:
+    #   vendor/bin/phpstan analyse --generate-baseline
+includes:
+    - phpstan-baseline.neon

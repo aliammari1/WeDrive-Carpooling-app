@@ -1,5 +1,18 @@
 {
   "name": "WeDrive-Carpooling-app",
-  "description": "A web-based carpooling application built with PHP following MVC architecture for connecting drivers and passengers",
-  "topics": ["php", "carpooling", "mvc-architecture", "web-application", "ride-sharing", "mysql", "transportation"]
+  "description": "Open-source carpooling / ride-sharing platform — self-hostable BlaBlaCar alternative (PHP MVC + MySQL + AI ride-matching). One-command docker compose up. MIT.",
+  "topics": [
+    "php",
+    "mvc",
+    "carpooling",
+    "ride-sharing",
+    "mysql",
+    "self-hosted",
+    "open-source-alternative",
+    "bootstrap",
+    "docker-compose",
+    "ai",
+    "mobility",
+    "blablacar-alternative"
+  ]
 }

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "\..\..\Model\Users\users.php";
+require_once __DIR__ . "/../../Model/Users/users.php";
 
 if (isset($_Get['id_user'])) {
     $users = new users();

@@ -1,0 +1,51 @@
+# WeDrive — one-command local stack: `docker compose up`
+# php:8.2-apache (built from ./Dockerfile) + MySQL 8.4 (the devcontainer's
+# MariaDB 10.4 is EOL). The schema + seeds are auto-loaded on first DB boot.
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wedrive-app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_NAME: wedrive
+      DB_USER: wedrive
+      DB_PASSWORD: wedrive
+      DB_CHARSET: utf8mb4
+    ports:
+      - "8080:80"
+    volumes:
+      # Live-mount source for local dev (comment out for an immutable image).
+      - .:/var/www/html
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.4
+    container_name: wedrive-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wedrive
+      MYSQL_USER: wedrive
+      MYSQL_PASSWORD: wedrive
+    ports:
+      - "3306:3306"
+    volumes:
+      - wedrive-db-data:/var/lib/mysql
+      # Files in /docker-entrypoint-initdb.d run alphabetically on first boot.
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./database/seeds.sql:/docker-entrypoint-initdb.d/02-seeds.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+volumes:
+  wedrive-db-data:

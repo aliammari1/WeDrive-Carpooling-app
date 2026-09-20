@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-label="WeDrive carpooling banner">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f2e2b"/>
+      <stop offset="1" stop-color="#0a3d62"/>
+    </linearGradient>
+    <linearGradient id="route" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1abc9c"/>
+      <stop offset="1" stop-color="#2ecc71"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+
+  <!-- Route-line "W": a dashed road that traces a W, with pin nodes at the vertices -->
+  <g fill="none" stroke="url(#route)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 26">
+    <path d="M 360 220 L 460 430 L 560 270 L 660 430 L 760 220"/>
+  </g>
+  <g fill="#2ecc71">
+    <circle cx="360" cy="220" r="16"/>
+    <circle cx="460" cy="430" r="16"/>
+    <circle cx="560" cy="270" r="16"/>
+    <circle cx="660" cy="430" r="16"/>
+    <circle cx="760" cy="220" r="16"/>
+  </g>
+
+  <text x="640" y="520" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="84" font-weight="800" fill="#ffffff" letter-spacing="2">WeDrive</text>
+  <text x="640" y="568" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28" fill="#9fe7d4">Carpooling, matched by AI — share the road, save the planet</text>
+
+  <!-- Placeholder marker (replace with brandkit/imagegen render) -->
+  <text x="1180" y="40" text-anchor="end" font-family="monospace" font-size="16" fill="#5a8a82">placeholder banner</text>
+</svg>

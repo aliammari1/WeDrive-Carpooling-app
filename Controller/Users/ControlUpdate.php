@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '\..\..\Model\Users\users.php';
+require_once __DIR__ . '/../../Model/Users/users.php';
 try {
     $users = new users();
     $id_user = $_POST['id_user'] ?? null;

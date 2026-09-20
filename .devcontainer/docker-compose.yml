@@ -19,18 +19,20 @@ services:
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
   db:
-    image: mariadb:10.4
+    image: mysql:8.4
     restart: unless-stopped
     volumes:
-      - mariadb-data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
+      - ../database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ../database/seeds.sql:/docker-entrypoint-initdb.d/02-seeds.sql:ro
     environment:
-      MYSQL_ROOT_PASSWORD: mariadb
-      MYSQL_DATABASE: mariadb
-      MYSQL_USER: mariadb
-      MYSQL_PASSWORD: mariadb
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wedrive
+      MYSQL_USER: wedrive
+      MYSQL_PASSWORD: wedrive
 
-    # Add "forwardPorts": ["3306"] to **devcontainer.json** to forward MariaDB locally.
+    # Add "forwardPorts": ["3306"] to **devcontainer.json** to forward MySQL locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
-  
+
 volumes:
-  mariadb-data:
+  mysql-data:

@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '\..\..\Model\Users\users.php';
+require_once __DIR__ . '/../../Model/Users/users.php';
 try {
     $users = new users();
 

@@ -1,7 +1,7 @@
 <?php
 
 
-require_once "user.php";
+require_once __DIR__ . "/user.php";
 class Passager extends user
 {
     private $id_user;
